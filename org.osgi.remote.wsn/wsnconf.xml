@@ -1,0 +1,7 @@
+<wsnconf>
+	<physicalIP>localhost:9279</physicalIP>
+	<physicalPort>/dev/ttyACM0</physicalPort>
+	<sensors>
+		<smlpath>SensorML.xml</smlpath>
+	</sensors>
+</wsnconf>

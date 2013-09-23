@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://wii.snps" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://wii.snps">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://wii.snps">
+            <xs:element name="stopSPlan">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="idPlan" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="stopSPlanResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setSPlan">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="splan" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setSPlanResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sendCommand">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="command" nillable="true" type="xs:string"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="sids" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="mode" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sendCommandResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayhello">
+                <xs:complexType>
+                    <xs:sequence/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="sayhelloResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getData">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="mode" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="action" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDataResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="buildVirtualSensor">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="sensors" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="schema" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="buildVirtualSensorResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DiscoverySensorsAndMeasurements">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="command" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="sid" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="id_detection" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="initDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="initTime" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="endTime" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="zoneid" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="bsid" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DiscoverySensorsAndMeasurementsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getDataRequest">
+        <wsdl:part name="parameters" element="xsd:getData"/>
+    </wsdl:message>
+    <wsdl:message name="getDataResponse">
+        <wsdl:part name="parameters" element="xsd:getDataResponse"/>
+    </wsdl:message>
+    <wsdl:message name="sayhelloRequest">
+        <wsdl:part name="parameters" element="xsd:sayhello"/>
+    </wsdl:message>
+    <wsdl:message name="sayhelloResponse">
+        <wsdl:part name="parameters" element="xsd:sayhelloResponse"/>
+    </wsdl:message>
+    <wsdl:message name="sendCommandRequest">
+        <wsdl:part name="parameters" element="xsd:sendCommand"/>
+    </wsdl:message>
+    <wsdl:message name="sendCommandResponse">
+        <wsdl:part name="parameters" element="xsd:sendCommandResponse"/>
+    </wsdl:message>
+    <wsdl:message name="DiscoverySensorsAndMeasurementsRequest">
+        <wsdl:part name="parameters" element="xsd:DiscoverySensorsAndMeasurements"/>
+    </wsdl:message>
+    <wsdl:message name="DiscoverySensorsAndMeasurementsResponse">
+        <wsdl:part name="parameters" element="xsd:DiscoverySensorsAndMeasurementsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setSPlanRequest">
+        <wsdl:part name="parameters" element="xsd:setSPlan"/>
+    </wsdl:message>
+    <wsdl:message name="setSPlanResponse">
+        <wsdl:part name="parameters" element="xsd:setSPlanResponse"/>
+    </wsdl:message>
+    <wsdl:message name="stopSPlanRequest">
+        <wsdl:part name="parameters" element="xsd:stopSPlan"/>
+    </wsdl:message>
+    <wsdl:message name="stopSPlanResponse">
+        <wsdl:part name="parameters" element="xsd:stopSPlanResponse"/>
+    </wsdl:message>
+    <wsdl:message name="buildVirtualSensorRequest">
+        <wsdl:part name="parameters" element="xsd:buildVirtualSensor"/>
+    </wsdl:message>
+    <wsdl:message name="buildVirtualSensorResponse">
+        <wsdl:part name="parameters" element="xsd:buildVirtualSensorResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="iWebServicePortType">
+        <wsdl:operation name="getData">
+            <wsdl:input message="xsd:getDataRequest" wsaw:Action="urn:getData"/>
+            <wsdl:output message="xsd:getDataResponse" wsaw:Action="urn:getDataResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="sayhello">
+            <wsdl:input message="xsd:sayhelloRequest" wsaw:Action="urn:sayhello"/>
+            <wsdl:output message="xsd:sayhelloResponse" wsaw:Action="urn:sayhelloResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="sendCommand">
+            <wsdl:input message="xsd:sendCommandRequest" wsaw:Action="urn:sendCommand"/>
+            <wsdl:output message="xsd:sendCommandResponse" wsaw:Action="urn:sendCommandResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="DiscoverySensorsAndMeasurements">
+            <wsdl:input message="xsd:DiscoverySensorsAndMeasurementsRequest" wsaw:Action="urn:DiscoverySensorsAndMeasurements"/>
+            <wsdl:output message="xsd:DiscoverySensorsAndMeasurementsResponse" wsaw:Action="urn:DiscoverySensorsAndMeasurementsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setSPlan">
+            <wsdl:input message="xsd:setSPlanRequest" wsaw:Action="urn:setSPlan"/>
+            <wsdl:output message="xsd:setSPlanResponse" wsaw:Action="urn:setSPlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="stopSPlan">
+            <wsdl:input message="xsd:stopSPlanRequest" wsaw:Action="urn:stopSPlan"/>
+            <wsdl:output message="xsd:stopSPlanResponse" wsaw:Action="urn:stopSPlanResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="buildVirtualSensor">
+            <wsdl:input message="xsd:buildVirtualSensorRequest" wsaw:Action="urn:buildVirtualSensor"/>
+            <wsdl:output message="xsd:buildVirtualSensorResponse" wsaw:Action="urn:buildVirtualSensorResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="iWebServiceSoap11Binding" type="xsd:iWebServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getData">
+            <soap:operation soapAction="urn:getData" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayhello">
+            <soap:operation soapAction="urn:sayhello" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendCommand">
+            <soap:operation soapAction="urn:sendCommand" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setSPlan">
+            <soap:operation soapAction="urn:setSPlan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DiscoverySensorsAndMeasurements">
+            <soap:operation soapAction="urn:DiscoverySensorsAndMeasurements" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="stopSPlan">
+            <soap:operation soapAction="urn:stopSPlan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="buildVirtualSensor">
+            <soap:operation soapAction="urn:buildVirtualSensor" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="iWebServiceSoap12Binding" type="xsd:iWebServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getData">
+            <soap12:operation soapAction="urn:getData" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayhello">
+            <soap12:operation soapAction="urn:sayhello" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendCommand">
+            <soap12:operation soapAction="urn:sendCommand" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setSPlan">
+            <soap12:operation soapAction="urn:setSPlan" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DiscoverySensorsAndMeasurements">
+            <soap12:operation soapAction="urn:DiscoverySensorsAndMeasurements" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="stopSPlan">
+            <soap12:operation soapAction="urn:stopSPlan" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="buildVirtualSensor">
+            <soap12:operation soapAction="urn:buildVirtualSensor" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="iWebServiceHttpBinding" type="xsd:iWebServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="getData">
+            <http:operation location="getData"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sayhello">
+            <http:operation location="sayhello"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendCommand">
+            <http:operation location="sendCommand"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setSPlan">
+            <http:operation location="setSPlan"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DiscoverySensorsAndMeasurements">
+            <http:operation location="DiscoverySensorsAndMeasurements"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="stopSPlan">
+            <http:operation location="stopSPlan"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="buildVirtualSensor">
+            <http:operation location="buildVirtualSensor"/>
+            <wsdl:input>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="application/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="iWebService">
+        <wsdl:port name="iWebServiceHttpSoap11Endpoint" binding="xsd:iWebServiceSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/iWebService"/>
+        </wsdl:port>
+        <wsdl:port name="iWebServiceHttpSoap12Endpoint" binding="xsd:iWebServiceSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/iWebService"/>
+        </wsdl:port>
+        <wsdl:port name="iWebServiceHttpEndpoint" binding="xsd:iWebServiceHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/iWebService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

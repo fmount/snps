@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="MDW_APP" uid="SNPS_middleware.product" id="org.osgi.snps.core.mdw_product" application="org.osgi.snps.core.mdwapp" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <plugins>
+      <plugin id="ISNPS"/>
+      <plugin id="SMLParser"/>
+      <plugin id="com.mysql.jdbc"/>
+      <plugin id="cxf-dosgi-ri-singlebundle-distribution"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.equinox.ds"/>
+      <plugin id="org.eclipse.equinox.event"/>
+      <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.osgi.snps.base"/>
+      <plugin id="org.osgi.snps.composer"/>
+      <plugin id="org.osgi.snps.core"/>
+      <plugin id="org.osgi.snps.logger"/>
+      <plugin id="org.osgi.snps.monitor"/>
+      <plugin id="org.osgi.snps.subscriber"/>
+      <plugin id="org.osgi.snps.wii"/>
+      <plugin id="publisher"/>
+      <plugin id="snps.interpreter"/>
+      <plugin id="snps.registry"/>
+   </plugins>
+
+   <configurations>
+      <plugin id="ISNPS" autoStart="true" startLevel="1" />
+      <plugin id="SMLParser" autoStart="true" startLevel="3" />
+      <plugin id="com.mysql.jdbc" autoStart="true" startLevel="3" />
+      <plugin id="cxf-dosgi-ri-singlebundle-distribution" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.util" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.osgi.services" autoStart="true" startLevel="2" />
+      <plugin id="org.osgi.snps.base" autoStart="true" startLevel="2" />
+      <plugin id="org.osgi.snps.composer" autoStart="true" startLevel="3" />
+      <plugin id="org.osgi.snps.core" autoStart="true" startLevel="5" />
+      <plugin id="org.osgi.snps.logger" autoStart="true" startLevel="3" />
+      <plugin id="org.osgi.snps.monitor" autoStart="true" startLevel="3" />
+      <plugin id="org.osgi.snps.subscriber" autoStart="true" startLevel="3" />
+      <plugin id="org.osgi.snps.wii" autoStart="true" startLevel="3" />
+      <plugin id="publisher" autoStart="true" startLevel="4" />
+      <plugin id="snps.interpreter" autoStart="true" startLevel="3" />
+      <plugin id="snps.registry" autoStart="true" startLevel="3" />
+   </configurations>
+
+</product>

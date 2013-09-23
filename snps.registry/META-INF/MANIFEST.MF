@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Registry
+Bundle-SymbolicName: snps.registry
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: snps.registry.Activator
+Bundle-ActivationPolicy: lazy
+Export-Package: snps.registry
+Require-Bundle: ISNPS;bundle-version="1.0.0",
+ publisher;bundle-version="1.0.0",
+ org.eclipse.osgi;bundle-version="3.7.0"

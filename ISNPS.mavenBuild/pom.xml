@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>eu.nce</groupId>
+	<artifactId>org.ISNPS.mavenBuild</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<tycho-version>0.18.1</tycho-version>
+	</properties>
+	<repositories>
+		<repository>
+			<id>juno</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/juno/</url>
+		</repository>
+		<repository>
+			<id>ecf</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/rt/ecf/3.6.0/site.p2</url>
+		</repository>
+		<repository>
+               <id>rxtx</id>
+               <url>http://rxtx.qbang.org/eclipse</url>
+               <layout>p2</layout>
+          </repository>
+        <repository>
+    			<id>orbit</id>
+    			<layout>p2</layout>
+    			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</url>
+  		</repository>
+  		<!--  <repository>
+				<id>apache-cxf-dosgi</id>
+				<layout>p2</layout>
+				<url>file: ../../eclipse/plugins/cxf-dosgi-ri-singlebundle-distribution 1.4.0.jar</url>
+		</repository> -->
+		<!--  <repository>
+  			<id>tomcat-p2</id>
+  			<layout>p2</layout>
+  			<url>http://localhost:8080/snps-repo/plugins</url>
+		</repository> -->
+		<repository>
+  			<id>snps-p2</id>
+  			<layout>p2</layout>
+  			<url>http://crashfiles.altervista.org/snps</url>
+		</repository>
+	</repositories>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>../ISNPS</module>
+		<module>../org.osgi.remote.wsn</module>
+		<module>../SMLParser</module>
+		<module>../com.mysql.jdbc</module>
+		<module>../publisher</module>
+		<module>../org.osgi.snps.base</module>
+		<module>../snps.registry</module>
+		<module>../org.osgi.snps.composer</module>
+		<module>../org.osgi.snps.core</module>
+		<module>../org.osgi.snps.logger</module>
+		<module>../org.osgi.snps.wii</module>
+		<module>../org.osgi.snps.monitor</module>
+		<module>../snps.interpreter</module>
+		<module>../org.osgi.snps.subscriber</module>
+	</modules>		
+</project>

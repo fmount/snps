@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="mdwapp"
+         point="org.eclipse.core.runtime.applications">
+      <application
+            cardinality="singleton-global"
+            thread="main"
+            visible="true">
+         <run
+               class="org.osgi.snps.core.MdwApplication">
+         </run>
+      </application>
+   </extension>
+   <extension
+         id="mdw_product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.osgi.snps.core.mdwapp"
+            name="MDW_APP">
+         <property
+               name="appName"
+               value="MDW_APP">
+         </property>
+      </product>
+   </extension>
+</plugin>

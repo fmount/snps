@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+	name="SNPSDao">
+   <implementation class="org.osgi.snps.base.daoservice.DaoService"/>
+   <service>
+      <provide interface="org.osgi.snps.base.interfaces.iDaoInterface"/>
+   </service>
+</scr:component>

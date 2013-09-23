@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sml:SensorML rng:version="1.0.1"
+xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+xmlns:gml="http://www.opengis.net/gml"
+xmlns:rng="http://relaxng.org/ns/structure/1.0"
+xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+xmlns:swe="http://www.opengis.net/swe/1.0.1"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xng="http://xng.org/1.0">
+    <sml:member>
+           <sml:Component gml:id="thermometer3">
+                  <gml:description>A Temperature Sensor.</gml:description>
+                  <gml:name>Thermometer_3</gml:name>
+                  <gml:type>Temperature</gml:type>
+                  <!--Identification -->
+                  <sml:identification>
+                      <sml:IdentifierList>
+                             <sml:identifier name="Model_Number">
+                                   <sml:Term definition="">
+                                         <sml:value>TMP35B</sml:value>
+                                   </sml:Term>
+                             </sml:identifier>
+                             <sml:identifier name="NetParams">
+                                   <sml:Term definition="net_id">
+                                         <sml:value>Net identifier</sml:value>
+                                   </sml:Term>
+                                   <sml:Term definition="zone_id">
+                                         <sml:value>Zone identifier</sml:value>
+                                   </sml:Term>
+                                   <sml:Term definition="node_id">
+                                         <sml:value>BS identifier</sml:value>
+                                   </sml:Term>
+                             </sml:identifier>
+                      </sml:IdentifierList>
+		</sml:identification>
+<!--Capabilities -->
+<capabilities name="MeasurementProperties">
+     − <swe:DataRecord definition=" urn: ogc:def:property:measurementProperties">
+           <!--  <gml:description>The SensorBoard Temperature Sensor performs temperature measurement in a variety of communication,
+                 computer, consumer, environmental, industrial, and
+                  instrumentation applications.</gml:description> -->
+           − <swe:field name="TemperatureResolution"
+                                    xlink:arcrole="urn:ogc:def:property:resolution">
+                 <swe:Quantity definition="urn:ogc:def:property:temperature">
+                        <swe:uom code="cel"/>
+                        <swe:value>0.0625</swe:value>
+                 </swe:Quantity>
+                 <swe:Quantity definition="urn:ogc:def:property:temperature">
+                        <swe:uom code="cel"/>
+                        <swe:value>0.0005</swe:value>
+                 </swe:Quantity>
+           </swe:field>
+           <swe:field name="TemperatureRange"
+                                    xlink:arcrole="urn:ogc:def:property:dynamicRange">
+                 <swe:Quantity definition="urn:ogc:def:property:temperature">
+                        <swe:uom code="cel"/>
+                        <swe:value>-45.125</swe:value>
+                 </swe:Quantity>
+           </swe:field>
+           <swe:field name="AbsoluteAccuracy"
+                                    xlink:arcrole="urn:ogc:def:property:accuracy">
+              <swe:Quantity definition="urn:ogc:def:property:absoluteAccuracy">
+                        <swe:uom code="%"/>
+                        <swe:value>-2.02.0</swe:value>
+                 </swe:Quantity>
+           </swe:field>
+     </swe:DataRecord>
+</capabilities>
+<!-- Inputs -->
+<sml:inputs>
+     <sml:InputList>
+           <sml:input name="thermometerInput">
+                 <swe:Count definition="urn:ogc:def:phenomenon:temperature">
+                                 <swe:uom xlink:href="urn:ogc:def:unit:celsius"/>
+                 </swe:Count>
+           </sml:input>
+     </sml:InputList>
+</sml:inputs>
+	   <!-- Outputs -->
+           <sml:outputs>
+               <sml:OutputList>
+                     <sml:output name="thermometerOutput">
+                           <swe:Count definition="urn:ogc:def:phenomenon:temperature">
+                                 <swe:uom xlink:href="urn:ogc:def:unit:celsius"/>
+                           </swe:Count>
+                     </sml:output>
+               </sml:OutputList>
+           </sml:outputs>
+    <!-- Method -->         
+    <method xlink:href="urn:ucd:sensorboard:thermometer"/>
+     </sml:Component>
+       </sml:member>
+</sml:SensorML>
+

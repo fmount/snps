@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>org.osgi.remote.wsn.product</name>
+	<comment></comment>
+	<projects>
+		<project>ISNPS</project>
+		<project>org.osgi.remote.wsn</project>
+		<project>SMLParser</project>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+</projectDescription>

@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Interpreter
+Bundle-SymbolicName: snps.interpreter
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: snps.interpreter.Activator
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: snps.interpreter
+Require-Bundle: ch.ethz.iks.r_osgi.remote;bundle-version="1.0.0",
+ ISNPS;bundle-version="1.0.0",
+ publisher;bundle-version="1.0.0",
+ org.eclipse.osgi;bundle-version="3.7.0",
+ provamq;bundle-version="1.0.0"

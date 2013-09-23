@@ -1,0 +1,1665 @@
+Apache Maven 3.0.4
+Maven home: /usr/share/maven
+Java version: 1.6.0_27, vendor: Sun Microsystems Inc.
+Java home: /usr/lib/jvm/java-6-openjdk-i386/jre
+Default locale: it_IT, platform encoding: UTF-8
+OS name: "linux", version: "3.2.0-43-generic-pae", arch: "i386", family: "unix"
+[INFO] Error stacktraces are turned on.
+[DEBUG] Reading global settings from /usr/share/maven/conf/settings.xml
+[DEBUG] Reading user settings from /home/cristiano/.m2/settings.xml
+[DEBUG] Using local repository at /home/cristiano/.m2/repository
+[DEBUG] Using manager EnhancedLocalRepositoryManager with priority 10 for /home/cristiano/.m2/repository
+[INFO] Scanning for projects...
+[DEBUG] org.eclipse.tycho:tycho-maven-plugin:jar:0.18.0:
+[DEBUG]    org.eclipse.tycho:tycho-core:jar:0.18.0:compile
+[DEBUG]       org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]          org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]          org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]             org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]          org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]          org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]             org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]       org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.codehaus.plexus:plexus-utils:jar:3.0.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]          org.codehaus.plexus:plexus-io:jar:2.0.5:compile (version managed from 2.0.4)
+[DEBUG]       org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:sisu-equinox-api:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:tycho-metadata-model:jar:0.18.0:compile
+[DEBUG]          de.pdark:decentxml:jar:1.3:compile
+[DEBUG]       org.eclipse.tycho:tycho-embedder-api:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0:compile
+[DEBUG]    org.eclipse.tycho:tycho-p2-facade:jar:0.18.0:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0:compile
+[DEBUG] Created new class realm maven.api
+[DEBUG] Importing foreign packages into class realm maven.api
+[DEBUG]   Imported: org.apache.maven.wagon.events < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.transfer < plexus.core
+[DEBUG]   Imported: org.apache.maven.exception < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.metadata < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.Xpp3Dom < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.collection < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.version < plexus.core
+[DEBUG]   Imported: org.apache.maven.monitor < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.resource < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.logging < plexus.core
+[DEBUG]   Imported: org.apache.maven.profiles < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.repository < plexus.core
+[DEBUG]   Imported: org.apache.maven.classrealm < plexus.core
+[DEBUG]   Imported: org.apache.maven.execution < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.artifact < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.spi < plexus.core
+[DEBUG]   Imported: org.apache.maven.reporting < plexus.core
+[DEBUG]   Imported: org.apache.maven.usability < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.container < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.component < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlSerializer < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authentication < plexus.core
+[DEBUG]   Imported: org.apache.maven.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.classworlds < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.graph < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.settings < plexus.core
+[DEBUG]   Imported: org.codehaus.classworlds < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.impl < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.toolchain < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.deployment < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.observers < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParserException < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.util.xml.pull.XmlPullParser < plexus.core
+[DEBUG]   Imported: org.apache.maven.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.cli < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.installation < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.context < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.authorization < plexus.core
+[DEBUG]   Imported: org.apache.maven.project < plexus.core
+[DEBUG]   Imported: org.apache.maven.rtinfo < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.lifecycle < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.configuration < plexus.core
+[DEBUG]   Imported: org.apache.maven.artifact < plexus.core
+[DEBUG]   Imported: org.apache.maven.model < plexus.core
+[DEBUG]   Imported: org.apache.maven.* < plexus.core
+[DEBUG]   Imported: org.apache.maven.wagon.proxy < plexus.core
+[DEBUG]   Imported: org.sonatype.aether.resolution < plexus.core
+[DEBUG]   Imported: org.apache.maven.plugin < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.* < plexus.core
+[DEBUG]   Imported: org.codehaus.plexus.personality < plexus.core
+[DEBUG] Populating class realm maven.api
+[DEBUG] Created new class realm extension>org.eclipse.tycho:tycho-maven-plugin:0.18.0
+[DEBUG] Importing foreign packages into class realm extension>org.eclipse.tycho:tycho-maven-plugin:0.18.0
+[DEBUG]   Imported:  < maven.api
+[DEBUG] Populating class realm extension>org.eclipse.tycho:tycho-maven-plugin:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-maven-plugin:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-core:jar:0.18.0
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.5
+[DEBUG]   Included: org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200
+[DEBUG]   Included: org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:sisu-equinox-api:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-metadata-model:jar:0.18.0
+[DEBUG]   Included: de.pdark:decentxml:jar:1.3
+[DEBUG]   Included: org.eclipse.tycho:tycho-embedder-api:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-p2-facade:jar:0.18.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0
+[DEBUG] Extension realms for project org.ISNPS:wsn:eclipse-repository:1.0.0-SNAPSHOT: [ClassRealm[extension>org.eclipse.tycho:tycho-maven-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]]
+[DEBUG] Created new class realm project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Looking up lifecyle mappings for packaging eclipse-repository from ClassRealm[project>org.ISNPS:wsn:1.0.0-SNAPSHOT, parent: ClassRealm[maven.api, parent: null]]
+[DEBUG] org.eclipse.tycho:tycho-maven-plugin:0.18.0 configured in MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0 configured in MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] org.eclipse.tycho:tycho-p2-director-plugin:0.18.0 configured in MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] org.eclipse.tycho:tycho-p2-plugin:0.18.0 configured in MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0 configured in MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] org.eclipse.tycho:tycho-packaging-plugin:0.18.0 configured in MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[WARNING] No explicit target runtime environment configuration. Build is platform dependent.
+Debug options:
+    file:/home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/.options not found
+Time to load bundles: 1672
+[DEBUG] Clearing proxy settings in OSGi runtime
+[DEBUG] org.eclipse.tycho:tycho-p2-repository-plugin:jar:0.18.0:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]          org.codehaus.plexus:plexus-utils:jar:3.0.7:compile (version managed from 2.0.4)
+[DEBUG]       org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.eclipse.tycho:tycho-p2-facade:jar:0.18.0:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200:compile
+[DEBUG]       org.eclipse.tycho:tycho-core:jar:0.18.0:compile
+[DEBUG]          org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]             org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]             org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]             org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]             org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]             org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]             org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]                org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]             org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]             org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]             org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]             org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]                org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]          org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]             org.codehaus.plexus:plexus-io:jar:2.0.5:compile (version managed from 2.0.4)
+[DEBUG]          org.eclipse.tycho:tycho-metadata-model:jar:0.18.0:compile
+[DEBUG]             de.pdark:decentxml:jar:1.3:compile
+[DEBUG]          org.eclipse.tycho:tycho-embedder-api:jar:0.18.0:compile
+[DEBUG]             org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:sisu-equinox-api:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0:compile
+[DEBUG] Created new class realm plugin>org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0
+[DEBUG] Importing foreign packages into class realm plugin>org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-p2-repository-plugin:jar:0.18.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.7
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.5
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:3.0
+[DEBUG]   Excluded: org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-classworlds:jar:2.2.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-p2-facade:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-core:jar:0.18.0
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-aether-provider:jar:3.0
+[DEBUG]   Excluded: org.sonatype.aether:aether-impl:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-spi:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-api:jar:1.7
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-metadata-model:jar:0.18.0
+[DEBUG]   Excluded: de.pdark:decentxml:jar:1.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-embedder-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0
+[DEBUG] org.eclipse.tycho:tycho-p2-director-plugin:jar:0.18.0:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-utils:jar:3.0.7:compile (version managed from 2.0.4)
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.eclipse.tycho:tycho-p2-facade:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200:compile
+[DEBUG]       org.eclipse.tycho:tycho-core:jar:0.18.0:compile
+[DEBUG]          org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]             org.codehaus.plexus:plexus-io:jar:2.0.5:compile (version managed from 2.0.4)
+[DEBUG]          org.eclipse.tycho:tycho-metadata-model:jar:0.18.0:compile
+[DEBUG]             de.pdark:decentxml:jar:1.3:compile
+[DEBUG]          org.eclipse.tycho:tycho-embedder-api:jar:0.18.0:compile
+[DEBUG]             org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0:compile
+[DEBUG]    org.eclipse.tycho:sisu-equinox-launching:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-api:jar:0.18.0:compile
+[DEBUG]    org.eclipse.tycho:tycho-standalone-p2-director:zip:0.18.0:compile
+[DEBUG] Created new class realm plugin>org.eclipse.tycho:tycho-p2-director-plugin:0.18.0
+[DEBUG] Importing foreign packages into class realm plugin>org.eclipse.tycho:tycho-p2-director-plugin:0.18.0
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.eclipse.tycho:tycho-p2-director-plugin:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-p2-director-plugin:jar:0.18.0
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.5
+[DEBUG]   Included: org.eclipse.tycho:sisu-equinox-launching:jar:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-standalone-p2-director:zip:0.18.0
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:3.0
+[DEBUG]   Excluded: org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-aether-provider:jar:3.0
+[DEBUG]   Excluded: org.sonatype.aether:aether-impl:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-spi:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-api:jar:1.7
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-classworlds:jar:2.2.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-p2-facade:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-core:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-metadata-model:jar:0.18.0
+[DEBUG]   Excluded: de.pdark:decentxml:jar:1.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-embedder-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-api:jar:0.18.0
+[DEBUG] org.eclipse.tycho:tycho-p2-plugin:jar:0.18.0:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-utils:jar:3.0.7:compile (version managed from 2.0.4)
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.eclipse.tycho:sisu-equinox-launching:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:tycho-core:jar:0.18.0:compile
+[DEBUG]          org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]             org.codehaus.plexus:plexus-io:jar:2.0.5:compile (version managed from 2.0.4)
+[DEBUG]          org.eclipse.tycho:tycho-metadata-model:jar:0.18.0:compile
+[DEBUG]             de.pdark:decentxml:jar:1.3:compile
+[DEBUG]          org.eclipse.tycho:tycho-embedder-api:jar:0.18.0:compile
+[DEBUG]             org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-api:jar:0.18.0:compile
+[DEBUG]    org.eclipse.tycho:tycho-p2-facade:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0:compile
+[DEBUG]    org.eclipse.tycho:tycho-artifactcomparator:jar:0.18.0:compile
+[DEBUG]       org.ow2.asm:asm-debug-all:jar:4.0:compile
+[DEBUG] Created new class realm plugin>org.eclipse.tycho:tycho-p2-plugin:0.18.0
+[DEBUG] Importing foreign packages into class realm plugin>org.eclipse.tycho:tycho-p2-plugin:0.18.0
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.eclipse.tycho:tycho-p2-plugin:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-p2-plugin:jar:0.18.0
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.eclipse.tycho:sisu-equinox-launching:jar:0.18.0
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.5
+[DEBUG]   Included: org.eclipse.tycho:tycho-artifactcomparator:jar:0.18.0
+[DEBUG]   Included: org.ow2.asm:asm-debug-all:jar:4.0
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:3.0
+[DEBUG]   Excluded: org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-aether-provider:jar:3.0
+[DEBUG]   Excluded: org.sonatype.aether:aether-impl:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-spi:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-api:jar:1.7
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-classworlds:jar:2.2.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-core:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-metadata-model:jar:0.18.0
+[DEBUG]   Excluded: de.pdark:decentxml:jar:1.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-embedder-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-p2-facade:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0
+[DEBUG] org.eclipse.tycho:tycho-p2-publisher-plugin:jar:0.18.0:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-utils:jar:3.0.7:compile (version managed from 2.0.4)
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.eclipse.tycho:tycho-p2-facade:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200:compile
+[DEBUG]       org.eclipse.tycho:tycho-core:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:tycho-metadata-model:jar:0.18.0:compile
+[DEBUG]             de.pdark:decentxml:jar:1.3:compile
+[DEBUG]          org.eclipse.tycho:tycho-embedder-api:jar:0.18.0:compile
+[DEBUG]             org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:sisu-equinox-api:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0:compile
+[DEBUG]    org.eclipse.tycho:tycho-packaging-plugin:jar:0.18.0:compile
+[DEBUG]       org.apache.maven:maven-archiver:jar:2.5:compile
+[DEBUG]       org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]          org.codehaus.plexus:plexus-io:jar:2.0.5:compile (version managed from 2.0.4)
+[DEBUG] Created new class realm plugin>org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0
+[DEBUG] Importing foreign packages into class realm plugin>org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-p2-publisher-plugin:jar:0.18.0
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.eclipse.tycho:tycho-packaging-plugin:jar:0.18.0
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:2.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.5
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:3.0
+[DEBUG]   Excluded: org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-aether-provider:jar:3.0
+[DEBUG]   Excluded: org.sonatype.aether:aether-impl:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-spi:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-api:jar:1.7
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-classworlds:jar:2.2.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-p2-facade:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-core:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-metadata-model:jar:0.18.0
+[DEBUG]   Excluded: de.pdark:decentxml:jar:1.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-embedder-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.resolver.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.p2.tools.shared:jar:0.18.0
+[INFO] Computing target platform for MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] Using default execution environment 'JavaSE-1.6'
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/ (128B at 0B/s)
+[INFO] 1 operation remaining.
+[INFO] Adding repository http://download.eclipse.org/releases/juno
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201303010900/ (0B at 0B/s)
+[INFO] 1 operation remaining.
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201303010900/ (365B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201209280900/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201209280900/ (365B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201206270900/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201206270900/ (365B at 0B/s)
+[INFO] 1 operation remaining.
+[INFO] Fetching p2.index from http://download.eclipse.org/technology/epp/packages/juno/ (0B at 0B/s)
+[INFO] 1 operation remaining.
+[INFO] Fetching p2.index from http://download.eclipse.org/technology/epp/packages/juno/ (116B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/ (128B at 0B/s)
+[INFO] Adding repository http://download.eclipse.org/releases/juno
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201303010900/ (0B at 0B/s)
+[INFO] 1 operation remaining.
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201303010900/ (365B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201209280900/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201209280900/ (365B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201206270900/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/releases/juno/201206270900/ (365B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/technology/epp/packages/juno/ (0B at 0B/s)
+[INFO] Fetching p2.index from http://download.eclipse.org/technology/epp/packages/juno/ (116B at 0B/s)
+[INFO] 1 operation remaining.
+[DEBUG] Added p2 repository juno (http://download.eclipse.org/releases/juno/)
+[INFO] Adding repository http://download.eclipse.org/rt/ecf/3.6.0/site.p2
+[INFO] Adding repository http://download.eclipse.org/rt/ecf/3.6.0/site.p2
+[DEBUG] Added p2 repository ecf (http://download.eclipse.org/rt/ecf/3.6.0/site.p2)
+[DEBUG] Registered artifact repository org.eclipse.tycho.repository.registry.facade.RepositoryBlackboardKey(uri=file:/resolution-context-artifacts@/home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product)
+[DEBUG] Added 542 locally built units to the target platform
+[INFO] Resolving dependencies of MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   SMLParser/1.0.0.201306131349
+[WARNING]   ISNPS/1.0.0.201306131349
+[WARNING]   org.osgi.remote.wsn/1.0.0.201306131349
+[INFO] Resolving class path of MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] === REACTOR BUILD PLAN ================================================
+[DEBUG] Project: org.ISNPS:wsn:eclipse-repository:1.0.0-SNAPSHOT
+[DEBUG] Tasks:   [clean, install]
+[DEBUG] Style:   Regular
+[DEBUG] =======================================================================
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building wsn 1.0.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] Lifecycle default -> [validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy]
+[DEBUG] Lifecycle clean -> [pre-clean, clean, post-clean]
+[DEBUG] Lifecycle site -> [pre-site, site, post-site, site-deploy]
+[DEBUG] === PROJECT BUILD PLAN ================================================
+[DEBUG] Project:       org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Dependencies (collect): []
+[DEBUG] Dependencies (resolve): []
+[DEBUG] Repositories (dependencies): [juno (http://download.eclipse.org/releases/juno/, disabled), ecf (http://download.eclipse.org/rt/ecf/3.6.0/site.p2, disabled), central (http://repo.maven.apache.org/maven2, releases)]
+[DEBUG] Repositories (plugins)     : [central (http://repo.maven.apache.org/maven2, releases)]
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-clean-plugin:2.3:clean (default-clean)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <directory default-value="${project.build.directory}"/>
+  <excludeDefaultDirectories default-value="false">${clean.excludeDefaultDirectories}</excludeDefaultDirectories>
+  <failOnError default-value="true">${maven.clean.failOnError}</failOnError>
+  <followSymLinks default-value="false">${clean.followSymLinks}</followSymLinks>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <project default-value="${project}"/>
+  <reportDirectory default-value="${project.reporting.outputDirectory}"/>
+  <skip default-value="false">${clean.skip}</skip>
+  <testOutputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <verbose>${clean.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-packaging-plugin:0.18.0:build-qualifier-aggregator (default-build-qualifier-aggregator)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <baseDir default-value="${project.basedir}"/>
+  <execution>${mojoExecution}</execution>
+  <forceContextQualifier>${forceContextQualifier}</forceContextQualifier>
+  <format default-value="yyyyMMddHHmm"/>
+  <packaging default-value="${project.packaging}"/>
+  <project default-value="${project}"/>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-clean-plugin:2.3:clean (default-clean-1)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <directory default-value="${project.build.directory}"/>
+  <excludeDefaultDirectories default-value="false">${clean.excludeDefaultDirectories}</excludeDefaultDirectories>
+  <failOnError default-value="true">${maven.clean.failOnError}</failOnError>
+  <followSymLinks default-value="false">${clean.followSymLinks}</followSymLinks>
+  <outputDirectory default-value="${project.build.outputDirectory}"/>
+  <project default-value="${project}"/>
+  <reportDirectory default-value="${project.reporting.outputDirectory}"/>
+  <skip default-value="false">${clean.skip}</skip>
+  <testOutputDirectory default-value="${project.build.testOutputDirectory}"/>
+  <verbose>${clean.verbose}</verbose>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:publish-products (default-publish-products)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <flavor default-value="tooling"/>
+  <project>${project}</project>
+  <qualifier>${buildQualifier}</qualifier>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:publish-categories (default-publish-categories)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <project>${project}</project>
+  <qualifier>${buildQualifier}</qualifier>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:attach-artifacts (default-attach-artifacts)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <project>${project}</project>
+  <qualifier>${buildQualifier}</qualifier>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0:assemble-repository (default-assemble-repository)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <compress default-value="true"/>
+  <createArtifactRepository default-value="true"/>
+  <includeAllDependencies default-value="false">true</includeAllDependencies>
+  <project>${project}</project>
+  <qualifier>${buildQualifier}</qualifier>
+  <repositoryName default-value="${project.name}"/>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0:archive-repository (default-archive-repository)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <finalName>${project.build.finalName}</finalName>
+  <project>${project}</project>
+  <qualifier>${buildQualifier}</qualifier>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-director-plugin:0.18.0:materialize-products (materialize-products)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <directorRuntime default-value="internal"/>
+  <installFeatures default-value="true"/>
+  <products>
+    <product>
+      <id>wsn_product</id>
+      <rootFolder>ISNPSClient</rootFolder>
+    </product>
+  </products>
+  <profile default-value="DefaultProfile"/>
+  <project>${project}</project>
+  <session>${session}</session>
+  <source default-value="targetPlatform"/>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-director-plugin:0.18.0:archive-products (archive-products)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <products>
+    <product>
+      <id>wsn_product</id>
+      <rootFolder>ISNPSClient</rootFolder>
+    </product>
+  </products>
+  <project>${project}</project>
+  <session>${session}</session>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.apache.maven.plugins:maven-install-plugin:2.3.1:install (default-install)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <artifact default-value="${project.artifact}"/>
+  <attachedArtifacts default-value="${project.attachedArtifacts}"/>
+  <createChecksum default-value="false">${createChecksum}</createChecksum>
+  <localRepository>${localRepository}</localRepository>
+  <packaging default-value="${project.packaging}"/>
+  <pomFile default-value="${project.file}"/>
+  <updateReleaseInfo default-value="false">${updateReleaseInfo}</updateReleaseInfo>
+</configuration>
+[DEBUG] -----------------------------------------------------------------------
+[DEBUG] Goal:          org.eclipse.tycho:tycho-p2-plugin:0.18.0:update-local-index (default-update-local-index)
+[DEBUG] Style:         Regular
+[DEBUG] Configuration: <?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <project>${project}</project>
+</configuration>
+[DEBUG] =======================================================================
+[INFO] 
+[INFO] --- maven-clean-plugin:2.3:clean (default-clean) @ wsn ---
+[DEBUG] org.apache.maven.plugins:maven-clean-plugin:jar:2.3:
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]          org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.1:compile
+[DEBUG]          classworlds:classworlds:jar:1.1-alpha-2:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven.shared:file-management:jar:1.2.1:compile
+[DEBUG]       org.apache.maven.shared:maven-shared-io:jar:1.1:compile
+[DEBUG]          org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:1.5.6:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-clean-plugin:2.3
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-clean-plugin:2.3
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-clean-plugin:2.3
+[DEBUG]   Included: org.apache.maven.plugins:maven-clean-plugin:jar:2.3
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.apache.maven.shared:file-management:jar:1.2.1
+[DEBUG]   Included: org.apache.maven.shared:maven-shared-io:jar:1.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:1.5.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1-alpha-2
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven.wagon:wagon-provider-api:jar:1.0-alpha-6
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-clean-plugin:2.3:clean from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-clean-plugin:2.3, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-clean-plugin:2.3:clean' with basic configurator -->
+[DEBUG]   (f) directory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target
+[DEBUG]   (f) excludeDefaultDirectories = false
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) followSymLinks = false
+[DEBUG]   (f) outputDirectory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) reportDirectory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/site
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) testOutputDirectory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/test-classes
+[DEBUG] -- end configuration --
+[INFO] Deleting file set: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target (included: [**], excluded: [])
+[INFO] Scanning for deletable directories.
+[INFO] Adding symbolic link dirs which were previously excluded to the list being deleted.
+[DEBUG] Originally marked for delete: [, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86, products/wsn_product/linux/gtk/x86/ISNPSClient, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS, repository/plugins, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk, products/wsn_product, products/wsn_product/linux/gtk/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc, targetPlatformRepository, p2agent, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon, products/wsn_product/linux/gtk/x86/ISNPSClient/p2, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of, products, classes, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app, products/wsn_product/linux, repository/features, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif, repository/binary, p2agent/org.eclipse.equinox.p2.engine/profileRegistry, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF, p2agent/org.eclipse.equinox.p2.engine/.settings, products/wsn_product/linux/gtk, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app, products/wsn_product/linux/gtk/x86/ISNPSClient/configuration, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32, repository, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents, p2agent/org.eclipse.equinox.p2.engine, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc, extraArtifacts, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32, p2agent/org.eclipse.equinox.p2.core, p2agent/org.eclipse.equinox.p2.core/cache, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin]
+[DEBUG] Marked for preserve (with followSymlinks == false): []
+[DEBUG] Symlinks marked for deletion (originally mismarked): []
+[INFO] Re-scanning for deletable files.
+[INFO] Adding symbolic link files which were previously excluded to the list being deleted.
+[DEBUG] Originally marked for delete: [, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64/eclipsec.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/eclipse_1502.so, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/MANIFEST.MF, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/build.properties, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86/launcher.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS/eclipse.ini, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS/eclipse.ini, repository/plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files, products/wsn_product-linux.gtk.x86.zip, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.osgi_3.8.2.v20130124-134944.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64, repository/plugins, repository/features/org.eclipse.equinox.executable_3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of.jar, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.objectweb.asm_3.3.1.v201105211655.jar, targetPlatformRepository, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64/libcairo-swt.so, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86/launcher, local-artifacts.properties, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32, classes, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64/launcher.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/ECLIPSE_.RSA, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.l.pm, repository/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/launcher.gtk.linux.x86.properties, repository/plugins/javax.xml_1.3.4.v201005080400.jar, products/wsn_product/linux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/Info.plist, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about.html, repository/plugins/org.osgi.remote.wsn_1.0.0.201306131349.jar, repository/features, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/feature.properties, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.artifact.repository.prefs, repository/binary/wsn_product.executable.gtk.linux.x86_1.0.0.201306131607, repository/plugins/ch.ethz.iks.r_osgi.remote_1.0.0.RC4_v20130309-0714.jar, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139670311.profile.gz, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS, products/wsn_product/linux/gtk/x86/ISNPSClient/configuration/config.ini, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif, p2agent/org.eclipse.equinox.p2.engine/profileRegistry, products/wsn_product/wsn.product, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/ISNPS_1.0.0.201306131349.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/license.html, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux, p2artifacts.xml, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root, repository/plugins/org.objectweb.asm_3.3.1.v201105211655.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS/eclipse.ini, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/mlpl-v10.html, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139672255.profile.gz, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/MANIFEST.MF, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/pixman-licenses.txt, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS/launcher, repository/plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32/launcher, products/wsn_product/linux/gtk/x86/ISNPSClient/configuration, p2content.xml, products/wsn_product/linux/gtk/x86/ISNPSClient/libcairo-swt.so, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32, repository, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine, products/wsn_product/linux/gtk/x86/ISNPSClient/eclipse.ini, p2agent/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.artifact.repository.prefs, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/Info.plist, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about.html, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86/launcher.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS/launcher, p2agent/org.eclipse.equinox.p2.core, products/wsn_product/linux/gtk/x86/ISNPSClient/eclipse, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary/wsn_product.executable.gtk.linux.x86_1.0.0.201306131607, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/eclipse.inf, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins, products/wsn_product/linux/gtk/x86/ISNPSClient, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc/launcher, repository/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390/launcher, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/javax.xml_1.3.4.v201005080400.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86/libcairo-swt.so, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.m.pm, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/ECLIPSE_.SF, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.apache.xerces_2.9.0.v201101211617.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/epl-v10.html, repository/plugins/SMLParser_1.0.0.201306131349.jar, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/SMLParser_1.0.0.201306131349.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.s.pm, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807, targetPlatformRepository/content.xml, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.lock, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files/mpl-v11.txt, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86/libXm.so.2, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk, products/wsn_product, products/wsn_product/linux/gtk/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.t.pm, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32, p2agent, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/ECLIPSE_.SF, repository/plugins/org.apache.xerces_2.9.0.v201101211617.jar, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.osgi.remote.wsn_1.0.0.201306131349.jar, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar, repository/plugins/ISNPS_1.0.0.201306131349.jar, products/wsn_product/linux/gtk/x86/ISNPSClient/p2, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86/eclipsec.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/build.xml, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/Info.plist, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of, products, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139675394.profile.gz, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139675106.profile.gz, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x/launcher, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/artifacts.xml, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86/eclipsec.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/eclipse_update_120.jpg, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390, products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry, wsn-1.0.0-SNAPSHOT.zip, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files, repository/binary, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64/launcher.exe, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS/launcher, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files/pixman-licenses.txt, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/mpl-v11.txt, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents, repository/content.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF, p2agent/org.eclipse.equinox.p2.engine/.settings, products/wsn_product/linux/gtk, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini, repository/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/feature.xml, extraArtifacts/wsn_product.executable.gtk.linux.x86.zip, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/about_cairo.html, p2agent/org.eclipse.equinox.p2.engine, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/ch.ethz.iks.r_osgi.remote_1.0.0.RC4_v20130309-0714.jar, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64/eclipsec.exe, extraArtifacts, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/Info.plist, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc/libcairo-swt.so, p2agent/org.eclipse.equinox.p2.core/cache/artifacts.xml, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/about_open_motif.html, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86/launcher, repository/artifacts.jar, p2agent/org.eclipse.equinox.p2.core/cache, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/ECLIPSE_.RSA, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/eclipse.inf, products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/about.html, products/wsn_product/linux/gtk/x86/ISNPSClient/artifacts.xml, repository/plugins/org.eclipse.osgi_3.8.2.v20130124-134944.jar, p2agent/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.metadata.repository.prefs, classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files/about_cairo.html]
+[DEBUG] Marked for preserve (with followSymlinks == false): []
+[DEBUG] Symlinks marked for deletion (originally mismarked): []
+[DEBUG] Found deletable paths: [
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64/eclipsec.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/eclipse_1502.so
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/MANIFEST.MF
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/build.properties
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86/launcher.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS/eclipse.ini
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS/eclipse.ini
+ repository/plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files
+ products/wsn_product-linux.gtk.x86.zip
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.osgi_3.8.2.v20130124-134944.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64
+ repository/plugins
+ repository/features/org.eclipse.equinox.executable_3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of.jar
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.objectweb.asm_3.3.1.v201105211655.jar
+ targetPlatformRepository
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64/libcairo-swt.so
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86/launcher
+ local-artifacts.properties
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32
+ classes
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64/launcher.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/ECLIPSE_.RSA
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.l.pm
+ repository/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/launcher.gtk.linux.x86.properties
+ repository/plugins/javax.xml_1.3.4.v201005080400.jar
+ products/wsn_product/linux
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/Info.plist
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about.html
+ repository/plugins/org.osgi.remote.wsn_1.0.0.201306131349.jar
+ repository/features
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/feature.properties
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.artifact.repository.prefs
+ repository/binary/wsn_product.executable.gtk.linux.x86_1.0.0.201306131607
+ repository/plugins/ch.ethz.iks.r_osgi.remote_1.0.0.RC4_v20130309-0714.jar
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139670311.profile.gz
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS
+ products/wsn_product/linux/gtk/x86/ISNPSClient/configuration/config.ini
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif
+ p2agent/org.eclipse.equinox.p2.engine/profileRegistry
+ products/wsn_product/wsn.product
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/ISNPS_1.0.0.201306131349.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/license.html
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux
+ p2artifacts.xml
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root
+ repository/plugins/org.objectweb.asm_3.3.1.v201105211655.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS/eclipse.ini
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/mlpl-v10.html
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139672255.profile.gz
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/MANIFEST.MF
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/pixman-licenses.txt
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS/launcher
+ repository/plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32/launcher
+ products/wsn_product/linux/gtk/x86/ISNPSClient/configuration
+ p2content.xml
+ products/wsn_product/linux/gtk/x86/ISNPSClient/libcairo-swt.so
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32
+ repository
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine
+ products/wsn_product/linux/gtk/x86/ISNPSClient/eclipse.ini
+ p2agent/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.artifact.repository.prefs
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/Info.plist
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about.html
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86/launcher.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS/launcher
+ p2agent/org.eclipse.equinox.p2.core
+ products/wsn_product/linux/gtk/x86/ISNPSClient/eclipse
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary/wsn_product.executable.gtk.linux.x86_1.0.0.201306131607
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/eclipse.inf
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins
+ products/wsn_product/linux/gtk/x86/ISNPSClient
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc/launcher
+ repository/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390/launcher
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/javax.xml_1.3.4.v201005080400.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86/libcairo-swt.so
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.m.pm
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/ECLIPSE_.SF
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.apache.xerces_2.9.0.v201101211617.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/epl-v10.html
+ repository/plugins/SMLParser_1.0.0.201306131349.jar
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/SMLParser_1.0.0.201306131349.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.s.pm
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807
+ targetPlatformRepository/content.xml
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.lock
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files/mpl-v11.txt
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86/libXm.so.2
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk
+ products/wsn_product
+ products/wsn_product/linux/gtk/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc/Eclipse.t.pm
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32
+ p2agent
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/ECLIPSE_.SF
+ repository/plugins/org.apache.xerces_2.9.0.v201101211617.jar
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.osgi.remote.wsn_1.0.0.201306131349.jar
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar
+ repository/plugins/ISNPS_1.0.0.201306131349.jar
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86/eclipsec.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/build.xml
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/Info.plist
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of
+ products
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139675394.profile.gz
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371139675106.profile.gz
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x/launcher
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/artifacts.xml
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86/eclipsec.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/eclipse_update_120.jpg
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390
+ products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry
+ wsn-1.0.0-SNAPSHOT.zip
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files
+ repository/binary
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64/launcher.exe
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS/launcher
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files/pixman-licenses.txt
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/mpl-v11.txt
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents
+ repository/content.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF
+ p2agent/org.eclipse.equinox.p2.engine/.settings
+ products/wsn_product/linux/gtk
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS/eclipse.ini
+ repository/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/feature.xml
+ extraArtifacts/wsn_product.executable.gtk.linux.x86.zip
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/about_cairo.html
+ p2agent/org.eclipse.equinox.p2.engine
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/ch.ethz.iks.r_osgi.remote_1.0.0.RC4_v20130309-0714.jar
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64/eclipsec.exe
+ extraArtifacts
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/Info.plist
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc/libcairo-swt.so
+ p2agent/org.eclipse.equinox.p2.core/cache/artifacts.xml
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files/about_open_motif.html
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86/launcher
+ repository/artifacts.jar
+ p2agent/org.eclipse.equinox.p2.core/cache
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF/ECLIPSE_.RSA
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/eclipse.inf
+ products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/about.html
+ products/wsn_product/linux/gtk/x86/ISNPSClient/artifacts.xml
+ repository/plugins/org.eclipse.osgi_3.8.2.v20130124-134944.jar
+ p2agent/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.metadata.repository.prefs
+ classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files/about_cairo.html]
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target
+[INFO] Deleting directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/extraArtifacts
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/extraArtifacts
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/targetPlatformRepository
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/targetPlatformRepository
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/plugins
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/plugins
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/configuration
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient/configuration
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/win32/win32/ia64
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390x
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/gtk/linux/s390
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/contributed/motif/solaris/sparc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/gtk_root/about_files
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86_64
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/win32/win32/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/x86/Eclipse.app/Contents/MacOS
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/carbon/macosx/ppc/Eclipse.app/Contents/MacOS
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/hpux/ia64_32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86_64
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc64
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/linux/ppc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc64
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/aix/ppc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/gtk/solaris/sparc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/hpux/ia64_32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/linux/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/motif/aix/ppc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/MacOS
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/x86/Eclipse.app/Contents/MacOS
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/cocoa/macosx/ppc/Eclipse.app/Contents/MacOS
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/bin/wpf/win32/x86
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/META-INF
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/motif_root/about_files
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository/binary
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository/binary
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository/features
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository/features
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository/plugins
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/repository/plugins
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.engine
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.engine
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.engine/profileRegistry
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.engine/profileRegistry
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.engine/.settings
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.engine/.settings
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.core
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.core
+[DEBUG] Checking for symlink:
+File's canonical path: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.core/cache
+File's absolute path with canonical parent: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2agent/org.eclipse.equinox.p2.core/cache
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/test-classes
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/site
+[INFO] 
+[INFO] --- tycho-packaging-plugin:0.18.0:build-qualifier-aggregator (default-build-qualifier-aggregator) @ wsn ---
+[DEBUG] org.eclipse.tycho:tycho-packaging-plugin:jar:0.18.0:
+[DEBUG]    org.eclipse.tycho:tycho-core:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:sisu-equinox-api:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:tycho-metadata-model:jar:0.18.0:compile
+[DEBUG]          de.pdark:decentxml:jar:1.3:compile
+[DEBUG]       org.eclipse.tycho:tycho-embedder-api:jar:0.18.0:compile
+[DEBUG]          org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0:compile
+[DEBUG]       org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0:compile
+[DEBUG]    org.apache.maven:maven-core:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-settings-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-artifact:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-model-builder:jar:3.0:compile
+[DEBUG]       org.apache.maven:maven-aether-provider:jar:3.0:runtime
+[DEBUG]       org.sonatype.aether:aether-impl:jar:1.7:compile
+[DEBUG]          org.sonatype.aether:aether-spi:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-api:jar:1.7:compile
+[DEBUG]       org.sonatype.aether:aether-util:jar:1.7:compile
+[DEBUG]       org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2:compile
+[DEBUG]          org.sonatype.sisu:sisu-inject-bean:jar:1.4.2:compile
+[DEBUG]             org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7:compile
+[DEBUG]       org.codehaus.plexus:plexus-interpolation:jar:1.14:compile
+[DEBUG]       org.codehaus.plexus:plexus-classworlds:jar:2.2.3:compile
+[DEBUG]       org.codehaus.plexus:plexus-component-annotations:jar:1.5.5:compile
+[DEBUG]       org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3:compile
+[DEBUG]          org.sonatype.plexus:plexus-cipher:jar:1.4:compile
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:3.0:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:3.0.7:compile
+[DEBUG]    org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200:compile
+[DEBUG]    org.apache.maven:maven-archiver:jar:2.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-archiver:jar:2.2:compile
+[DEBUG]       org.codehaus.plexus:plexus-io:jar:2.0.5:compile (version managed from 2.0.4)
+[DEBUG] Created new class realm plugin>org.eclipse.tycho:tycho-packaging-plugin:0.18.0
+[DEBUG] Importing foreign packages into class realm plugin>org.eclipse.tycho:tycho-packaging-plugin:0.18.0
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.eclipse.tycho:tycho-packaging-plugin:0.18.0
+[DEBUG]   Included: org.eclipse.tycho:tycho-packaging-plugin:jar:0.18.0
+[DEBUG]   Included: org.sonatype.aether:aether-util:jar:1.7
+[DEBUG]   Included: org.sonatype.sisu:sisu-inject-bean:jar:1.4.2
+[DEBUG]   Included: org.sonatype.sisu:sisu-guice:jar:noaop:2.1.7
+[DEBUG]   Included: org.codehaus.plexus:plexus-interpolation:jar:1.14
+[DEBUG]   Included: org.codehaus.plexus:plexus-component-annotations:jar:1.5.5
+[DEBUG]   Included: org.sonatype.plexus:plexus-sec-dispatcher:jar:1.3
+[DEBUG]   Included: org.sonatype.plexus:plexus-cipher:jar:1.4
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:3.0.7
+[DEBUG]   Included: org.apache.maven:maven-archiver:jar:2.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-archiver:jar:2.2
+[DEBUG]   Included: org.codehaus.plexus:plexus-io:jar:2.0.5
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-core:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-embedder:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:sisu-equinox-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-metadata-model:jar:0.18.0
+[DEBUG]   Excluded: de.pdark:decentxml:jar:1.3
+[DEBUG]   Excluded: org.eclipse.tycho:tycho-embedder-api:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.embedder.shared:jar:0.18.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.tycho.core.shared:jar:0.18.0
+[DEBUG]   Excluded: org.apache.maven:maven-core:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-settings-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-model-builder:jar:3.0
+[DEBUG]   Excluded: org.apache.maven:maven-aether-provider:jar:3.0
+[DEBUG]   Excluded: org.sonatype.aether:aether-impl:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-spi:jar:1.7
+[DEBUG]   Excluded: org.sonatype.aether:aether-api:jar:1.7
+[DEBUG]   Excluded: org.sonatype.sisu:sisu-inject-plexus:jar:1.4.2
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-classworlds:jar:2.2.3
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:3.0
+[DEBUG]   Excluded: org.eclipse.tycho:org.eclipse.osgi:jar:3.9.0.v20130305-2200
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-packaging-plugin:0.18.0:build-qualifier-aggregator from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-packaging-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-packaging-plugin:0.18.0:build-qualifier-aggregator' with basic configurator -->
+[DEBUG]   (f) baseDir = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product
+[DEBUG]   (f) execution = org.eclipse.tycho:tycho-packaging-plugin:0.18.0:build-qualifier-aggregator {execution: default-build-qualifier-aggregator}
+[DEBUG]   (s) format = yyyyMMddHHmm
+[DEBUG]   (f) packaging = eclipse-repository
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[INFO] 
+[INFO] --- maven-clean-plugin:2.3:clean (default-clean-1) @ wsn ---
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-clean-plugin:2.3:clean from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-clean-plugin:2.3, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-clean-plugin:2.3:clean' with basic configurator -->
+[DEBUG]   (f) directory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target
+[DEBUG]   (f) excludeDefaultDirectories = false
+[DEBUG]   (f) failOnError = true
+[DEBUG]   (f) followSymLinks = false
+[DEBUG]   (f) outputDirectory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) reportDirectory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/site
+[DEBUG]   (f) skip = false
+[DEBUG]   (f) testOutputDirectory = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/test-classes
+[DEBUG] -- end configuration --
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/test-classes
+[DEBUG] Skipping non-existing directory: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/site
+[INFO] 
+[INFO] --- tycho-p2-publisher-plugin:0.18.0:publish-products (default-publish-products) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:publish-products from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:publish-products' with basic configurator -->
+[DEBUG]   (f) flavor = tooling
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) qualifier = 201306131614
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   SMLParser/1.0.0.201306131349
+[WARNING]   ISNPS/1.0.0.201306131349
+[WARNING]   org.osgi.remote.wsn/1.0.0.201306131349
+[DEBUG] Expanding: /home/cristiano/.m2/repository/p2/org/eclipse/update/feature/org.eclipse.equinox.executable/3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of.jar into /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/classes/org.eclipse.equinox.executable-3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of
+[DEBUG] expand complete
+[INFO] 
+[INFO] --- tycho-p2-publisher-plugin:0.18.0:publish-categories (default-publish-categories) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:publish-categories from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:publish-categories' with basic configurator -->
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) qualifier = 201306131614
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   SMLParser/1.0.0.201306131349
+[WARNING]   ISNPS/1.0.0.201306131349
+[WARNING]   org.osgi.remote.wsn/1.0.0.201306131349
+[INFO] 
+[INFO] --- tycho-p2-publisher-plugin:0.18.0:attach-artifacts (default-attach-artifacts) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:attach-artifacts from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-publisher-plugin:0.18.0:attach-artifacts' with basic configurator -->
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) qualifier = 201306131614
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[INFO] 
+[INFO] --- tycho-p2-repository-plugin:0.18.0:assemble-repository (default-assemble-repository) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0:assemble-repository from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0:assemble-repository' with basic configurator -->
+[DEBUG]   (f) compress = true
+[DEBUG]   (f) createArtifactRepository = true
+[DEBUG]   (f) includeAllDependencies = true
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) qualifier = 201306131614
+[DEBUG]   (f) repositoryName = wsn
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   SMLParser/1.0.0.201306131349
+[WARNING]   ISNPS/1.0.0.201306131349
+[WARNING]   org.osgi.remote.wsn/1.0.0.201306131349
+[INFO] 
+[INFO] --- tycho-p2-repository-plugin:0.18.0:archive-repository (default-archive-repository) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0:archive-repository from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-repository-plugin:0.18.0:archive-repository' with basic configurator -->
+[DEBUG]   (f) finalName = wsn-1.0.0-SNAPSHOT
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) qualifier = 201306131614
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[INFO] Building zip: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/wsn-1.0.0-SNAPSHOT.zip
+[DEBUG] adding directory binary/
+[DEBUG] adding directory features/
+[DEBUG] adding directory plugins/
+[DEBUG] adding entry binary/wsn_product.executable.gtk.linux.x86_1.0.0.201306131614
+[DEBUG] adding entry features/org.eclipse.equinox.executable_3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of.jar
+[DEBUG] adding entry artifacts.jar
+[DEBUG] adding entry plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+[DEBUG] adding entry plugins/org.objectweb.asm_3.3.1.v201105211655.jar
+[DEBUG] adding entry plugins/org.apache.xerces_2.9.0.v201101211617.jar
+[DEBUG] adding entry plugins/org.osgi.remote.wsn_1.0.0.201306131349.jar
+[DEBUG] adding entry plugins/org.eclipse.osgi_3.8.2.v20130124-134944.jar
+[DEBUG] adding entry plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar
+[DEBUG] adding entry plugins/ISNPS_1.0.0.201306131349.jar
+[DEBUG] adding entry plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar
+[DEBUG] adding entry plugins/SMLParser_1.0.0.201306131349.jar
+[DEBUG] adding entry plugins/javax.xml_1.3.4.v201005080400.jar
+[DEBUG] adding entry plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807.jar
+[DEBUG] adding entry plugins/ch.ethz.iks.r_osgi.remote_1.0.0.RC4_v20130309-0714.jar
+[DEBUG] adding entry plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar
+[DEBUG] adding entry content.jar
+[INFO] 
+[INFO] --- tycho-p2-director-plugin:0.18.0:materialize-products (materialize-products) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-director-plugin:0.18.0:materialize-products from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-director-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-director-plugin:0.18.0:materialize-products' with basic configurator -->
+[DEBUG]   (f) directorRuntime = internal
+[DEBUG]   (f) installFeatures = true
+[DEBUG]   (f) id = wsn_product
+[DEBUG]   (f) rootFolder = ISNPSClient
+[DEBUG]   (f) products = [Product [id=wsn_product, attachId=null]]
+[DEBUG]   (f) profile = DefaultProfile
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG]   (f) source = targetPlatform
+[DEBUG] -- end configuration --
+[WARNING] The following locally built units have been used to resolve project dependencies:
+[WARNING]   SMLParser/1.0.0.201306131349
+[WARNING]   ISNPS/1.0.0.201306131349
+[WARNING]   org.osgi.remote.wsn/1.0.0.201306131349
+[INFO] Installing product wsn_product for environment linux/gtk/x86 to /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient
+[DEBUG] Calling director with arguments: [-metadataRepository, file:/home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/,file:/home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/targetPlatformRepository/, -artifactRepository, file:/home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/,file:/resolution-context-artifacts@/home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product,file:/home/cristiano/.m2/repository/, -installIU, wsn_product, -destination, /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product/linux/gtk/x86/ISNPSClient, -profile, DefaultProfile, -profileProperties, org.eclipse.update.install.features=true, -roaming, -p2.os, linux, -p2.ws, gtk, -p2.arch, x86]
+Installing wsn_product 1.0.0.201306131614.
+Operation completed in 6206 ms.
+[INFO] 
+[INFO] --- tycho-p2-director-plugin:0.18.0:archive-products (archive-products) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-director-plugin:0.18.0:archive-products from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-director-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-director-plugin:0.18.0:archive-products' with basic configurator -->
+[DEBUG]   (f) id = wsn_product
+[DEBUG]   (f) rootFolder = ISNPSClient
+[DEBUG]   (f) products = [Product [id=wsn_product, attachId=null]]
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) session = org.apache.maven.execution.MavenSession@15d63da
+[DEBUG] -- end configuration --
+[INFO] Building zip: /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product-linux.gtk.x86.zip
+[DEBUG] adding directory ISNPSClient/
+[DEBUG] adding directory ISNPSClient/plugins/
+[DEBUG] adding directory ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/
+[DEBUG] adding directory ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/
+[DEBUG] adding directory ISNPSClient/p2/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.engine/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.data/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.core/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/
+[DEBUG] adding directory ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary/
+[DEBUG] adding directory ISNPSClient/configuration/
+[DEBUG] adding entry ISNPSClient/eclipse
+[DEBUG] adding entry ISNPSClient/eclipse.ini
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher_1.3.0.v20120522-1813.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.objectweb.asm_3.3.1.v201105211655.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.apache.xerces_2.9.0.v201101211617.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.osgi.remote.wsn_1.0.0.201306131349.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/eclipse_1502.so
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/about.html
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/MANIFEST.MF
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/ECLIPSE_.RSA
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/eclipse.inf
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/META-INF/ECLIPSE_.SF
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_1.1.200.v20120913-144807/launcher.gtk.linux.x86.properties
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.osgi_3.8.2.v20130124-134944.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar
+[DEBUG] adding entry ISNPSClient/plugins/ISNPS_1.0.0.201306131349.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar
+[DEBUG] adding entry ISNPSClient/plugins/SMLParser_1.0.0.201306131349.jar
+[DEBUG] adding entry ISNPSClient/plugins/javax.xml_1.3.4.v201005080400.jar
+[DEBUG] adding entry ISNPSClient/plugins/ch.ethz.iks.r_osgi.remote_1.0.0.RC4_v20130309-0714.jar
+[DEBUG] adding entry ISNPSClient/plugins/org.eclipse.osgi.services_3.3.100.v20120522-1822.jar
+[DEBUG] adding entry ISNPSClient/libcairo-swt.so
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371140067817.profile.gz
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/.lock
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371140063575.profile.gz
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371140065086.profile.gz
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/profileRegistry/DefaultProfile.profile/1371140067546.profile.gz
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.artifact.repository.prefs
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.engine/.settings/org.eclipse.equinox.p2.metadata.repository.prefs
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/binary/wsn_product.executable.gtk.linux.x86_1.0.0.201306131614
+[DEBUG] adding entry ISNPSClient/p2/org.eclipse.equinox.p2.core/cache/artifacts.xml
+[DEBUG] adding entry ISNPSClient/configuration/config.ini
+[DEBUG] adding entry ISNPSClient/artifacts.xml
+[INFO] 
+[INFO] --- maven-install-plugin:2.3.1:install (default-install) @ wsn ---
+[DEBUG] org.apache.maven.plugins:maven-install-plugin:jar:2.3.1:
+[DEBUG]    org.apache.maven:maven-plugin-api:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-project:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-settings:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-profile:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-plugin-registry:jar:2.0.6:compile
+[DEBUG]       org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1:compile
+[DEBUG]          junit:junit:jar:3.8.1:compile
+[DEBUG]          classworlds:classworlds:jar:1.1-alpha-2:compile
+[DEBUG]    org.apache.maven:maven-model:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-artifact-manager:jar:2.0.6:compile
+[DEBUG]       org.apache.maven:maven-repository-metadata:jar:2.0.6:compile
+[DEBUG]    org.apache.maven:maven-artifact:jar:2.0.6:compile
+[DEBUG]    org.codehaus.plexus:plexus-utils:jar:2.0.5:compile
+[DEBUG]    org.codehaus.plexus:plexus-digest:jar:1.0:compile
+[DEBUG] Created new class realm plugin>org.apache.maven.plugins:maven-install-plugin:2.3.1
+[DEBUG] Importing foreign packages into class realm plugin>org.apache.maven.plugins:maven-install-plugin:2.3.1
+[DEBUG]   Imported:  < project>org.ISNPS:wsn:1.0.0-SNAPSHOT
+[DEBUG] Populating class realm plugin>org.apache.maven.plugins:maven-install-plugin:2.3.1
+[DEBUG]   Included: org.apache.maven.plugins:maven-install-plugin:jar:2.3.1
+[DEBUG]   Included: junit:junit:jar:3.8.1
+[DEBUG]   Included: org.codehaus.plexus:plexus-utils:jar:2.0.5
+[DEBUG]   Included: org.codehaus.plexus:plexus-digest:jar:1.0
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-api:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-project:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-settings:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-profile:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-plugin-registry:jar:2.0.6
+[DEBUG]   Excluded: org.codehaus.plexus:plexus-container-default:jar:1.0-alpha-9-stable-1
+[DEBUG]   Excluded: classworlds:classworlds:jar:1.1-alpha-2
+[DEBUG]   Excluded: org.apache.maven:maven-model:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact-manager:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-repository-metadata:jar:2.0.6
+[DEBUG]   Excluded: org.apache.maven:maven-artifact:jar:2.0.6
+[DEBUG] Configuring mojo org.apache.maven.plugins:maven-install-plugin:2.3.1:install from plugin realm ClassRealm[plugin>org.apache.maven.plugins:maven-install-plugin:2.3.1, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.apache.maven.plugins:maven-install-plugin:2.3.1:install' with basic configurator -->
+[DEBUG]   (f) artifact = org.ISNPS:wsn:eclipse-repository:1.0.0-SNAPSHOT
+[DEBUG]   (f) attachedArtifacts = [org.ISNPS:wsn:zip:wsn_product.executable.gtk.linux.x86:1.0.0-SNAPSHOT, org.ISNPS:wsn:xml:p2metadata:1.0.0-SNAPSHOT, org.ISNPS:wsn:xml:p2artifacts:1.0.0-SNAPSHOT, org.ISNPS:wsn:zip:linux.gtk.x86:1.0.0-SNAPSHOT]
+[DEBUG]   (f) createChecksum = false
+[DEBUG]   (f) localRepository =        id: local
+      url: file:///home/cristiano/.m2/repository/
+   layout: none
+
+[DEBUG]   (f) packaging = eclipse-repository
+[DEBUG]   (f) pomFile = /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG]   (f) updateReleaseInfo = false
+[DEBUG] -- end configuration --
+[INFO] Installing /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/wsn-1.0.0-SNAPSHOT.zip to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/wsn-1.0.0-SNAPSHOT.zip
+[DEBUG] Writing resolution tracking file /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/_maven.repositories
+[INFO] Installing /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/wsn-1.0.0-SNAPSHOT.pom
+[DEBUG] Writing resolution tracking file /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/_maven.repositories
+[DEBUG] Installing org.ISNPS:wsn:1.0.0-SNAPSHOT/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/maven-metadata-local.xml
+[DEBUG] Installing org.ISNPS:wsn/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/maven-metadata-local.xml
+[INFO] Installing /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/extraArtifacts/wsn_product.executable.gtk.linux.x86.zip to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/wsn-1.0.0-SNAPSHOT-wsn_product.executable.gtk.linux.x86.zip
+[DEBUG] Writing resolution tracking file /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/_maven.repositories
+[DEBUG] Installing org.ISNPS:wsn:1.0.0-SNAPSHOT/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/maven-metadata-local.xml
+[DEBUG] Installing org.ISNPS:wsn/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/maven-metadata-local.xml
+[INFO] Installing /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2content.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/wsn-1.0.0-SNAPSHOT-p2metadata.xml
+[DEBUG] Writing resolution tracking file /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/_maven.repositories
+[DEBUG] Installing org.ISNPS:wsn:1.0.0-SNAPSHOT/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/maven-metadata-local.xml
+[DEBUG] Installing org.ISNPS:wsn/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/maven-metadata-local.xml
+[INFO] Installing /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/p2artifacts.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/wsn-1.0.0-SNAPSHOT-p2artifacts.xml
+[DEBUG] Writing resolution tracking file /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/_maven.repositories
+[DEBUG] Installing org.ISNPS:wsn:1.0.0-SNAPSHOT/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/maven-metadata-local.xml
+[DEBUG] Installing org.ISNPS:wsn/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/maven-metadata-local.xml
+[INFO] Installing /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/target/products/wsn_product-linux.gtk.x86.zip to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/wsn-1.0.0-SNAPSHOT-linux.gtk.x86.zip
+[DEBUG] Writing resolution tracking file /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/_maven.repositories
+[DEBUG] Installing org.ISNPS:wsn:1.0.0-SNAPSHOT/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/1.0.0-SNAPSHOT/maven-metadata-local.xml
+[DEBUG] Installing org.ISNPS:wsn/maven-metadata.xml to /home/cristiano/.m2/repository/org/ISNPS/wsn/maven-metadata-local.xml
+[INFO] 
+[INFO] --- tycho-p2-plugin:0.18.0:update-local-index (default-update-local-index) @ wsn ---
+[DEBUG] Configuring mojo org.eclipse.tycho:tycho-p2-plugin:0.18.0:update-local-index from plugin realm ClassRealm[plugin>org.eclipse.tycho:tycho-p2-plugin:0.18.0, parent: sun.misc.Launcher$AppClassLoader@3e25a5]
+[DEBUG] Configuring mojo 'org.eclipse.tycho:tycho-p2-plugin:0.18.0:update-local-index' with basic configurator -->
+[DEBUG]   (f) project = MavenProject: org.ISNPS:wsn:1.0.0-SNAPSHOT @ /home/cristiano/workspaces/Sensori/remote-osgi/org.osgi.remote.wsn.product/pom.xml
+[DEBUG] -- end configuration --
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2:03.228s
+[INFO] Finished at: Thu Jun 13 18:14:31 CEST 2013
+[INFO] Final Memory: 60M/143M
+[INFO] ------------------------------------------------------------------------
+!SESSION 2013-06-13 18:14:33.549 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_27
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=linux, ARCH=x86, WS=gtk, NL=it_IT
+Framework arguments:  -eclipse.keyring /tmp/tycho429498318884688671secure_storage
+Command-line arguments:  -eclipse.keyring /tmp/tycho429498318884688671secure_storage -debug -consoleLog
+
+!ENTRY org.eclipse.osgi 2 0 2013-06-13 18:14:33.568
+!MESSAGE Info: cycle(s) found while stopping bundles: [[org.eclipse.equinox.app,org.eclipse.core.runtime,org.eclipse.equinox.registry,org.eclipse.equinox.preferences,org.eclipse.core.contenttype]].

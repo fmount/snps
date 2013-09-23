@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sml:SensorML rng:version="1.0.1"
+xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+xmlns:gml="http://www.opengis.net/gml"
+xmlns:rng="http://relaxng.org/ns/structure/1.0"
+xmlns:sml="http://www.opengis.net/sensorML/1.0.1"
+xmlns:swe="http://www.opengis.net/swe/1.0.1"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xng="http://xng.org/1.0">
+
+<sml:member>
+           <sml:Component gml:id="Composedthermometer">
+                  <gml:description>Virtualization of temperature sensors. </gml:description>
+                  <gml:name>HybridThermometer</gml:name>
+                  <gml:type>Detector</gml:type>
+                  <gml:state>ACTIVE</gml:state>
+                  <!-- Components-->
+                  <sml:components>
+                    <sml:ComponentList>
+                        <sml:component id="thermometer_1" />
+                        <sml:component id="thermometer_2" />
+                        <sml:component id="thermometer_3" />
+                        <sml:component id="thermometer_4" />
+                        <sml:component id="AverageOperator " />
+                    </sml:ComponentList>
+                  </sml:components>
+              </sml:Component>
+</sml:member>
+</sml:SensorML>

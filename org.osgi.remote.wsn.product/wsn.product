@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="WSN Client" uid="org.osgi.remote.wsn.wsn_product" id="org.osgi.remote.wsn.wsn_product" application="org.osgi.remote.wsn.wsnapp" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages/>
+
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="ISNPS"/>
+      <plugin id="SMLParser"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.osgi.remote.wsn"/>
+   </plugins>
+
+   <configurations>
+      <plugin id="ISNPS" autoStart="true" startLevel="2" />
+      <plugin id="SMLParser" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="1" />
+      <plugin id="org.osgi.remote.wsn" autoStart="true" startLevel="4" />
+   </configurations>
+
+</product>

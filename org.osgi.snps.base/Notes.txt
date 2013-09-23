@@ -1,0 +1,37 @@
+---------------------
+TODO
+---------------------
+
+a) Monitoraggio su un Sensore
+
+
+
+
+----------------------
+1) SendCommand: Aggiornare lo stato del sensore, sia a livello di immagine che sul db (tramite il registry)
+2) Aggiornare il parser per recuperare le informazioni di rete 
+3) Completare schema di composizione e integrarlo all'interno del progetto.
+4) Aggiornare sia in memoria che sul DB le info del sensore dopo il sendCommand..
+5) Non posso salvare su db il sensore ibrido..prevedere una forma diversa..
+
+4) Esper(CEP)+ EQL per il processing dei dati
+
+------------------
+PROF
+------------------
+1) XML (istanza perché il modello [Sml] se lo possono scaricare..
+2) Scenario di virtualizzazione (composizione di sensori per la temperatura)
+3) wsdl [metà mese]
+
+
+
+
+
+------------------
+ARCH
+-----------------
++ Intro
++ Background and motivations -> Letteratura (Review) + punti di forza osgi
++ System Architecture (SensorML & CO) [4-5 pages]
++ Prototype implementation
++ Conclusion
