@@ -1,5 +1,6 @@
 package org.osgi.snps.base.daoservice;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -195,13 +196,14 @@ public class DataManager implements DataInterface {
 			String sensor) {
 		try {
 			// if(exist(key)){
-			String SQL = "UPDATE SensorNodes SET Description = ?, SensorImage = ?, Timestamp = ? WHERE SensorId = \""
+			String SQL = "UPDATE SensorNodes SET SensorType = ?, Description = ?, SensorImage = ?, Timestamp = ? WHERE SensorId = \""
 					+ key + "\";";
 			SQLPreparedStatement = con.prepareStatement(SQL);
-
-			SQLPreparedStatement.setString(1, description);
-			SQLPreparedStatement.setString(2, sensor);
-			SQLPreparedStatement.setTimestamp(3, getTimestamp());
+			
+			SQLPreparedStatement.setString(1, type);
+			SQLPreparedStatement.setString(2, description);
+			SQLPreparedStatement.setString(3, sensor);
+			SQLPreparedStatement.setTimestamp(4, getTimestamp());
 
 			SQLPreparedStatement.executeUpdate();
 			SQLPreparedStatement.close();
@@ -751,7 +753,7 @@ public class DataManager implements DataInterface {
 	}
 
 	/* Gestione tabella Misure dei Sensori.. */
-	@Override
+	
 	public boolean registerMeas(SimpleData data) {
 		try {
 			String insertQuery = "INSERT INTO Measures (SensorId,id_meas,data,date,time) VALUES (?,?,?,?,?)";
@@ -831,16 +833,20 @@ public class DataManager implements DataInterface {
 	public List<String> getDetectionByDate(String sid, String initDate,
 			String endDate) {
 		try {
+			String tmp1[] = initDate.split("-");
+			String date_1= tmp1[2]+"-"+tmp1[1]+"-"+tmp1[0];
+			String tmp2[] = endDate.split("-");
+			String date_2= tmp2[2]+"-"+tmp2[1]+"-"+tmp2[0];
 			DateFormat formatter;
-			formatter = new SimpleDateFormat("dd-MM-yyyy");
-			Date date1 = (Date) formatter.parse(initDate);
-			Date date2 = (Date) formatter.parse(endDate);
+			formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date date1 = (Date) formatter.parse(date_1);
+			Date date2 = (Date) formatter.parse(date_2);
 			List<String> dList = new ArrayList<String>();
-
+			System.out.println("InitDate: " + formatter.format(date1) + " EndDate: " + formatter.format(date2));
 			if (sid.equalsIgnoreCase("")) {
 				// Query su tutti i sensori presenti..
 				// SELEZIONO TUTTI I DATI BETWEEN UNA DATA E UN'ALTRA..
-				String SQL = "SELECT * FROM Measures WHERE date BETWEEN \""
+				String SQL = "SELECT * FROM Measures WHERE STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \""
 						+ formatter.format(date1) + "\"AND \""
 						+ formatter.format(date2) + "\";";
 				dList = getDetect(SQL);
@@ -848,7 +854,7 @@ public class DataManager implements DataInterface {
 			} else {
 				// SELEZIONO TUTTI I DATI BETWEEN UNA DATA E UN'ALTRA..
 				String SQL = "SELECT * FROM Measures WHERE SensorId=\"" + sid
-						+ "\" AND date BETWEEN \"" + formatter.format(date1)
+						+ "\" AND STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \"" + formatter.format(date1)
 						+ "\"AND \"" + formatter.format(date2) + "\";";
 				dList = getDetect(SQL);
 				return dList;
@@ -891,14 +897,18 @@ public class DataManager implements DataInterface {
 	public List<String> getDetectionByDateAndTime(String sid, String initDate,
 			String endDate, String initTime, String endTime) {
 		try {
+			String tmp1[] = initDate.split("-");
+			String date_1= tmp1[2]+"-"+tmp1[1]+"-"+tmp1[0];
+			String tmp2[] = endDate.split("-");
+			String date_2= tmp2[2]+"-"+tmp2[1]+"-"+tmp2[0];
 			List<String> dList = new ArrayList<String>();
 			DateFormat formatter;
-			formatter = new SimpleDateFormat("dd-MM-yyyy");
-			Date date1 = (Date) formatter.parse(initDate);
-			Date date2 = (Date) formatter.parse(endDate);
+			formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date date1 = (Date) formatter.parse(date_1);
+			Date date2 = (Date) formatter.parse(date_2);
 
 			if (sid.equalsIgnoreCase("")) {
-				String SQL = "SELECT * FROM Measures WHERE date BETWEEN \""
+				String SQL = "SELECT * FROM Measures WHERE STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \""
 						+ formatter.format(date1) + "\"AND \""
 						+ formatter.format(date2) + "\" AND time BETWEEN \""
 						+ initTime + "\"AND \"" + endTime + "\";";
@@ -906,7 +916,7 @@ public class DataManager implements DataInterface {
 				return dList;
 			} else {
 				String SQL = "SELECT * FROM Measures WHERE SensorId=\"" + sid
-						+ "\" AND date BETWEEN \"" + formatter.format(date1)
+						+ "\" AND STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \"" + formatter.format(date1)
 						+ "\"AND \"" + formatter.format(date2)
 						+ "\" AND time BETWEEN \"" + initTime + "\"AND \""
 						+ endTime + "\";";

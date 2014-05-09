@@ -63,9 +63,9 @@ public class CommandLine implements Runnable {
 	// static iCompose composerService;
 
 	public enum commands {
-		sayhello, regSensor, samplPlan, compose, getData, viewSensors, dao, 
-		sendCommand, dataflow, viewcomponent, help, quit, test_prova, sensor_cu_1,
-		sensor_cu_2, sensor_cu_5, sensor_cu_6, sensor_cu_7, hellowsn, sensor_cu_3_4
+		sayhello, regSensor, samplPlan, compose, getData, viewSensors, dao, importsensors, 
+		sendCommand, dataflow, viewcomponent, help, quit, test_prova, getconfiguration, setconfiguration,
+		sensor_cu_1,sensor_cu_2, sensor_cu_5, sensor_cu_6, sensor_cu_7, hellowsn, sensor_cu_3_4, isAlive
 	}
 
 	public enum modes {
@@ -129,7 +129,56 @@ public class CommandLine implements Runnable {
 							}
 
 							break;
-
+						
+						case isAlive:
+							try{
+								System.out.println("[CML:Info] -> Is the Sensor ALIVE????????");
+								if(options.isEmpty())
+									System.out.println("[CML:Alert] -> Arguments Error!!");
+								else if (options.get(0).equals("--sId")) {
+									System.out.println("Check availability for Sensor: "+options.get(1));
+									try{
+										ABComponent s = service.getSensList().get(options.get(1));										
+											//service.regCall("updateComponent", 3, options.get(1), description, s, "",null);
+											/** EXAMPLE USING WII BUNDLE **/
+											reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
+											iwebService = (iWebIntegrationInterface) context.getService(reference);
+											
+											//IT SEEMS OK..
+											System.out.println(iwebService.isAlive(options.get(1)));
+											System.out.println("Done");
+										}catch(Exception e){
+											System.out.println(e.getMessage());
+										}
+									}			
+							}catch (Exception e) {
+								e.printStackTrace();
+							}
+							break;
+						case importsensors:
+							try{
+								Document description;
+								reference = context.getServiceReference(Parser.class.getName());
+								Sensor s;
+								if (reference != null) {
+									String originPath="/home/francesco/Dropbox/S-SENSORI/DocsMilan/BerkeleyDB/SML";
+									final File folder = new File(originPath);
+									List<String> flist = listFilesForFolder(folder);
+									System.out.println("Found "+flist.size()+" files");
+									pservice = (Parser) context.getService(reference);
+									for(int i=0;i<flist.size();i++){
+										System.out.println("Import file: "+flist.get(i));
+										description = pservice.getDocument(flist.get(i));
+										s = pservice.parse(description);
+										String id = service.regCall("persist", 3, s.getID(),description, s, s.getNature(),null);
+										System.out.println("[CML:Info]-> New Sensor: "+ id);
+									}
+								}else System.out.println("Reference error!");
+							}
+							catch(Exception e){
+								e.printStackTrace();
+							}
+							break;
 						case regSensor: // OK
 							try {
 								System.out
@@ -308,7 +357,58 @@ public class CommandLine implements Runnable {
 							//}
 							viewSensors();
 							break;
-
+						case getconfiguration:
+							System.out.println("[CML:Info] -> Get Sensor configuration");
+							if(options.isEmpty())
+								System.out.println("[CML:Alert] -> Arguments Error!!");
+							else if (options.get(0).equals("--sId")) {
+								System.out.println("Get Configuration from Sensor: "+options.get(1));
+								System.out.println(service.getSensList().get(options.get(1)).toString());
+								System.out.println("[CML:Info] -> Getting Sensor XML registered");
+								//System.out.println(service.regCall("getSDesc", 3, options.get(1).toString(), null, null, "",null));
+								/** EXMAPLE USING WII **/
+								reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
+								iwebService = (iWebIntegrationInterface) context.getService(reference);
+								try{
+								//IT SEEMS OK
+								System.out.println(iwebService.getSensorConfiguration(options.get(1)));
+								}catch(Exception e){
+									e.printStackTrace();
+								}
+							}
+							break;
+							
+						case setconfiguration:
+							System.out.println("[CML:Info] -> Set Sensor configuration");
+							if(options.isEmpty())
+								System.out.println("[CML:Alert] -> Arguments Error!!");
+							else if (options.get(0).equals("--sId")) {
+								System.out.println("Set Configuration to Sensor: "+options.get(1));
+								if (options.get(2).equals("-xml")) {
+									System.out.println("Apply Configuration provided by: "+options.get(3).toString());
+									
+									try{
+										reference = context.getServiceReference(Parser.class
+												.getName());
+										pservice = (Parser) context.getService(reference);
+										Document description = pservice.getDocument(options.get(3).toString());
+										Sensor s = pservice.parse(description);
+										//ABComponent s = service.getSensList().get(options.get(1));										
+										//service.regCall("updateComponent", 3, options.get(1), description, s, "",null);
+										/** EXAMPLE USING WII BUNDLE **/
+										reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
+										iwebService = (iWebIntegrationInterface) context.getService(reference);
+										
+										//IT SEEMS OK..
+										System.out.println(iwebService.setSensorConfiguration(options.get(1), options.get(3).toString()));
+										System.out.println("Done");
+										//viewSensors();
+									}catch(Exception e){
+										System.out.println(e.getMessage());
+									}
+								}
+							}
+							break;
 						case getData:
 							List<String> testcmds = new ArrayList<String>();
 							System.out.println("[CML:Info] -> Get data test");
@@ -1536,5 +1636,17 @@ public class CommandLine implements Runnable {
 				System.out.println("[CML:Command] ->" + current);
 		}
 	}
-
+	
+	public static List<String> listFilesForFolder(final File folder) {
+		List<String> flist = new ArrayList<String>();
+	    for (final File fileEntry : folder.listFiles()) {
+	        if (fileEntry.isDirectory()) {
+	            listFilesForFolder(fileEntry);
+	        } else {
+	        	flist.add(fileEntry.getAbsolutePath());
+	            System.out.println(fileEntry.getName());
+	        }
+	    }
+	    return flist;
+	}
 }

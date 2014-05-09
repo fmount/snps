@@ -32,4 +32,6 @@ public interface iGWInterface {
 
 	public String getData(String id_meas_to_set, String sid, String mode,
 			String[] options, String action);
+
+	public String isAlive(String sid);
 }

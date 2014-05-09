@@ -8,15 +8,20 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.snps.base.common.SamplingPlan;
+import org.osgi.snps.base.common.Sensor;
 import org.osgi.snps.base.interfaces.iCoreInterface;
 import org.osgi.snps.base.interfaces.iWebIntegrationInterface;
 import org.osgi.snps.base.util.JSonUtil;
+import org.w3c.dom.Document;
+
+import smlparser.Parser;
 
 public class iWebService implements iWebIntegrationInterface{
 
 	BundleContext context;
 	protected ComponentContext contex;
 	iCoreInterface service;
+	Parser pservice;
 	private final int MY_SQL= 3;
 	
 	public enum commands {
@@ -24,7 +29,7 @@ public class iWebService implements iWebIntegrationInterface{
 		getSensInfo, getsenslist, getzonelist, inszone, insbs, rmvzone, rmvbs,
 		getbsinfo, getzoneinfo, insertentry, rmventry, updateentry, getnodelist,
 		detection, detectbydate, detectbytime, detectbydateandtime, detectbyzone,
-		getSensorbyzone, getSensorbynode
+		getSensorbyzone, getSensorbynode, updateComponent
 	}
 	
 	/* protected void activate(ComponentContext ctx){
@@ -142,7 +147,7 @@ public class iWebService implements iWebIntegrationInterface{
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public String DiscoverySensorsAndMeasurements(String command, String sid,String type,
+	public String discoverySensorsAndMeasurements(String command, String sid,String type,
 			String id_detection,String initDate, String endDate, String initTime, 
 			String endTime,String zoneid,String bsid) {
 		ServiceReference reference;
@@ -157,9 +162,9 @@ public class iWebService implements iWebIntegrationInterface{
 		case getSensor:
 			return service.regCall(command, MY_SQL, sid, null, null,"", null);
 						
-		case getSDesc:
-			return service.regCall(command, MY_SQL, sid, null, null, "",null);
-
+		/*case getSDesc:
+			return service.regCall(command, MY_SQL, sid, null, null, "",null); */
+			
 		case getAllSensors:			
 			return service.regCall(command, MY_SQL, "", null, null,"",null);
 
@@ -260,4 +265,50 @@ public class iWebService implements iWebIntegrationInterface{
 		return "Error Sending getData request!";
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public String getSensorConfiguration(String sid) {
+		ServiceReference reference;
+		reference = context.getServiceReference(iCoreInterface.class.getName());
+		service = (iCoreInterface) context.getService(reference);
+		return service.regCall("getSDesc", MY_SQL, sid, null, null, "",null);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public String setSensorConfiguration(String sid, String sensormlpath) {
+		try {	
+			
+			Document description;
+			ServiceReference reference = context.getServiceReference(Parser.class.getName());
+			Sensor s;
+			if (reference != null) {
+				description = JSonUtil.JSONToDocument(sensormlpath);
+				pservice = (Parser) context.getService(reference);
+				//description = pservice.getDocument(sensormlpath);
+				s = pservice.parse(description);
+				s.setID(sid);
+				reference = context.getServiceReference(iCoreInterface.class.getName());
+				service = (iCoreInterface) context.getService(reference);
+				return service.regCall("updateComponent",MY_SQL, sid, description, s, "",null);
+			}
+			return "Service not available";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public String isAlive(String sId) {
+		try {
+			ServiceReference reference;
+			reference = context.getServiceReference(iCoreInterface.class.getName());
+			service = (iCoreInterface) context.getService(reference);
+			return service.isAlive(sId);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return "Error Sending isAlive request!";
+	}
 }

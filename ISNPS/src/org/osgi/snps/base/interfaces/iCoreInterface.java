@@ -51,5 +51,7 @@ public interface iCoreInterface {
 	public String regCall(String command, int opcode, String key,
 			Document description, ABComponent s, String type,
 			List<String> params);
+
+	public String isAlive(String sId);
 	
 }

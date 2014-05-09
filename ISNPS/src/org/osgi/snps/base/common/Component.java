@@ -14,4 +14,7 @@ public interface Component {
 	public String getData(BundleContext context, String mode, String[] options,
 			String action);
 	
+
+	String isAlive(BundleContext context);
+	
 }

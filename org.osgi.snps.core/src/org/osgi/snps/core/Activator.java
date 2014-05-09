@@ -1,8 +1,9 @@
 package org.osgi.snps.core;
 
-import java.io.BufferedReader;
+/*import java.io.BufferedReader;
 import java.io.InputStreamReader;
-/*
+import org.osgi.snps.core.cmline.CommandLine;
+
 import java.util.Dictionary;
 import java.util.Properties;
 import org.osgi.service.event.EventConstants;
@@ -12,7 +13,6 @@ import org.osgi.snps.core.dataservice.Subscriber;
 import java.util.Hashtable;
 import org.osgi.framework.*;
 import org.osgi.snps.base.interfaces.iCoreInterface;
-import org.osgi.snps.core.cmline.CommandLine;
 
 
 
@@ -44,7 +44,7 @@ public class Activator implements BundleActivator{
 		
 				
 		/*DEBUG MODE*/
-		BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+		/*BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
         String userInput="N";
         System.out.println("Enable SNPS Debug Mode?[Y/N] [Default: N]");
         userInput = stdIn.readLine();
@@ -52,7 +52,7 @@ public class Activator implements BundleActivator{
         if(userInput.equalsIgnoreCase("Y")){
         		CommandLine c = new CommandLine(context);
         		c.run();
-        }
+        }*/
 	}
 	
 

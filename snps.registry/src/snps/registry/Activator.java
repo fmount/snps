@@ -25,7 +25,7 @@ public class Activator implements BundleActivator {
 	 * al Registry, in modo da renderli disponibili per l'invocazione (sia locale che remota).
 	 */
 	@Override
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
 	public void start(BundleContext bundleContext) throws Exception {
 		
 		//System.out.println(bundleContext.getBundle().getHeaders().get(Constants.BUNDLE_NAME) + " starting...");
@@ -35,7 +35,7 @@ public class Activator implements BundleActivator {
 		iRegistryInterface service = new RegisterService(context);
 		System.out.println("[IREGISTRY:Info] -> State: ACTIVE");
 		ServiceRegistration registration = bundleContext.registerService(iRegistryInterface.class.getName(),service, new Hashtable());
-		System.out.println("Service registered: "+ registration.getReference());
+		//System.out.println("Service registered: "+ registration.getReference());
 		
 	}
 

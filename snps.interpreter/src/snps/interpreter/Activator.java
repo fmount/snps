@@ -27,7 +27,6 @@ public class Activator implements BundleActivator {
 	      properties.put(RemoteOSGiService.R_OSGi_REGISTRATION, Boolean.TRUE);
 	      context.registerService(iGWInterface.class.getName(), new MDWExportService(context), properties);
 	      System.out.println("[INTERPRETER:Info] -> State: ACTIVE");
-	      Rabbit.send();
 	     // new Worker(context);
 	  }
 

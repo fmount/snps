@@ -2,6 +2,8 @@ package org.osgi.snps.base.common;
 
 import java.io.Serializable;
 
+import org.osgi.framework.BundleContext;
+
 
 public abstract class ABComponent implements Serializable{
 	
@@ -93,6 +95,11 @@ public abstract class ABComponent implements Serializable{
 				",type: "+getType()+",description: "+getDescription()+
 				",state: "+getState()+",nature: "+getNature();		
 		return str;		
+	}
+
+	public String isAlive(BundleContext context) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

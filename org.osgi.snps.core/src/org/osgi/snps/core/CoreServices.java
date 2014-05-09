@@ -216,10 +216,14 @@ public class CoreServices extends Observable implements iCoreInterface {
 							opcode, key, JSonUtil.DocumentTOJson(description),
 							s.getNature(),JSonUtil.HybridToJSON((SensHybrid) s)));
 				}else{
+					getSensList().remove(key);
+					addToSensList(key, (Sensor)s);
 					return String.valueOf(registryservice.updateComponent(
 							opcode, key, JSonUtil.DocumentTOJson(description),
 							s.getNature(),JSonUtil.SensorToJSON((Sensor) s)));
 				}
+				
+				
 
 			case removeComponent:
 				
@@ -673,7 +677,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 
 
 	/* UTILITY METHODS */
-
+	
 	@Override
 	public Map<String, ABComponent> getSensList() {
 		return sensList;
@@ -827,6 +831,30 @@ public class CoreServices extends Observable implements iCoreInterface {
 			System.out.println(e.getMessage());
 		}
 		return false;
+	}
+
+	@SuppressWarnings({ "unchecked", "unused" })
+	@Override
+	public String isAlive(String sId) {
+		try {
+			serviceRef = context.getServiceReference(iDataFlow.class.getName());
+			processorService = (iDataFlow) context.getService(serviceRef);
+			ABComponent s = sensList.get(sId);
+			if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
+				System.out.println("Hybrid!");
+				String[] options = {s.getID()+"#"+Util.IdGenerator().replace("-","")};
+				//return ((SensHybrid) s).getData(context, mode,options,action);
+				return ((SensHybrid) s).isAlive(context);
+			} else {
+				System.out.println("Selected Simple sensor: "+s.getID());
+				//return ((Sensor) s).getData(context, mode,null,action);
+				return ((Sensor) s).isAlive(context);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error retrieving sensor!");
+			return "Error!";
+		}
 	}
 	
 }

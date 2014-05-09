@@ -206,5 +206,15 @@ public class MDWExportService implements iGWInterface {
 		return wsnService;
 		
 	}
+
+	@Override
+	public String isAlive(String sid) {
+		//wsnService = setRemoteConnection();
+		//return wsnService.isAlive(sid);
+		
+		
+		
+		return "IS_ALIVE";
+	}
 }
 

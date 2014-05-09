@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>DAO</title>
+		<meta http-equiv="content-type" content="text/html; charset=iso-8859-15" />
+		<meta http-equiv="content-script-type" content="text/javascript" />
+		<meta http-equiv="content-style-type" content="text/css" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta name="language" content="italian-it" />
+		
+		<style type=text/css>
+			body {
+				text-align:center;
+				padding: 0;
+				margin: 0;
+				overflow-x: hidden;
+			}
+			#telaio {
+				font-family:"Arial";
+				width:100%;
+				margin:0px;
+				border:1px solid gray;
+				line-height:150%;
+				color:black;
+				background-color: rgb(242,244,248);
+				text-align:left;
+			}
+			#testata {
+				text-align:center;
+				font-size: 110%;
+				}
+			#fondo {
+				font-size: 85%;
+				text-align: center;
+			}
+			#testata, #fondo {
+				padding:0.5em;
+				color:white;
+				background-color: #3A5896;
+				clear:left;
+			}
+			#sinistro {
+				text-align:center;
+				float:left;
+				width:190px;
+				padding: 5px;
+				border-right:1px solid gray;
+			}
+			#sinistro ul {
+				margin: 1em 0;
+				padding: 0;
+				list-style: none;
+			}
+			#sinistro li {
+				margin: 0.5em 0;
+				padding: 0;
+			}
+			#sinistro a:link, #sinistro a:visited {
+				display: block;
+				width: 90%;
+				margin: 0;
+				padding: 0.2em;
+				background: rgb(242,244,248);
+				color: black;
+				text-decoration: none;
+				font-weight: bold;
+				border: 1px solid gray;
+			}
+			#sinistro a:hover {
+				background: #3A5896;
+				color: #fff;
+				border: 1px solid gray;
+				text-decoration: none;
+				font-weight: bold;
+			}
+			#centrale {
+			margin-left: 200px;
+			padding:10px;
+			border-left:1px solid gray;
+			}
+			#sinistro, #centrale {
+			min-height:470px;
+			}
+		</style>
+	
+	</head>
+	
+	<body>
+		
+		<div id="telaio">
+					
+			<div id="testata">
+				<h1>Sensor Node Plug-in System - SNPS</h1>
+			</div>
+			
+			<div id="sinistro">
+				<ul>
+				<li><a href="http://localhost:8080/index">Home</a></li>
+				<li><a href="http://localhost:8080/index/regSensorServlet">Registra un Sensore</a></li>
+				<li><a href="http://localhost:8080/index/samplPlanServlet">Configura un Piano di Campionamento</a></li>
+				<li><a href="http://localhost:8080/index/composeServlet">Componi Sensori</a></li>
+				<li><a href="http://localhost:8080/index/getData.html">Acquisisci Dati</a></li>
+				<li><a href="http://localhost:8080/index/sendCommandServlet">Invia un Comando</a></li>
+				<li><a href="http://localhost:8080/index/dao.html">Data Base</a></li>
+				<li><a href="http://localhost:8080/index/PlatformTest.html">Testa la Piattaforma</a></li>				
+				</ul>
+			</div>
+			
+			<div id="centrale">
+				<h2>DATA BASE:</h2>
+				<p>La piattaforma mette a disposizione diverse modalità di interazione diretta del Data Base del sistema.</p>
+				
+				<p><BR>Cosa vuoi fare?<BR>
+				
+				<FORM METHOD=GET ACTION="http://localhost:8080/index/daoServlet">
+					<INPUT TYPE="radio" NAME="scelta" VALUE="sensorsbyzone" CHECKED>Ricerca sensori per zona<BR>
+					<INPUT TYPE="radio" NAME="scelta" VALUE="sensorsbynode">Ricerca sensori per Base Station<BR>
+					<INPUT TYPE="radio" NAME="scelta" VALUE="detection">Ricerca una misurazione<BR>
+					<INPUT TYPE="radio" NAME="scelta" VALUE="detectbydate">Ricerca misurazioni per data<BR>
+					<INPUT TYPE="radio" NAME="scelta" VALUE="detectbytime">Ricerca misurazioni per intervallo di tempo<BR>
+					<!-- <INPUT TYPE="radio" NAME="scelta" VALUE="detectbydateandtime">DetectByDateAndTime<BR> -->
+					<INPUT TYPE="radio" NAME="scelta" VALUE="detectbyzone">Ricerca misurazioni per zona<BR>
+					<!--<INPUT TYPE="radio" NAME="scelta" VALUE="removeComponent">Remove Component<BR>-->
+					<INPUT TYPE="submit">
+				</FORM>
+			</div>
+			
+			<div id="fondo">
+				<p>&copy Litterio Barrica</p>
+			</div>
+		</div>
+
+	</body>
+</html>

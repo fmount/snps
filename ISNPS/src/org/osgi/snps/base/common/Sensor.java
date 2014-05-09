@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.snps.base.interfaces.iGWInterface;
@@ -198,6 +199,32 @@ public class Sensor extends ABComponent implements Component, Serializable{
 			return "Error sending GetData Request!!";
 		}
 	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
+	@Override
+	public String isAlive(BundleContext context) {
+		try{
+			//System.out.println("MODE: "+mode);
+			iGWInterface gw;
+			ServiceReference serviceRef;
+			serviceRef = context.getServiceReference(iGWInterface.class.getName());
+	        gw = (iGWInterface) context.getService(serviceRef);
+	        String id_meas_to_set = Util.IdGenerator().replace("-", "");
+	        //String received = gw.getData(id_meas_to_set,getID(),mode,options,action); 
+	        String received = gw.isAlive(this.getID());
+	        //Util.writeTmpData(received); 
+	        /**
+	         * Ritorno i dati al chiamante, il quale si occupera' di processarli..
+	         */
+	        return received;
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			return "Error sending request";
+		}
+	}
+
+	
 	
 /*	@SuppressWarnings({ "unchecked", "unused", "rawtypes" })
 	public void addSubs(BundleContext context){

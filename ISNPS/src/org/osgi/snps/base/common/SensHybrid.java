@@ -136,4 +136,17 @@ public class SensHybrid extends ABComponent implements Component {
 		System.out.println("[Sensor: " + this.getID()
 				+ "] -> Filter changed to: " + filter);
 	}
+
+
+	@Override
+	public String isAlive(BundleContext context) {
+		List<Sensor> sensList = this.getSensors();
+		List<String> alivelist = new ArrayList<String>();
+		Iterator<Sensor> it = sensList.iterator();
+		while (it.hasNext()) {
+			Sensor s = it.next();
+			alivelist.add(s.isAlive(context));
+		}
+		return alivelist.toString();
+	}
 }
