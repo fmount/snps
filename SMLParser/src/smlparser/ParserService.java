@@ -1236,6 +1236,7 @@ public class ParserService implements Parser {
 		System.out.println("[STEP 6]");
 		Map<String, String> position = getPosition(xpath, description);
 		System.out.println("[SENSOR] Position: " + position.toString());
+		
 
 		// FINAL STAGE
 		Sensor sens = new Sensor(id, name, model, type, state, desc, nature,
@@ -1243,7 +1244,6 @@ public class ParserService implements Parser {
 
 		sens.setCapabilities(capabilities);
 		sens.setNetParams(netParams);
-
 		/*
 		 * Map<String,String> bs = new HashMap<String, String>();
 		 * 

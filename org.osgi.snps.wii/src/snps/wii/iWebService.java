@@ -285,7 +285,7 @@ public class iWebService implements iWebIntegrationInterface{
 			if (reference != null) {
 				description = JSonUtil.JSONToDocument(sensormlpath);
 				pservice = (Parser) context.getService(reference);
-				//description = pservice.getDocument(sensormlpath);
+				description = pservice.getDocument(sensormlpath);
 				s = pservice.parse(description);
 				s.setID(sid);
 				reference = context.getServiceReference(iCoreInterface.class.getName());

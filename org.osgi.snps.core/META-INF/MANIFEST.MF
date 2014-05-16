@@ -1,12 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core
-Bundle-SymbolicName: org.osgi.snps.core;singleton:=true
+Bundle-SymbolicName: org.osgi.snps.core
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.osgi.snps.core.Activator
 Export-Package: org.osgi.snps.core
 Require-Bundle: org.apache.felix.gogo.command;bundle-version="0.8.0",
- org.apache.felix.gogo.runtime;bundle-version="0.8.0",
  org.apache.felix.gogo.shell;bundle-version="0.8.0",
  org.eclipse.equinox.console;bundle-version="1.0.0",
  org.eclipse.osgi;bundle-version="3.7.0",

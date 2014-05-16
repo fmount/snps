@@ -99,7 +99,7 @@ public class MDWExportService implements iGWInterface {
 			*/
 			
 			/****************CLOSING INTERACTION*****************/
-			SimpleData sd = new SimpleData(sid,String.valueOf((Math.random() * 10)) ,"",Util.whatDayIsToday(), Util.whatTimeIsIt());
+			SimpleData sd = new SimpleData(sid,String.valueOf(0 + Math.random()*10) ,"",Util.whatDayIsToday(), Util.whatTimeIsIt());
 						//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
 						  sd.set_id_meas(id_meas_to_set);
 			
@@ -119,7 +119,7 @@ public class MDWExportService implements iGWInterface {
 			
 			
 			/****************CLOSING INTERACTION*****************/
-			SimpleData sd = new SimpleData(sid,String.valueOf((Math.random() * 10)) ,"",Util.whatDayIsToday(), Util.whatTimeIsIt());
+			SimpleData sd = new SimpleData(sid,String.valueOf(0 + Math.random()*10),"",Util.whatDayIsToday(), Util.whatTimeIsIt());
 			//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
 			sd.set_id_meas(id_meas_to_set);
 				
@@ -142,6 +142,62 @@ public class MDWExportService implements iGWInterface {
 		return "ERROR!!!";
 	}
 
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public String getData(String id_meas_to_set,String sid,String Nature, String mode,String[] options,String action) {
+		//wsnService = setRemoteConnection();
+		ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
+		if (mode.equals("sync")) {
+			
+			/*
+			 * DISABLING WSN INTERACTION..
+			return wsnService.getData(sid,options);
+			*/
+			
+			/****************CLOSING INTERACTION*****************/
+			SimpleData sd = new SimpleData(sid,Util.getSampleValue(Nature) ,"",Util.whatDayIsToday(), Util.whatTimeIsIt());
+						//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+						  sd.set_id_meas(id_meas_to_set);
+			
+			if(options!=null){
+				sd.setRef(options[0]);
+			}
+			
+			return JSonUtil.SimpleDataToJSON(sd);
+			/*******************************/
+			
+			
+		} else if (mode.equals("async")){
+			/*
+			 * DISABLING WSN INTERACTION..
+			String data = wsnService.getData(sid,options);
+			*/
+			
+			
+			/****************CLOSING INTERACTION*****************/
+			SimpleData sd = new SimpleData(sid,Util.getSampleValue(Nature),"",Util.whatDayIsToday(), Util.whatTimeIsIt());
+			//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+			sd.set_id_meas(id_meas_to_set);
+				
+			if(options!=null){
+				sd.setRef(options[0]);
+			}
+			
+			String data = JSonUtil.SimpleDataToJSON(sd);
+			System.out.println(data);
+			/*******************************/
+			
+			ipubservice = (iEventPublisherInterface) context.getService(reference);
+			ipubservice.sendDataEventWithAction(sid,data,action);
+			
+			
+			return "[PUSH] -> Event";
+		
+		}
+		
+		return "ERROR!!!";
+	}
 	
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })

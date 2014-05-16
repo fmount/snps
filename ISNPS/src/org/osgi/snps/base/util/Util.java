@@ -41,8 +41,12 @@ import org.w3c.dom.NodeList;
 
 public class Util {
 
-	//static iCoreInterface Cservice;
-	//static iRegistryInterface Rservice;
+	// static iCoreInterface Cservice;
+	// static iRegistryInterface Rservice;
+
+	public enum phenomena {
+		temperature, humidity, light, voltage
+	}
 
 	public static boolean writeTmpData(String data) {
 		try {
@@ -126,33 +130,26 @@ public class Util {
 
 	}
 
-	
 	public static boolean sensorExist(String sId, BundleContext context) {
 		// Recupero i servizi offerti dal Core e dal Registry..
-	/*	ServiceReference reference;
-		reference = context
-				.getServiceReference("org.osgi.snps.iregistry.RegisterService");
-		Rservice = (iRegistryInterface) context.getService(reference);
+		/*
+		 * ServiceReference reference; reference = context
+		 * .getServiceReference("org.osgi.snps.iregistry.RegisterService");
+		 * Rservice = (iRegistryInterface) context.getService(reference);
+		 * 
+		 * reference = context
+		 * .getServiceReference("org.osgi.snps.core.CoreServices"); Cservice =
+		 * (iCoreInterface) context.getService(reference);
+		 * 
+		 * try { // Controllo di primo livello (in memoria) if
+		 * ((Cservice.getSensList().get(sId)) != null) return true;
+		 * 
+		 * Sensor s = Rservice.getImageComponent(3, sId); if (s != null) {
+		 * return true; } } catch (Exception e) { e.printStackTrace(); return
+		 * false; }
+		 */
 
-		reference = context
-				.getServiceReference("org.osgi.snps.core.CoreServices");
-		Cservice = (iCoreInterface) context.getService(reference);
-
-		try {
-			// Controllo di primo livello (in memoria)
-			if ((Cservice.getSensList().get(sId)) != null)
-				return true;
-
-			Sensor s = Rservice.getImageComponent(3, sId);
-			if (s != null) {
-				return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}*/
-
-		//return false;
+		// return false;
 		return true;
 	}
 
@@ -198,72 +195,131 @@ public class Util {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
-	
-	public static String whatDayIsToday(){
-		/*Date now = new Date(System.currentTimeMillis());
-        //System.out.println("Today is: "+String.valueOf(now));
-        return String.valueOf(now);*/
+
+	public static String whatDayIsToday() {
+		/*
+		 * Date now = new Date(System.currentTimeMillis());
+		 * //System.out.println("Today is: "+String.valueOf(now)); return
+		 * String.valueOf(now);
+		 */
 		Date n = new Date(System.currentTimeMillis());
-		String now= new SimpleDateFormat("dd-MM-yyyy").format(n);
+		String now = new SimpleDateFormat("dd-MM-yyyy").format(n);
 		return now; // 2011-01-18
 	}
-	
-	public static String whatTimeIsIt(){
+
+	public static String whatTimeIsIt() {
 		Calendar cal = Calendar.getInstance();
-    	cal.getTime();
-    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    	//System.out.println( sdf.format(cal.getTime()));
-    	return sdf.format(cal.getTime());
+		cal.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		// System.out.println( sdf.format(cal.getTime()));
+		return sdf.format(cal.getTime());
 	}
-	
-	public static String loadConfiguration(String path){
+
+	public static String loadConfiguration(String path) {
 		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			//description = builder.parse(new File("sensorDescription.xml"));
+			// description = builder.parse(new File("sensorDescription.xml"));
 			Document description = builder.parse(new File(path));
 			XPath xpath = XPathFactory.newInstance().newXPath();
 			String ip = getIP(xpath, description);
 			int port = Integer.parseInt(getPort(xpath, description));
-			return "http://"+ip+":"+port+"/wii?wsdl";
-		}catch (Exception e) {
+			return "http://" + ip + ":" + port + "/wii?wsdl";
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return "";
 		}
 	}
-	
-	public static String getIP(XPath xpath, Document document){
-		String ip="";
-		try{
+
+	public static String getIP(XPath xpath, Document document) {
+		String ip = "";
+		try {
 			XPathExpression expr = xpath.compile("//config/ip/text()");
 			Object result = expr.evaluate(document, XPathConstants.NODESET);
 			NodeList nodes = (NodeList) result;
 			for (int i = 0; i < nodes.getLength(); i++) {
-			 		//System.out.println(nodes.item(i).getNodeValue()); 
-			 		ip = nodes.item(i).getNodeValue();
+				// System.out.println(nodes.item(i).getNodeValue());
+				ip = nodes.item(i).getNodeValue();
 			}
 			return ip;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return ip;
 		}
 	}
-	
-	public static String getPort(XPath xpath, Document document){
-		String port="";
-		try{
+
+	public static String getPort(XPath xpath, Document document) {
+		String port = "";
+		try {
 			XPathExpression expr = xpath.compile("//config/port/text()");
 			Object result = expr.evaluate(document, XPathConstants.NODESET);
 			NodeList nodes = (NodeList) result;
 			for (int i = 0; i < nodes.getLength(); i++) {
-			 		//System.out.println(nodes.item(i).getNodeValue()); 
-			 		port = nodes.item(i).getNodeValue();
+				// System.out.println(nodes.item(i).getNodeValue());
+				port = nodes.item(i).getNodeValue();
 			}
 			return port;
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
 		}
+	}
+
+	public static String getSampleValue(String nature) {
+		float result;
+		float min = 0;
+		float max = 0;
+		String tmp[] = whatTimeIsIt().split(":");
+		String phen[] = nature.split(":");
+		int hour = Integer.parseInt(tmp[0]);
+
+		switch (phenomena.valueOf(phen[4])) {
+
+		case temperature:
+			if ((hour >= 0 && hour < 8) || (hour >= 20 && hour <= 23)) {
+				min = 20;
+				max = 22;
+			} else if ((hour >= 8 && hour < 11) || (hour >= 17 && hour < 20)) {
+				min = 22;
+				max = 26;
+			} else if (hour >= 11 && hour < 17) {
+				min = 25;
+				max = 28;
+			}
+			break;
+		case light:
+			if (hour >= 0 && hour < 6) {
+				min = 0;
+				max = 6;
+			} else if (hour >= 6 && hour < 8) {
+				min = 6;
+				max = 90;
+			} else if (hour >= 8 && hour < 17) {
+				min = 190;
+				max = 412;
+			} else if (hour >= 17 && hour <= 23) {
+				min = 100;
+				max = 130;
+			}
+			break;
+		case humidity:
+			min = 46;
+			max = 51;
+			break;
+		case voltage:
+			min = 2.28f;
+			max = 2.33f;
+			break;
+		default:
+			min = 0;
+			max = 100;
+		}
+
+		float rand = (float) (min + (Math.random() * (max - min)));
+		result = (float) (Math.round(rand * 1000.0) / 1000.0);
+
+		return String.valueOf(result);
 	}
 
 	public static void main(String[] argvs) {
@@ -286,8 +342,8 @@ public class Util {
 				+ operation);
 
 		System.out.println(IdGenerator());
-		
-		System.out.println("DATE: "+whatDayIsToday());
-		System.out.println("TIME: "+whatTimeIsIt());
+
+		System.out.println("DATE: " + whatDayIsToday());
+		System.out.println("TIME: " + whatTimeIsIt());
 	}
 }

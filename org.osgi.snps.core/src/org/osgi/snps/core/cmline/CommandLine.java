@@ -378,7 +378,7 @@ public class CommandLine implements Runnable {
 							}
 							break;
 							
-						case setconfiguration:
+						case setconfiguration:							
 							System.out.println("[CML:Info] -> Set Sensor configuration");
 							if(options.isEmpty())
 								System.out.println("[CML:Alert] -> Arguments Error!!");
@@ -393,14 +393,15 @@ public class CommandLine implements Runnable {
 										pservice = (Parser) context.getService(reference);
 										Document description = pservice.getDocument(options.get(3).toString());
 										Sensor s = pservice.parse(description);
+										s.setID(options.get(1));
 										//ABComponent s = service.getSensList().get(options.get(1));										
-										//service.regCall("updateComponent", 3, options.get(1), description, s, "",null);
+										service.regCall("updateComponent", 3, options.get(1), description, s, "",null);
 										/** EXAMPLE USING WII BUNDLE **/
-										reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
-										iwebService = (iWebIntegrationInterface) context.getService(reference);
+//										reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
+//										iwebService = (iWebIntegrationInterface) context.getService(reference);
 										
 										//IT SEEMS OK..
-										System.out.println(iwebService.setSensorConfiguration(options.get(1), options.get(3).toString()));
+										//System.out.println(iwebService.setSensorConfiguration(options.get(1), options.get(3).toString()));
 										System.out.println("Done");
 										//viewSensors();
 									}catch(Exception e){

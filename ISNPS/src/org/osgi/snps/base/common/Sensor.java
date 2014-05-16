@@ -174,8 +174,10 @@ public class Sensor extends ABComponent implements Component, Serializable{
 				serviceRef = context.getServiceReference(iGWInterface.class.getName());
 		        gw = (iGWInterface) context.getService(serviceRef);
 		        String id_meas_to_set = Util.IdGenerator().replace("-", "");
-		        String received = gw.getData(id_meas_to_set,getID(),mode,options,action); 
-		        Util.writeTmpData(received); 
+		        //String received = gw.getData(id_meas_to_set,getID(),mode,options,action); 
+		        String received = gw.getData(id_meas_to_set,getID(), getNature(),mode,options,action); 
+		        Util.writeTmpData(received);
+		        System.out.println(getNature());
 		        /**
 		         * Ritorno i dati al chiamante, il quale si occupera' di processarli..
 		         */
@@ -191,8 +193,8 @@ public class Sensor extends ABComponent implements Component, Serializable{
 			serviceRef = context.getServiceReference(iGWInterface.class.getName());
 	        gw = (iGWInterface) context.getService(serviceRef);
 	        String id_meas_to_set = Util.IdGenerator().replace("-", "");
-	        gw.getData(id_meas_to_set,getID(),mode,options,action); 
-	 
+	        //gw.getData(id_meas_to_set,getID(),mode,options,action); 
+	        gw.getData(id_meas_to_set,getID(),getNature(),mode,options,action);
 			return "Get Data Request sent To Wsn with id: "+id_meas_to_set;
 		}
 		else{

@@ -259,7 +259,7 @@ public class JSonUtil {
 	
 	@SuppressWarnings({ "rawtypes" })
 	public static Sensor JsonToSensor(String str){
-		System.out.println("Sensor: " + str);
+		//System.out.println("Sensor: " + str);
 		Sensor sd = new Sensor("sid1", "test", "test", "test", "active",
 				"test","temperature", new HashMap<String, List<String>>(),
 				new HashMap<String, List<String>>(),new HashMap<String, List<String>>(),

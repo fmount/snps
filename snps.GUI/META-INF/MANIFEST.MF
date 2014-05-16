@@ -14,5 +14,5 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: ISNPS;bundle-version="1.0.0",
  org.osgi.snps.core;bundle-version="1.0.0",
  org.osgi.snps.base;bundle-version="1.0.0",
- org.osgi.snps.composer;bundle-version="1.0.0",
- SMLParser;bundle-version="1.0.0"
+ SMLParser;bundle-version="1.0.0",
+ org.osgi.snps.composer;bundle-version="1.0.0"
