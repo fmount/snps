@@ -33,7 +33,7 @@ public class Subscriber implements EventHandler {
 		this.type = type;
 		this.context = context;
 		this.ac = ac;
-		if(ac!=null)
+		if(ac!=null) 
 			System.out.println("ACTION: "+ac.toString());
 	}
 	
@@ -49,6 +49,7 @@ public class Subscriber implements EventHandler {
 		/*for (String propertyName :	event.getPropertyNames()) {
 			System.out.println(propertyName+" - "+event.getProperty(propertyName));
 		}*/
+		System.out.println("Type: " + type);
 		try{
 			if(type.equalsIgnoreCase("logger")){
 				LogMessage(event);
@@ -203,7 +204,7 @@ public class Subscriber implements EventHandler {
 	
 	
 	public void LogMessage(Event event){
-		String msg ="[LOGGING]-> \n";
+		String msg ="[LOGGING]-> \n ";
 		for (String propertyName :	event.getPropertyNames()) {
 			//System.out.println("\t" + propertyName + " = " +event.getProperty(propertyName));
 			msg += " "+propertyName+ " = "+event.getProperty(propertyName)+"\n";

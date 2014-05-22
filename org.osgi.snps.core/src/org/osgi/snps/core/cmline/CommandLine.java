@@ -54,7 +54,7 @@ public class CommandLine implements Runnable {
 	static iGWInterface interpreterservice;
 	static iDataFlow dataflowservice;
 	static iMonitor monitorservice;
-	
+
 	static iWebIntegrationInterface iwebService;
 	static iEventPublisherInterface ipubservice;
 
@@ -63,9 +63,7 @@ public class CommandLine implements Runnable {
 	// static iCompose composerService;
 
 	public enum commands {
-		sayhello, regSensor, samplPlan, compose, getData, viewSensors, dao, importsensors, 
-		sendCommand, dataflow, viewcomponent, help, quit, test_prova, getconfiguration, setconfiguration,
-		sensor_cu_1,sensor_cu_2, sensor_cu_5, sensor_cu_6, sensor_cu_7, hellowsn, sensor_cu_3_4, isAlive
+		sayhello, regSensor, samplPlan, compose, getData, viewSensors, dao, importsensors, sendCommand, dataflow, viewcomponent, help, quit, test_prova, getconfiguration, setconfiguration, sensor_cu_1, sensor_cu_2, sensor_cu_5, sensor_cu_6, sensor_cu_7, hellowsn, sensor_cu_3_4, isAlive
 	}
 
 	public enum modes {
@@ -76,11 +74,10 @@ public class CommandLine implements Runnable {
 		sRegis, sPlan, getSimpleData, enable, disable
 	}
 
-	public enum searchCommands{
-		history, allhistory, detectbytime, detection, detectbydate, 
-		detectbydateandtime, detectbyzone, sensorsbyzone, sensorsbynode
+	public enum searchCommands {
+		history, allhistory, detectbytime, detection, detectbydate, detectbydateandtime, detectbyzone, sensorsbyzone, sensorsbynode
 	}
-	
+
 	public CommandLine(BundleContext bundleContext) {
 		context = bundleContext;
 		// Thread t = new Thread(this);
@@ -115,7 +112,7 @@ public class CommandLine implements Runnable {
 					StringTokenizer stnk = new StringTokenizer(userInput, " ");
 					command = stnk.nextToken();
 					while (stnk.hasMoreTokens()) {
-						
+
 						options.add(stnk.nextToken());
 					}
 					try {
@@ -129,53 +126,74 @@ public class CommandLine implements Runnable {
 							}
 
 							break;
-						
+
 						case isAlive:
-							try{
-								System.out.println("[CML:Info] -> Is the Sensor ALIVE????????");
-								if(options.isEmpty())
-									System.out.println("[CML:Alert] -> Arguments Error!!");
+							try {
+								System.out
+										.println("[CML:Info] -> Is the Sensor ALIVE????????");
+								if (options.isEmpty())
+									System.out
+											.println("[CML:Alert] -> Arguments Error!!");
 								else if (options.get(0).equals("--sId")) {
-									System.out.println("Check availability for Sensor: "+options.get(1));
-									try{
-										ABComponent s = service.getSensList().get(options.get(1));										
-											//service.regCall("updateComponent", 3, options.get(1), description, s, "",null);
-											/** EXAMPLE USING WII BUNDLE **/
-											reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
-											iwebService = (iWebIntegrationInterface) context.getService(reference);
-											
-											//IT SEEMS OK..
-											System.out.println(iwebService.isAlive(options.get(1)));
-											System.out.println("Done");
-										}catch(Exception e){
-											System.out.println(e.getMessage());
-										}
-									}			
-							}catch (Exception e) {
+									System.out
+											.println("Check availability for Sensor: "
+													+ options.get(1));
+									try {
+										ABComponent s = service.getSensList()
+												.get(options.get(1));
+										// service.regCall("updateComponent", 3,
+										// options.get(1), description, s,
+										// "",null);
+										/** EXAMPLE USING WII BUNDLE **/
+										reference = context
+												.getServiceReference(iWebIntegrationInterface.class
+														.getName());
+										iwebService = (iWebIntegrationInterface) context
+												.getService(reference);
+
+										// IT SEEMS OK..
+										System.out.println(iwebService
+												.isAlive(options.get(1)));
+										System.out.println("Done");
+									} catch (Exception e) {
+										System.out.println(e.getMessage());
+									}
+								}
+							} catch (Exception e) {
 								e.printStackTrace();
 							}
 							break;
 						case importsensors:
-							try{
+							try {
 								Document description;
-								reference = context.getServiceReference(Parser.class.getName());
+								reference = context
+										.getServiceReference(Parser.class
+												.getName());
 								Sensor s;
 								if (reference != null) {
-									String originPath="/home/francesco/Dropbox/S-SENSORI/DocsMilan/BerkeleyDB/SML";
+									String originPath = "/home/francesco/Dropbox/S-SENSORI/DocsMilan/BerkeleyDB/SML";
 									final File folder = new File(originPath);
 									List<String> flist = listFilesForFolder(folder);
-									System.out.println("Found "+flist.size()+" files");
-									pservice = (Parser) context.getService(reference);
-									for(int i=0;i<flist.size();i++){
-										System.out.println("Import file: "+flist.get(i));
-										description = pservice.getDocument(flist.get(i));
+									System.out.println("Found " + flist.size()
+											+ " files");
+									pservice = (Parser) context
+											.getService(reference);
+									for (int i = 0; i < flist.size(); i++) {
+										System.out.println("Import file: "
+												+ flist.get(i));
+										description = pservice
+												.getDocument(flist.get(i));
 										s = pservice.parse(description);
-										String id = service.regCall("persist", 3, s.getID(),description, s, s.getNature(),null);
-										System.out.println("[CML:Info]-> New Sensor: "+ id);
+										String id = service.regCall("persist",
+												3, s.getID(), description, s,
+												s.getNature(), null);
+										System.out
+												.println("[CML:Info]-> New Sensor: "
+														+ id);
 									}
-								}else System.out.println("Reference error!");
-							}
-							catch(Exception e){
+								} else
+									System.out.println("Reference error!");
+							} catch (Exception e) {
 								e.printStackTrace();
 							}
 							break;
@@ -193,34 +211,47 @@ public class CommandLine implements Runnable {
 									pservice = (Parser) context
 											.getService(reference);
 									System.out.println(options.toString());
-									if(options.isEmpty()){
+									if (options.isEmpty()) {
 										System.out.println("Standard!");
 										/*
+										 * description = pservice
+										 * .getDOMDocument("SensorML.xml");
+										 * 
+										 * APACHE XERCES
+										 */
+										// USING XPATH..
 										description = pservice
-												.getDOMDocument("SensorML.xml");
-										*
-										* APACHE XERCES
-										*/
-										//USING XPATH..
-										description = pservice.getDocument("SensorML.xml");
-									}
-									else{
-										//description = pservice.getDOMDocument(options.get(0));
+												.getDocument("SensorML.xml");
+									} else {
+										// description =
+										// pservice.getDOMDocument(options.get(0));
 										/*
+										 * description = pservice
+										 * .getDOMDocument(options.get(0));
+										 * 
+										 * APACHE XERCES
+										 */
+										// USING XPATH..
 										description = pservice
-												.getDOMDocument(options.get(0));
-										*
-										* APACHE XERCES
-										*/
-										//USING XPATH..
-										description = pservice.getDocument(options.get(0));
-										s = pservice.parse(description);
-										String id = service.regCall("persist", 3, s.getID(),
-												description, s, s.getNature(),null);
-										
-										System.out
-												.println("[CML:Info]-> New Sensor: "
-														+ id);
+												.getDocument(options.get(0));
+										if (description != null) {
+											System.out.println("DESCRIPTION "
+													+ description);
+											s = pservice.parse(description);
+											if (s != null) {
+												String id = service.regCall(
+														"persist", 3,
+														s.getID(), description,
+														s, s.getNature(), null);
+
+												System.out
+														.println("[CML:Info]-> New Sensor: "
+																+ id);
+											}else{
+												System.out.println("[Alert]-> Missing required fields");
+											}
+											
+										}
 									}
 								} else {
 									System.err
@@ -231,7 +262,7 @@ public class CommandLine implements Runnable {
 							}
 							break;
 
-						case samplPlan: //OK
+						case samplPlan: // OK
 							// EX: samplPlan --sId id1 id2 ..idN -a/-s
 							List<String> ids = new ArrayList<String>();
 							boolean opres = false;
@@ -339,72 +370,103 @@ public class CommandLine implements Runnable {
 							break;
 
 						case viewSensors: // OK
-							/*System.out.println("---------------------------");
-							System.out.println("List of available sensors: ");
-							System.out.println("---------------------------");
-							Map<String, ABComponent> mList = service
-									.getSensList();
-							for (Entry<String, ABComponent> entry : mList
-									.entrySet()) {
-								/*
-								 * System.out.println("Sid:" + entry.getKey() +
-								 * " - Value: " + entry.getValue());
-								 */
-								/*System.out.println(
-													 * "Sid:" + entry.getKey()+
-													 * " -
-													 *"" + entry.getValue()); */
-							//}
+							/*
+							 * System.out.println("---------------------------");
+							 * System
+							 * .out.println("List of available sensors: ");
+							 * System
+							 * .out.println("---------------------------");
+							 * Map<String, ABComponent> mList = service
+							 * .getSensList(); for (Entry<String, ABComponent>
+							 * entry : mList .entrySet()) { /*
+							 * System.out.println("Sid:" + entry.getKey() +
+							 * " - Value: " + entry.getValue());
+							 */
+							/*
+							 * System.out.println( "Sid:" + entry.getKey()+ " -
+							 * "" + entry.getValue());
+							 */
+							// }
 							viewSensors();
 							break;
 						case getconfiguration:
-							System.out.println("[CML:Info] -> Get Sensor configuration");
-							if(options.isEmpty())
-								System.out.println("[CML:Alert] -> Arguments Error!!");
+							System.out
+									.println("[CML:Info] -> Get Sensor configuration");
+							if (options.isEmpty())
+								System.out
+										.println("[CML:Alert] -> Arguments Error!!");
 							else if (options.get(0).equals("--sId")) {
-								System.out.println("Get Configuration from Sensor: "+options.get(1));
-								System.out.println(service.getSensList().get(options.get(1)).toString());
-								System.out.println("[CML:Info] -> Getting Sensor XML registered");
-								//System.out.println(service.regCall("getSDesc", 3, options.get(1).toString(), null, null, "",null));
+								System.out
+										.println("Get Configuration from Sensor: "
+												+ options.get(1));
+								System.out.println(service.getSensList()
+										.get(options.get(1)).toString());
+								System.out
+										.println("[CML:Info] -> Getting Sensor XML registered");
+								// System.out.println(service.regCall("getSDesc",
+								// 3, options.get(1).toString(), null, null,
+								// "",null));
 								/** EXMAPLE USING WII **/
-								reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
-								iwebService = (iWebIntegrationInterface) context.getService(reference);
-								try{
-								//IT SEEMS OK
-								System.out.println(iwebService.getSensorConfiguration(options.get(1)));
-								}catch(Exception e){
+								reference = context
+										.getServiceReference(iWebIntegrationInterface.class
+												.getName());
+								iwebService = (iWebIntegrationInterface) context
+										.getService(reference);
+								try {
+									// IT SEEMS OK
+									System.out.println(iwebService
+											.getSensorConfiguration(options
+													.get(1)));
+								} catch (Exception e) {
 									e.printStackTrace();
 								}
 							}
 							break;
-							
-						case setconfiguration:							
-							System.out.println("[CML:Info] -> Set Sensor configuration");
-							if(options.isEmpty())
-								System.out.println("[CML:Alert] -> Arguments Error!!");
+
+						case setconfiguration:
+							System.out
+									.println("[CML:Info] -> Set Sensor configuration");
+							if (options.isEmpty())
+								System.out
+										.println("[CML:Alert] -> Arguments Error!!");
 							else if (options.get(0).equals("--sId")) {
-								System.out.println("Set Configuration to Sensor: "+options.get(1));
+								System.out
+										.println("Set Configuration to Sensor: "
+												+ options.get(1));
 								if (options.get(2).equals("-xml")) {
-									System.out.println("Apply Configuration provided by: "+options.get(3).toString());
-									
-									try{
-										reference = context.getServiceReference(Parser.class
-												.getName());
-										pservice = (Parser) context.getService(reference);
-										Document description = pservice.getDocument(options.get(3).toString());
+									System.out
+											.println("Apply Configuration provided by: "
+													+ options.get(3).toString());
+
+									try {
+										reference = context
+												.getServiceReference(Parser.class
+														.getName());
+										pservice = (Parser) context
+												.getService(reference);
+										Document description = pservice
+												.getDocument(options.get(3)
+														.toString());
 										Sensor s = pservice.parse(description);
 										s.setID(options.get(1));
-										//ABComponent s = service.getSensList().get(options.get(1));										
-										service.regCall("updateComponent", 3, options.get(1), description, s, "",null);
+										// ABComponent s =
+										// service.getSensList().get(options.get(1));
+										service.regCall("updateComponent", 3,
+												options.get(1), description, s,
+												"", null);
 										/** EXAMPLE USING WII BUNDLE **/
-//										reference = context.getServiceReference(iWebIntegrationInterface.class.getName());
-//										iwebService = (iWebIntegrationInterface) context.getService(reference);
-										
-										//IT SEEMS OK..
-										//System.out.println(iwebService.setSensorConfiguration(options.get(1), options.get(3).toString()));
+										// reference =
+										// context.getServiceReference(iWebIntegrationInterface.class.getName());
+										// iwebService =
+										// (iWebIntegrationInterface)
+										// context.getService(reference);
+
+										// IT SEEMS OK..
+										// System.out.println(iwebService.setSensorConfiguration(options.get(1),
+										// options.get(3).toString()));
 										System.out.println("Done");
-										//viewSensors();
-									}catch(Exception e){
+										// viewSensors();
+									} catch (Exception e) {
 										System.out.println(e.getMessage());
 									}
 								}
@@ -422,37 +484,39 @@ public class CommandLine implements Runnable {
 							else if (options.get(0).equals("--sId")) {
 								System.out
 										.println("Options: " + options.get(2));
-								//buildSensors(100);								
-								
+								// buildSensors(100);
+
 								if (options.get(2).equals("-s")) {
 									System.out.println("Select SYNC MODE");
-									
-									
+
 									System.out.println(service.getData(
-											options.get(1), "sync","none"));
+											options.get(1), "sync", "none"));
 								}
 								// System.out.println(service.getData(options.get(1)));
 								else if (options.get(2).equals("-a")) {
 									System.out.println("Select ASYNC MODE");
-									
-									
-									String ac= defineAction(options.get(1));									
-									System.out.println("ACC: "+ac);
+
+									String ac = defineAction(options.get(1));
+									System.out.println("ACC: " + ac);
 									System.out.println(service.getData(
-											options.get(1), "async",ac));
+											options.get(1), "async", ac));
 									break;
-									/*System.out
-											.println("[CML:Info] -> Receiving data: enabling Event Mode..");
-									testcmds.add(options.get(1));*/
+									/*
+									 * System.out .println(
+									 * "[CML:Info] -> Receiving data: enabling Event Mode.."
+									 * ); testcmds.add(options.get(1));
+									 */
 
-								/*	reference = context
-											.getServiceReference(iEventPublisherInterface.class
-													.getName());
-
-									ipubservice = (iEventPublisherInterface) context
-											.getService(reference);
-									ipubservice.sendEventt("registration",
-											testcmds);*/
+									/*
+									 * reference = context
+									 * .getServiceReference(iEventPublisherInterface
+									 * .class .getName());
+									 * 
+									 * ipubservice = (iEventPublisherInterface)
+									 * context .getService(reference);
+									 * ipubservice.sendEventt("registration",
+									 * testcmds);
+									 */
 								} else {
 									System.out
 											.println("[CML:Alert] -> Malformed Command: Please Retry!");
@@ -479,10 +543,11 @@ public class CommandLine implements Runnable {
 									System.out
 											.println("[CML:Info] -> Usage: getData --all -l <limit> -t <time>");
 								}
-							}else if (options.get(0).equals("-m")) {
-									System.out.println("[CML:Info] -> Monitor mode");
-									monitor(options.get(1),options.get(2));
-							
+							} else if (options.get(0).equals("-m")) {
+								System.out
+										.println("[CML:Info] -> Monitor mode");
+								monitor(options.get(1), options.get(2));
+
 							} else
 								System.out.println("Error typing command!");
 							options.clear();
@@ -514,36 +579,38 @@ public class CommandLine implements Runnable {
 										.getService(reference);
 								daoTest();
 							}
-							
-							else if(options.get(0).equals("--search")){
+
+							else if (options.get(0).equals("--search")) {
 								reference = context
 										.getServiceReference(iDaoInterface.class
 												.getName());
 								daoservice = (iDaoInterface) context
 										.getService(reference);
-								try{
-									if(options.get(1).equalsIgnoreCase("-sid")){
-										String s = daoservice.getImageComponent(3, options.get(2));
+								try {
+									if (options.get(1).equalsIgnoreCase("-sid")) {
+										String s = daoservice
+												.getImageComponent(3,
+														options.get(2));
 										System.out.println(s.toString());
-									}
-									else{
+									} else {
 										System.out
-										.println("[CML:Alert] -> MALFORMED COMMAND");
-									System.out
-										.println("[CML:Usage] -> ex: dao --greet/--all");
+												.println("[CML:Alert] -> MALFORMED COMMAND");
+										System.out
+												.println("[CML:Usage] -> ex: dao --greet/--all");
 									}
-								}catch(Exception e){
+								} catch (Exception e) {
 									System.out
-										.println("[CML:Alert] -> MALFORMED COMMAND");
+											.println("[CML:Alert] -> MALFORMED COMMAND");
 									System.out
-										.println("[CML:Usage] -> ex: dao --greet/--all");
+											.println("[CML:Usage] -> ex: dao --greet/--all");
 								}
-							}else if(options.get(0).equals("--get")){
-								System.out.println("[CML:Info] -> Search Engine");
-								try{
+							} else if (options.get(0).equals("--get")) {
+								System.out
+										.println("[CML:Info] -> Search Engine");
+								try {
 									searchEngine(options);
-									
-								}catch(Exception e){
+
+								} catch (Exception e) {
 									e.printStackTrace();
 								}
 							} else {
@@ -663,10 +730,11 @@ public class CommandLine implements Runnable {
 									.println("[CML:Info] -> Test Data Flow Services:\n");
 
 							reference = context
-									.getServiceReference(iDataFlow.class.getName());
+									.getServiceReference(iDataFlow.class
+											.getName());
 							dataflowservice = (iDataFlow) context
 									.getService(reference);
-							
+
 							try {
 
 								if (options.get(0).equals("--greet")) {
@@ -682,8 +750,10 @@ public class CommandLine implements Runnable {
 																	String.valueOf((Math
 																			.random() * 10)),
 																	"",
-																	org.osgi.snps.base.util.Util.whatDayIsToday(),
-																	org.osgi.snps.base.util.Util.whatTimeIsIt()),
+																	org.osgi.snps.base.util.Util
+																			.whatDayIsToday(),
+																	org.osgi.snps.base.util.Util
+																			.whatTimeIsIt()),
 															"test", context);
 										}
 									} catch (Exception e) {
@@ -697,10 +767,12 @@ public class CommandLine implements Runnable {
 																"test",
 																String.valueOf((Math
 																		.random() * 10)),
-																		"simple",
-																		org.osgi.snps.base.util.Util.whatDayIsToday(),
-																		org.osgi.snps.base.util.Util.whatDayIsToday()),
-																"test", context);
+																"simple",
+																org.osgi.snps.base.util.Util
+																		.whatDayIsToday(),
+																org.osgi.snps.base.util.Util
+																		.whatDayIsToday()),
+														"test", context);
 
 										System.out
 												.println("[CML:Alert] -> MALFORMED COMMAND");
@@ -739,11 +811,11 @@ public class CommandLine implements Runnable {
 							break;
 						case sensor_cu_2:
 							// SETTING SPLAN
-							sensor_cu_2(reference,"scu2.txt");
+							sensor_cu_2(reference, "scu2.txt");
 							break;
 						case sensor_cu_3_4:
 							// SENSOR ACTIVATION
-							sensor_cu_3_4(reference,"scu_3_4.txt");
+							sensor_cu_3_4(reference, "scu_3_4.txt");
 							break;
 						case sensor_cu_5:
 							// TODO: BENESSERE
@@ -760,10 +832,12 @@ public class CommandLine implements Runnable {
 							// BUILD VIRTUAL SENSOR (COMPOSE)
 							sensor_cu_6("scu6.txt");
 							reference = context
-							.getServiceReference(iWebIntegrationInterface.class.getName());
-					iwebService = (iWebIntegrationInterface) context.getService(reference);
-					System.out.println(iwebService.sayhello());
-							
+									.getServiceReference(iWebIntegrationInterface.class
+											.getName());
+							iwebService = (iWebIntegrationInterface) context
+									.getService(reference);
+							System.out.println(iwebService.sayhello());
+
 							break;
 						case sensor_cu_7:
 							// GET DATA FROM VIRTUAL SENSOR
@@ -782,10 +856,9 @@ public class CommandLine implements Runnable {
 								mode = "async";
 							if (a.equalsIgnoreCase("s"))
 								mode = "sync";
-							
-							
-							//TODO: DEFINE ACTION
-							
+
+							// TODO: DEFINE ACTION
+
 							sensor_cu_7("scu7.txt", mode);
 							break;
 
@@ -803,7 +876,7 @@ public class CommandLine implements Runnable {
 							break;
 						}
 					} catch (Exception ex) {
-						//ex.printStackTrace();
+						// ex.printStackTrace();
 						System.out
 								.println("[CML:Info] -> Command not found!!\n");
 					}
@@ -831,129 +904,130 @@ public class CommandLine implements Runnable {
 			System.out.println("Generic Error: Reload CML " + e.getMessage());
 		}
 	}
-	
-	
-	public static void searchEngine(List<String> options){
-		try{
+
+	public static void searchEngine(List<String> options) {
+		try {
 			String choice = options.get(1);
-			switch(searchCommands.valueOf(choice)){
-			
+			switch (searchCommands.valueOf(choice)) {
+
 			case sensorsbyzone:
-				if(options.get(2).equalsIgnoreCase("-z")){
+				if (options.get(2).equalsIgnoreCase("-z")) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(3));
-					System.out.println(service.regCall("getSensorbyzone",3, "",
-							null, null, "",params));
+					System.out.println(service.regCall("getSensorbyzone", 3,
+							"", null, null, "", params));
 				}
 				break;
 			case sensorsbynode:
-				if(options.get(2).equalsIgnoreCase("-b")){
+				if (options.get(2).equalsIgnoreCase("-b")) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(3));
-					System.out.println(service.regCall("getSensorbynode",3, "",
-							null, null, "",params));
-				}				
+					System.out.println(service.regCall("getSensorbynode", 3,
+							"", null, null, "", params));
+				}
 				break;
-			case history: 
-				if(options.get(2).equalsIgnoreCase("-sId")){
-				System.out.println(service.regCall("history", 3, options.get(3), null,
-						null, null,null));
-				}else{
+			case history:
+				if (options.get(2).equalsIgnoreCase("-sId")) {
+					System.out.println(service.regCall("history", 3,
+							options.get(3), null, null, null, null));
+				} else {
 					System.out.println("Malformed command!");
 				}
 				break;
-			
-			case allhistory: 
-				System.out.println(service.regCall("allhistory", 3, options.get(1), null,
-							null, null,null));				
+
+			case allhistory:
+				System.out.println(service.regCall("allhistory", 3,
+						options.get(1), null, null, null, null));
 				break;
-			
-			case detection: 
-				if(options.get(2)!=null){
-				List<String> params = new ArrayList<String>();
-				params.add(options.get(2));
-				System.out.println(service.regCall("detection", 3, "", null,
-						null, null,params));
+
+			case detection:
+				if (options.get(2) != null) {
+					List<String> params = new ArrayList<String>();
+					params.add(options.get(2));
+					System.out.println(service.regCall("detection", 3, "",
+							null, null, null, params));
 				}
 				break;
-			case detectbydate: 
-				if((options.get(2).equalsIgnoreCase("-sId")) && ((options.get(4).equalsIgnoreCase("-d")))){
+			case detectbydate:
+				if ((options.get(2).equalsIgnoreCase("-sId"))
+						&& ((options.get(4).equalsIgnoreCase("-d")))) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(5));
 					params.add(options.get(6));
-					System.out.println(service.regCall("detectbydate",3, options.get(3),
-							null, null, "",params));
-				}
-				else if(options.get(2).equalsIgnoreCase("-d")){
+					System.out.println(service.regCall("detectbydate", 3,
+							options.get(3), null, null, "", params));
+				} else if (options.get(2).equalsIgnoreCase("-d")) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(3));
 					params.add(options.get(4));
-					System.out.println(service.regCall("detectbydate",3, "",
-							null, null, "",params));
+					System.out.println(service.regCall("detectbydate", 3, "",
+							null, null, "", params));
 				}
 				break;
-			case detectbytime: 
-				if((options.get(2).equalsIgnoreCase("-sId")) && ((options.get(4).equalsIgnoreCase("-d")) && 
-						(options.get(6).equalsIgnoreCase("-t")))){
+			case detectbytime:
+				if ((options.get(2).equalsIgnoreCase("-sId"))
+						&& ((options.get(4).equalsIgnoreCase("-d")) && (options
+								.get(6).equalsIgnoreCase("-t")))) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(5));
 					params.add(options.get(7));
 					params.add(options.get(8));
-					System.out.println(service.regCall("detectbytime",3, options.get(3),
-							null, null, "",params));
-				}	
-				else if((options.get(2).equalsIgnoreCase("-d")) && (options.get(4).equalsIgnoreCase("-t"))){
+					System.out.println(service.regCall("detectbytime", 3,
+							options.get(3), null, null, "", params));
+				} else if ((options.get(2).equalsIgnoreCase("-d"))
+						&& (options.get(4).equalsIgnoreCase("-t"))) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(3));
 					params.add(options.get(5));
 					params.add(options.get(6));
-					System.out.println(service.regCall("detectbytime",3, "",
-							null, null, "",params));
+					System.out.println(service.regCall("detectbytime", 3, "",
+							null, null, "", params));
 				}
 				break;
 			case detectbydateandtime:
-				if((options.get(2).equalsIgnoreCase("-sId")) && ((options.get(4).equalsIgnoreCase("-d")) && 
-						(options.get(7).equalsIgnoreCase("-t")))){
+				if ((options.get(2).equalsIgnoreCase("-sId"))
+						&& ((options.get(4).equalsIgnoreCase("-d")) && (options
+								.get(7).equalsIgnoreCase("-t")))) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(5));
 					params.add(options.get(6));
 					params.add(options.get(8));
 					params.add(options.get(9));
-					System.out.println(service.regCall("detectbydateandtime",3, options.get(3),
-							null, null, "",params));
-				}
-				else if((options.get(2).equalsIgnoreCase("-d"))&& (options.get(5).equalsIgnoreCase("-t"))){
+					System.out.println(service.regCall("detectbydateandtime",
+							3, options.get(3), null, null, "", params));
+				} else if ((options.get(2).equalsIgnoreCase("-d"))
+						&& (options.get(5).equalsIgnoreCase("-t"))) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(3));
 					params.add(options.get(4));
 					params.add(options.get(6));
 					params.add(options.get(7));
-					System.out.println(service.regCall("detectbydateandtime",3, "",
-							null, null, "",params));
+					System.out.println(service.regCall("detectbydateandtime",
+							3, "", null, null, "", params));
 				}
 				break;
 			case detectbyzone:
-				if(options.get(2).equalsIgnoreCase("-z")){
+				if (options.get(2).equalsIgnoreCase("-z")) {
 					List<String> params = new ArrayList<String>();
 					params.add(options.get(3));
-					System.out.println(service.regCall("detectbyzone",3, "",
-							null, null, "",params));
+					System.out.println(service.regCall("detectbyzone", 3, "",
+							null, null, "", params));
 				}
 				break;
-			default: System.out.println("Command not found!");
-			 		 break;
+			default:
+				System.out.println("Command not found!");
+				break;
 			}
-			
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static String defineAction(String sid){
+	public static String defineAction(String sid) {
 		viewSensors();
-		System.out.println("Sensor ID: "+sid);
+		System.out.println("Sensor ID: " + sid);
 		BufferedReader stdIn = new BufferedReader(new InputStreamReader(
 				System.in));
 		System.out.println("-----------------\n");
@@ -962,58 +1036,61 @@ public class CommandLine implements Runnable {
 		System.out.println("0. None\n");
 		System.out.println("1. Actuator\n");
 		System.out.println("What action?\n");
-			
+
 		try {
 			int answ = Integer.parseInt(stdIn.readLine());
-			switch(answ){
-			case 0: return "none";
-			
-			case 1: 
+			switch (answ) {
+			case 0:
+				return "none";
+
+			case 1:
 				List<String> act = service.getActuators();
-				String exec="enable";
-				String restriction="";
-				if(!act.isEmpty()){
-					for(int i=0;i<act.size();i++){
-						System.out.println(i+1+") "+act.get(i)+"\n");
+				String exec = "enable";
+				String restriction = "";
+				if (!act.isEmpty()) {
+					for (int i = 0; i < act.size(); i++) {
+						System.out.println(i + 1 + ") " + act.get(i) + "\n");
 					}
 					System.out.println("Select ACT id: ");
 					int actid = Integer.parseInt(stdIn.readLine());
-					System.out.println("ACTUATOR SELECTED: "+act.get(actid-1));
+					System.out.println("ACTUATOR SELECTED: "
+							+ act.get(actid - 1));
 					System.out.println("1. Enable\n");
 					System.out.println("2. Disable\n");
 					int ex = Integer.parseInt(stdIn.readLine());
-					if(ex==1) {
+					if (ex == 1) {
 						exec = "enable";
-					}
-					else if(ex==2){
+					} else if (ex == 2) {
 						exec = "disable";
-					}
-					else{
-						System.out.println("[CML:Info] -> Error Selecting command");
+					} else {
+						System.out
+								.println("[CML:Info] -> Error Selecting command");
 						System.out.println("[CML:Info] -> SKIP");
 						System.out.println("returning: none");
 						return "none";
 					}
 					System.out.println("Enter restriction value: ");
 					double rVal = Double.parseDouble(stdIn.readLine());
-					Action a = new Action((service.getSensList()).get((act.get(actid-1))).
-							getID(), exec,rVal);
+					Action a = new Action((service.getSensList()).get(
+							(act.get(actid - 1))).getID(), exec, rVal);
 					ServiceReference reference = context
-							.getServiceReference(iMonitor.class
-									.getName());
-					
-					//CONTROLLO SE ESISTE UN AZIONE DI QUESTO TIPO SUL SENSORE..
-					if(service.getActions().containsKey(sid+"_"+a.getComponent()+"_"+exec)){
+							.getServiceReference(iMonitor.class.getName());
+
+					// CONTROLLO SE ESISTE UN AZIONE DI QUESTO TIPO SUL
+					// SENSORE..
+					if (service.getActions().containsKey(
+							sid + "_" + a.getComponent() + "_" + exec)) {
 						System.out.println("Action already exist..");
-						return a.getComponent()+":"+exec;
+						return a.getComponent() + ":" + exec;
 					}
-					
-					monitorservice = (iMonitor) context
-							.getService(reference);
+
+					monitorservice = (iMonitor) context.getService(reference);
 					monitorservice.monitor(sid, a);
-					service.addToActionList(sid+"_"+a.getComponent()+"_"+exec, exec);
-					System.out.println("returning: "+a.getComponent()+":"+exec);
-					return a.getComponent()+":"+exec;
+					service.addToActionList(sid + "_" + a.getComponent() + "_"
+							+ exec, exec);
+					System.out.println("returning: " + a.getComponent() + ":"
+							+ exec);
+					return a.getComponent() + ":" + exec;
 				}
 				System.out.println("No actuators: None Action!");
 				System.out.println("[CML:Info] -> SKIP");
@@ -1021,34 +1098,31 @@ public class CommandLine implements Runnable {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-				System.out.println(e.getMessage());
-				System.out.println("[CML:Alert] -> SKIP");
-				return "none";
+			System.out.println(e.getMessage());
+			System.out.println("[CML:Alert] -> SKIP");
+			return "none";
 		}
 		return "none";
 	}
-	
-	public static void viewSensors(){
+
+	public static void viewSensors() {
 		System.out.println("---------------------------");
 		System.out.println("List of available sensors: ");
 		System.out.println("---------------------------");
-		Map<String, ABComponent> mList = service
-				.getSensList();
-		for (Entry<String, ABComponent> entry : mList
-				.entrySet()) {
+		Map<String, ABComponent> mList = service.getSensList();
+		for (Entry<String, ABComponent> entry : mList.entrySet()) {
 			/*
-			 * System.out.println("Sid:" + entry.getKey() +
-			 * " - Value: " + entry.getValue());
+			 * System.out.println("Sid:" + entry.getKey() + " - Value: " +
+			 * entry.getValue());
 			 */
 			System.out.println(/*
-								 * "Sid:" + entry.getKey()+
-								 * " -
+								 * "Sid:" + entry.getKey()+ " -
 								 */"" + entry.getValue());
 		}
 	}
-	
-	public static void monitor(String sid,String mode){
-		try{
+
+	public static void monitor(String sid, String mode) {
+		try {
 			String com = "";
 			if (mode.equals("-a")) {
 				com = "async";
@@ -1059,39 +1133,38 @@ public class CommandLine implements Runnable {
 			case sync:
 				System.out.println("SYNC MODE: " + com);
 				for (int i = 0; i < 100; i++) {
-					String key = service.getSensList()
-							.get(sid).getID();
-					System.out.println(service.getData(key, "sync","none"));
+					String key = service.getSensList().get(sid).getID();
+					System.out.println(service.getData(key, "sync", "none"));
 				}
 				break;
 			case async:
 				String ac = defineAction(sid);
-				
+
 				System.out.println("ASYNC MODE: " + com);
-				System.out.println("Rate for monitoring: (time in ms)");	
-				BufferedReader stdIn = new BufferedReader(new InputStreamReader(
-						System.in));
+				System.out.println("Rate for monitoring: (time in ms)");
+				BufferedReader stdIn = new BufferedReader(
+						new InputStreamReader(System.in));
 				String rate = stdIn.readLine();
 				System.out.println("How long? (time in ms)");
 				String finish = stdIn.readLine();
-					new ServiceData(context, service.getSensList()
-							.get(sid),com,null,Integer.parseInt(rate),
-							Integer.parseInt(finish),ac);
-				
+				new ServiceData(context, service.getSensList().get(sid), com,
+						null, Integer.parseInt(rate), Integer.parseInt(finish),
+						ac);
+
 				break;
 			default:
 				System.out.println("UNAVAILABLE MODE!");
 				break;
 			}
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error!");
-		}	
+		}
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static iWsnInterface setRemoteConnection(){
+	public static iWsnInterface setRemoteConnection() {
 		// Get WSN SERVICES..
 		ServiceReference serviceRef = context
 				.getServiceReference(RemoteOSGiService.class.getName());
@@ -1111,15 +1184,15 @@ public class CommandLine implements Runnable {
 					System.out.println("[MDW] -> Service not found!");
 					return null;
 				} else {
-					 wsnservice = (iWsnInterface) remote
+					wsnservice = (iWsnInterface) remote
 							.getRemoteService(references[0]);
 					return wsnservice;
 				}
 			} catch (RemoteOSGiException e) {
-				 e.printStackTrace();
+				e.printStackTrace();
 				System.out.println("No NetworkChannelFactory for r-osgi found");
 			} catch (IOException e) {
-				 e.printStackTrace();
+				e.printStackTrace();
 				System.out.println("No NetworkChannelFactory for r-osgi found");
 			} finally {
 				// bundleContext.ungetService(serviceRef);
@@ -1127,11 +1200,11 @@ public class CommandLine implements Runnable {
 		}
 		return wsnservice;
 	}
-	
-	@SuppressWarnings({"rawtypes" })
+
+	@SuppressWarnings({ "rawtypes" })
 	public static void sensor_cu_1(ServiceReference reference, String fname) {
 		try {
-			
+
 			wsnservice = setRemoteConnection();
 			org.osgi.snps.base.util.Util.describe(fname);
 			// System.out.println("[CML] -> Generating Sensor..");
@@ -1148,28 +1221,29 @@ public class CommandLine implements Runnable {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void sensor_cu_2(ServiceReference reference, String fname) {
 		try {
-			reference = context.getServiceReference(iWebIntegrationInterface.class
-					.getName());
-			if(reference!=null){
-				iwebService = (iWebIntegrationInterface) context.getService(reference);
+			reference = context
+					.getServiceReference(iWebIntegrationInterface.class
+							.getName());
+			if (reference != null) {
+				iwebService = (iWebIntegrationInterface) context
+						.getService(reference);
 				org.osgi.snps.base.util.Util.describe(fname);
 				List<String> ids = new ArrayList<String>();
 				ids.add("localhostSensorA");
 				ids.add("localhostSensorB");
 				SamplingPlan plan = new SamplingPlan("", ids, 30.0, 40.0, 200);
-				plan.setSplan_identifier(org.osgi.snps.base.util.Util.IdGenerator()
-						.replace("-", ""));
-				
-				System.out.println("[CML:Info] -> " +
-						"New SPlan identifier: "+iwebService.setSPlan(JSonUtil.SamplingPlanToJSON(plan)));
-				}
-			else{
+				plan.setSplan_identifier(org.osgi.snps.base.util.Util
+						.IdGenerator().replace("-", ""));
+
+				System.out.println("[CML:Info] -> "
+						+ "New SPlan identifier: "
+						+ iwebService.setSPlan(JSonUtil
+								.SamplingPlanToJSON(plan)));
+			} else {
 				System.out.println("Error getting reference..");
 				return;
 			}
@@ -1178,40 +1252,41 @@ public class CommandLine implements Runnable {
 		}
 	}
 
-
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static void sensor_cu_3_4(ServiceReference reference,String fname) {
+	public static void sensor_cu_3_4(ServiceReference reference, String fname) {
 		try {
-			reference = context.getServiceReference(iWebIntegrationInterface.class
-					.getName());
-			if(reference!=null){
-					org.osgi.snps.base.util.Util.describe(fname);
-					List<String> ids = new ArrayList<String>();
-					ids.add("test");
-					iwebService = (iWebIntegrationInterface) context.getService(reference);
-					BufferedReader stdin = new BufferedReader(new InputStreamReader(
-							System.in));
-					System.out.println("What command? (enable/disable available)");
+			reference = context
+					.getServiceReference(iWebIntegrationInterface.class
+							.getName());
+			if (reference != null) {
+				org.osgi.snps.base.util.Util.describe(fname);
+				List<String> ids = new ArrayList<String>();
+				ids.add("test");
+				iwebService = (iWebIntegrationInterface) context
+						.getService(reference);
+				BufferedReader stdin = new BufferedReader(
+						new InputStreamReader(System.in));
+				System.out.println("What command? (enable/disable available)");
 
-					try {
-						String cmd = stdin.readLine();
-						if (cmd.equalsIgnoreCase("enable")|| cmd.equalsIgnoreCase("disable")) {
-								iwebService.sendCommand(cmd, ids, "sync");
-						} else {
-							System.out
-							.println("This Use case support only enable/disable cmds!! ");
-							return;
-						}
-					} catch (Exception e) {
-						System.out.println(e.getMessage());
+				try {
+					String cmd = stdin.readLine();
+					if (cmd.equalsIgnoreCase("enable")
+							|| cmd.equalsIgnoreCase("disable")) {
+						iwebService.sendCommand(cmd, ids, "sync");
+					} else {
+						System.out
+								.println("This Use case support only enable/disable cmds!! ");
+						return;
 					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	
 	public static void sensor_cu_5(String fname) {
 		// org.osgi.snps.base.util.Util.describe(fname);
 		/*
@@ -1220,15 +1295,17 @@ public class CommandLine implements Runnable {
 		 * (iWebIntegrationInterface) context .getService(reference);
 		 */
 		System.out.println("TODO: MISURA DEL BENESSERE..");
-	/*	ServiceReference reference = context
-				.getServiceReference(MathService.class.getName());
-		test11 = (MathService) context.getService(reference);
-		System.out.println(test11.add(3, 4));*/
+		/*
+		 * ServiceReference reference = context
+		 * .getServiceReference(MathService.class.getName()); test11 =
+		 * (MathService) context.getService(reference);
+		 * System.out.println(test11.add(3, 4));
+		 */
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void sensor_cu_6(String fname) {
-		//buildSensors(100);
+		// buildSensors(100);
 		org.osgi.snps.base.util.Util.describe(fname);
 		ServiceReference reference = context
 				.getServiceReference(iWebIntegrationInterface.class.getName());
@@ -1297,7 +1374,7 @@ public class CommandLine implements Runnable {
 			String s = stdin.readLine();
 			System.out.println(s);
 
-			iwebService.getData(s, mode,"none");
+			iwebService.getData(s, mode, "none");
 			// service.addTestCmd(s);
 			tcmd.add(s);
 			/*
@@ -1412,7 +1489,8 @@ public class CommandLine implements Runnable {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void daoTest() {
 		System.out.println("[CML:Info] -> SNPS DAO TEST STARTED..");
-		System.out.println("[CML:Info] -> Generating sensor from default SensorML.xml");
+		System.out
+				.println("[CML:Info] -> Generating sensor from default SensorML.xml");
 		// try {
 
 		ServiceReference reference = context.getServiceReference(Parser.class
@@ -1422,62 +1500,65 @@ public class CommandLine implements Runnable {
 
 			pservice = (Parser) context.getService(reference);
 			/*
-			 * USING APACHE XERCES...
-			 * Document description = pservice.getDOMDocument("SensorML.xml");
-			*/
-			//USING XPATH..
+			 * USING APACHE XERCES... Document description =
+			 * pservice.getDOMDocument("SensorML.xml");
+			 */
+			// USING XPATH..
 			Document description = pservice.getDocument("SensorML.xml");
 			System.out.println("Document obtained!");
-			try{
-			Sensor s = pservice.parse(description);
-			
-			reference = context.getServiceReference(iCoreInterface.class
-					.getName());
+			try {
+				Sensor s = pservice.parse(description);
 
-			service = (iCoreInterface) context.getService(reference);
+				reference = context.getServiceReference(iCoreInterface.class
+						.getName());
 
-			// La rendo persistente..
-			System.out.println("[CML: STEP 1] -> Persist image..");
+				service = (iCoreInterface) context.getService(reference);
 
-			service.regCall("persist", 3, s.getID(), description,s, "",null);
+				// La rendo persistente..
+				System.out.println("[CML: STEP 1] -> Persist image..");
 
-			// La modifico..
-			System.out.println("[CML: STEP 2] -> Update sensor..");
-			System.out.println("[CML: STEP 2] -> OLD NAME: " + s.getName());
-			s.setName("ThermistorUnict@diit");
-			System.out.println("[CML: STEP 2] -> NEW NAME: " + s.getName());
+				service.regCall("persist", 3, s.getID(), description, s, "",
+						null);
 
-			service.regCall("updateComponent", 3, s.getID(), description, s, "",null);
+				// La modifico..
+				System.out.println("[CML: STEP 2] -> Update sensor..");
+				System.out.println("[CML: STEP 2] -> OLD NAME: " + s.getName());
+				s.setName("ThermistorUnict@diit");
+				System.out.println("[CML: STEP 2] -> NEW NAME: " + s.getName());
 
-			/***TEMP: TESTING GET SENSOR INFO..****/
-			String a = service.regCall("getSDesc", 3, s.getID(), null, null, "",null);
-			System.out.println("Retrieved Desc: "+a);
-			a = service.regCall("getSensor", 3, s.getID(), null, null, "",null);
-			//Sensor stemp = JSonUtil.JsonToSensor(a);
-			System.out.println("Retrieved Sensor Image: "+a);
-			/*************/
-			
-			System.out.println("[CML: STEP 3] -> Removing component..");
+				service.regCall("updateComponent", 3, s.getID(), description,
+						s, "", null);
 
-			//Lo elimino..
-			boolean result = Boolean.parseBoolean(service.regCall(
-					"removeComponent", 3, s.getID(), null, s, "",null));
+				/*** TEMP: TESTING GET SENSOR INFO.. ****/
+				String a = service.regCall("getSDesc", 3, s.getID(), null,
+						null, "", null);
+				System.out.println("Retrieved Desc: " + a);
+				a = service.regCall("getSensor", 3, s.getID(), null, null, "",
+						null);
+				// Sensor stemp = JSonUtil.JsonToSensor(a);
+				System.out.println("Retrieved Sensor Image: " + a);
+				/*************/
 
-			if (result)
-				System.out.println("[CML:Info] -> Test Passed");
-			else
-				System.out.println("[CML:Alert] -> Error!!");
+				System.out.println("[CML: STEP 3] -> Removing component..");
 
-			}catch(Exception e){
+				// Lo elimino..
+				boolean result = Boolean.parseBoolean(service.regCall(
+						"removeComponent", 3, s.getID(), null, s, "", null));
+
+				if (result)
+					System.out.println("[CML:Info] -> Test Passed");
+				else
+					System.out.println("[CML:Alert] -> Error!!");
+
+			} catch (Exception e) {
 				System.out.println(e.getMessage());
 				return;
 			}
 		} else {
 			System.out.println("Error..");
 			return;
-		
+
 		}
-		
 
 	}
 
@@ -1489,7 +1570,7 @@ public class CommandLine implements Runnable {
 	 *            tempo di inattivita' tra 2 messaggi consecutivi
 	 * 
 	 */
-	
+
 	public static void StressTest(int limit, int ms, String mode) {
 		String com = "";
 		if (mode.equals("-a")) {
@@ -1505,7 +1586,7 @@ public class CommandLine implements Runnable {
 			for (int i = 0; i < limit; i++) {
 				String key = service.getSensList()
 						.get("test" + random.nextInt(size)).getID();
-				System.out.println(service.getData(key, "sync","none"));
+				System.out.println(service.getData(key, "sync", "none"));
 			}
 			break;
 		case async:
@@ -1514,9 +1595,9 @@ public class CommandLine implements Runnable {
 			random = new Random();
 			for (int i = 0; i < limit; i++) {
 				String key = "test" + random.nextInt(100);
-				service.getData(key, "async",ac);
+				service.getData(key, "async", ac);
 			}
-			
+
 			break;
 		default:
 			System.out.println("UNAVAILABLE MODE!");
@@ -1549,51 +1630,51 @@ public class CommandLine implements Runnable {
 					.getServiceReference(Parser.class.getName());
 			System.out.println("[CML:Info] -> Sensor Registration");
 			pservice = (Parser) context.getService(reference);
-			
-			/*
-			 * USING XERCES..
-			Document description = pservice.getDOMDocument("SensorML.xml");
-			String f11 = pservice.DOMSID(description);
-			*/
-			
-			
-			/*
-			 * USING XERCES..
-			description = pservice.getDOMDocument("SensorML1.xml");
-			String f12 = pservice.DOMSID(description);
-			*/
-			
 
-			//Boolean.parseBoolean(service.regCall("image", 0, "", description,null, ""));
+			/*
+			 * USING XERCES.. Document description =
+			 * pservice.getDOMDocument("SensorML.xml"); String f11 =
+			 * pservice.DOMSID(description);
+			 */
 
-			//USING XPATH..
-			
-			  XPath xpath = XPathFactory.newInstance().newXPath();
-			  DocumentBuilderFactory factory = DocumentBuilderFactory
-			  .newInstance(); DocumentBuilder builder =
-			  factory.newDocumentBuilder(); Document description;
-			  
-			  System.out.println("[CML:Info] -> Sensor Registration");
-			  
-			  description = builder.parse(new File(f1));
-			  service.regCall("image", 0, "", description, null,"",null); 
-			  //f1 = SensorMLParser.getId(xpath, description);
-			  f1 = pservice.getId(xpath, description);
-			  
-			  description = builder.parse(new File(f2));
-			  service.regCall("image", 0, "", description, null,"",null); 
-			  f2 = pservice.getId(xpath, description);
-			 
+			/*
+			 * USING XERCES.. description =
+			 * pservice.getDOMDocument("SensorML1.xml"); String f12 =
+			 * pservice.DOMSID(description);
+			 */
+
+			// Boolean.parseBoolean(service.regCall("image", 0, "",
+			// description,null, ""));
+
+			// USING XPATH..
+
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document description;
+
+			System.out.println("[CML:Info] -> Sensor Registration");
+
+			description = builder.parse(new File(f1));
+			service.regCall("image", 0, "", description, null, "", null);
+			// f1 = SensorMLParser.getId(xpath, description);
+			f1 = pservice.getId(xpath, description);
+
+			description = builder.parse(new File(f2));
+			service.regCall("image", 0, "", description, null, "", null);
+			f2 = pservice.getId(xpath, description);
 
 			System.out.println("[CML:Info] -> Composing sensors");
 
 			List<String> toCompose = new ArrayList<String>();
-			/*toCompose.add(f11);
-			toCompose.add(f12);*/
+			/*
+			 * toCompose.add(f11); toCompose.add(f12);
+			 */
 
 			toCompose.add(f1);
 			toCompose.add(f2);
-			
+
 			// System.out.println(service.composerCall("compose", toCompose,
 			// ""));
 			return service.composerCall("compose", toCompose, "");
@@ -1637,17 +1718,17 @@ public class CommandLine implements Runnable {
 				System.out.println("[CML:Command] ->" + current);
 		}
 	}
-	
+
 	public static List<String> listFilesForFolder(final File folder) {
 		List<String> flist = new ArrayList<String>();
-	    for (final File fileEntry : folder.listFiles()) {
-	        if (fileEntry.isDirectory()) {
-	            listFilesForFolder(fileEntry);
-	        } else {
-	        	flist.add(fileEntry.getAbsolutePath());
-	            System.out.println(fileEntry.getName());
-	        }
-	    }
-	    return flist;
+		for (final File fileEntry : folder.listFiles()) {
+			if (fileEntry.isDirectory()) {
+				listFilesForFolder(fileEntry);
+			} else {
+				flist.add(fileEntry.getAbsolutePath());
+				System.out.println(fileEntry.getName());
+			}
+		}
+		return flist;
 	}
 }

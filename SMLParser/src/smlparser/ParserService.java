@@ -39,581 +39,420 @@ import org.xml.sax.SAXException;
 
 public class ParserService implements Parser {
 
-	
-	
 	public enum tags {
 		capabilities, inputList, outputList, netParams
 	}
 
 	@Override
-	public String sayhello(){
+	public String sayhello() {
 		return "I'm SNPS Parser..";
 	}
-	
-/*	public String DOMSID(Document doc){
-		NodeList LOP = doc.getElementsByTagName("sml:Component");
-		String id="";
-		for (int s = 0; s < LOP.getLength(); s++) {
 
-			Node FPN = LOP.item(s);
-
-			if (FPN.getNodeType() == Node.ELEMENT_NODE) {
-				Element firstPElement = (Element) FPN;
-
-				try {
-					id= getDOMAttribute(firstPElement, "gml:id");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return id;
-	}
-	
-	
-	public Sensor DOMparse(Document doc) {
-		try {
-			System.out.println(doc.getXmlEncoding());
-			System.out.println("Root element of the doc is "
-					+ doc.getDocumentElement().getNodeName());
-			NodeList LOP = doc.getElementsByTagName("sml:Component");
-			for (int s = 0; s < LOP.getLength(); s++) {
-
-				Node FPN = LOP.item(s);
-
-				if (FPN.getNodeType() == Node.ELEMENT_NODE) {
-					Element firstPElement = (Element) FPN;
-
-					System.out.println("[SENSOR:Id]-> "
-							+ getDOMAttribute(firstPElement, "gml:id"));
-
-					System.out.println("[SENSOR:Name]-> "
-							+ getDOMSimpleElement(firstPElement, "gml:name"));
-
-					System.out.println("[SENSOR:Description]-> "
-							+ getDOMSimpleElement(firstPElement,
-									"gml:description"));
-
-					System.out.println("[SENSOR:Type]-> "
-							+ getDOMSimpleElement(firstPElement, "gml:type"));
-
-					System.out.println("[SENSOR:Model]-> "
-							+ getDOMModel(firstPElement, "sml:identification"));
-
-					System.out.println("[SENSOR:State]-> "
-							+ getDOMSimpleElement(firstPElement, "gml:state"));
-
-					// TODO: NATURA DEL SENSORE..
-					/*
-					 * System.out.println("[SENSOR:Nature]-> " +
-					 * getDOMSimpleElement(firstPElement, "sml:state"));
-					 */
-
-/*					System.out.println("[SENSOR:Position]-> "
-							+ getDOMPosition(firstPElement, "sml:Position")
-									.toString());
-
-					System.out.println("[SENSOR:Info]-> "
-							+ getDOMIdentificationList(firstPElement,
-									"sml:identification").toString());
-
-					System.out
-							.println("[SENSOR:Capabilities]-> "
-									+ getDOMCapabilities(firstPElement,
-											"capabilities"));
-
-					System.out.println("[SENSOR:InputList]-> "
-							+ getDOMInputList(firstPElement, "sml:inputs"));
-
-					System.out.println("[SENSOR:OutputList]-> "
-							+ getDOMOutputList(firstPElement, "sml:outputs"));
-
-					Sensor sensor = new Sensor(getDOMAttribute(firstPElement,
-							"gml:id"), getDOMSimpleElement(firstPElement,
-							"gml:name"), getDOMModel(firstPElement,
-							"sml:identification"), getDOMSimpleElement(
-							firstPElement, "gml:type"), getDOMSimpleElement(
-							firstPElement, "gml:state"), getDOMSimpleElement(
-							firstPElement, "gml:description"), "TODO:nature",
-							getDOMInputList(firstPElement, "sml:inputs"),
-							getDOMOutputList(firstPElement, "sml:outputs"),
-							getDOMIdentificationList(firstPElement,
-									"sml:identification"), getDOMCapabilities(
-									firstPElement, "capabilities"),
-							getDOMPosition(firstPElement, "sml:Position"));
-					return sensor;
-				} // end of if clause
-			} // end of for loop with variable s
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		return null;
-
-	}
-
-	public void processNode(Node node, String spacer) throws IOException {
-		if (node == null)
-			return;
-		switch (node.getNodeType()) {
-		case Node.ELEMENT_NODE:
-			String name = node.getNodeName();
-			System.out.print(spacer + "<" + name);
-			NamedNodeMap nnm = node.getAttributes();
-
-			for (int i = 0; i < nnm.getLength(); i++) {
-				Node current = nnm.item(i);
-				System.out.print(" " + current.getNodeName() + "= "
-						+ current.getNodeValue());
-			}
-
-			System.out.print(">");
-
-			NodeList nl = node.getChildNodes();
-
-			if (nl != null) {
-				for (int i = 0; i < nl.getLength(); i++) {
-					processNode(nl.item(i), "");
-				}
-			}
-			System.out.println(spacer + "</" + name + ">");
-			break;
-		case Node.TEXT_NODE:
-			System.out.print(node.getNodeValue());
-			break;
-		case Node.CDATA_SECTION_NODE:
-			System.out.print("" + node.getNodeValue() + "");
-			break;
-		case Node.ENTITY_REFERENCE_NODE:
-			System.out.print("&" + node.getNodeName() + ";");
-			break;
-		case Node.ENTITY_NODE:
-			System.out.print("<ENTITY: " + node.getNodeName() + "> </"
-					+ node.getNodeName() + "/>");
-			break;
-		case Node.DOCUMENT_NODE:
-			NodeList nodes = node.getChildNodes();
-			if (nodes != null) {
-				for (int i = 0; i < nodes.getLength(); i++) {
-					processNode(nodes.item(i), "");
-				}
-			}
-			break;
-
-		case Node.DOCUMENT_TYPE_NODE:
-			DocumentType docType = (DocumentType) node;
-			System.out.print("<!DOCTYPE " + docType.getName());
-			if (docType.getPublicId() != null) {
-				System.out.print(" PUBLIC " + docType.getPublicId() + " ");
-			} else {
-				System.out.print(" SYSTEM ");
-			}
-			System.out.println(" " + docType.getSystemId() + ">");
-			break;
-		default:
-			break;
-		}
-	}
-	
-/*	public Document getDOMDocument(String path){
-		try {
-			System.out.println("Parsing XML File: " + path + "\n\n");
-			DOMParser parser = new DOMParser();
-			parser.parse(path);
-			Document doc = parser.getDocument();
-			System.out.println(doc.getXmlEncoding());
-			return doc;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	public Sensor parse(String path) {
-		try {
-			System.out.println("Parsing XML File: " + path + "\n\n");
-			DOMParser parser = new DOMParser();
-			parser.parse(path);
-			Document doc = parser.getDocument();
-			System.out.println(doc.getXmlEncoding());
-			System.out.println("Root element of the doc is "
-					+ doc.getDocumentElement().getNodeName());
-			NodeList LOP = doc.getElementsByTagName("sml:Component");
-			for (int s = 0; s < LOP.getLength(); s++) {
-
-				Node FPN = LOP.item(s);
-
-				if (FPN.getNodeType() == Node.ELEMENT_NODE) {
-					Element firstPElement = (Element) FPN;
-
-					System.out.println("[SENSOR:Id]-> "
-							+ getDOMAttribute(firstPElement, "gml:id"));
-
-					System.out.println("[SENSOR:Name]-> "
-							+ getDOMSimpleElement(firstPElement, "gml:name"));
-
-					System.out.println("[SENSOR:Description]-> "
-							+ getDOMSimpleElement(firstPElement,
-									"gml:description"));
-
-					System.out.println("[SENSOR:Type]-> "
-							+ getDOMSimpleElement(firstPElement, "gml:type"));
-
-					System.out.println("[SENSOR:Model]-> "
-							+ getDOMModel(firstPElement, "sml:identification"));
-
-					System.out.println("[SENSOR:State]-> "
-							+ getDOMSimpleElement(firstPElement, "gml:state"));
-
-					// TODO: NATURA DEL SENSORE..
-					/*
-					 * System.out.println("[SENSOR:Nature]-> " +
-					 * getDOMSimpleElement(firstPElement, "sml:state"));
-					 */
-
-/*					System.out.println("[SENSOR:Position]-> "
-							+ getDOMPosition(firstPElement, "sml:Position")
-									.toString());
-
-					System.out.println("[SENSOR:Info]-> "
-							+ getDOMIdentificationList(firstPElement,
-									"sml:identification").toString());
-
-					System.out
-							.println("[SENSOR:Capabilities]-> "
-									+ getDOMCapabilities(firstPElement,
-											"capabilities"));
-
-					System.out.println("[SENSOR:InputList]-> "
-							+ getDOMInputList(firstPElement, "sml:inputs"));
-
-					System.out.println("[SENSOR:OutputList]-> "
-							+ getDOMOutputList(firstPElement, "sml:outputs"));
-
-					Sensor sensor = new Sensor(getDOMAttribute(firstPElement,
-							"gml:id"), getDOMSimpleElement(firstPElement,
-							"gml:name"), getDOMModel(firstPElement,
-							"sml:identification"), getDOMSimpleElement(
-							firstPElement, "gml:type"), getDOMSimpleElement(
-							firstPElement, "gml:state"), getDOMSimpleElement(
-							firstPElement, "gml:description"), "TODO:nature",
-							getDOMInputList(firstPElement, "sml:inputs"),
-							getDOMOutputList(firstPElement, "sml:outputs"),
-							getDOMIdentificationList(firstPElement,
-									"sml:identification"), getDOMCapabilities(
-									firstPElement, "capabilities"),
-							getDOMPosition(firstPElement, "sml:Position"));
-					
-					System.out.println(JSonUtil.SensorToJSON(sensor));
-					return sensor;
-				} // end of if clause
-			} // end of for loop with variable s
-		} catch (SAXParseException err) {
-			System.out.println(err.getMessage());
-		} catch (SAXException e) {
-			e.printStackTrace();
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		return null;
-	}
-
-	public Map<String, List<String>> getDOMOutputList(Element firstPElement,
-			String elem) {
-
-		Map<String, List<String>> ol = new HashMap<String, List<String>>();
-		String attr = "";
-		List<String> vals = new ArrayList<String>();
-
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-
-		NodeList datarecord = element.getElementsByTagName("sml:OutputList");
-		for (int i = 0; i < datarecord.getLength(); i++) {
-
-			element = (Element) datarecord.item(i);
-			// System.out.println("I'm in: " + element.getNodeName());
-
-			NodeList inputs = element.getElementsByTagName("sml:output");
-			for (int j = 0; j < inputs.getLength(); j++) {
-				vals.clear();
-				element = (Element) inputs.item(j);
-				// System.out.println("Output Attribute: " +
-				// element.getAttribute("name"));
-				attr = element.getAttribute("name");
-				NodeList vls = element.getElementsByTagName("swe:Count");
-
-				for (int z = 0; z < vls.getLength(); z++) {
-
-					element = (Element) vls.item(z);
-					// System.out.println("Output Value: " +
-					// element.getAttribute("definition"));
-
-					vals.add(element.getAttribute("definition"));
-				}
-				ol.put(attr, vals);
-			}
-		}
-		return ol;
-	}
-
-	public Map<String, List<String>> getDOMInputList(Element firstPElement,
-			String elem) {
-
-		Map<String, List<String>> il = new HashMap<String, List<String>>();
-		String attr = "";
-		List<String> vals = new ArrayList<String>();
-
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-
-		NodeList datarecord = element.getElementsByTagName("sml:InputList");
-		for (int i = 0; i < datarecord.getLength(); i++) {
-			vals.clear();
-			element = (Element) datarecord.item(i);
-			// System.out.println("I'm in: " + element.getNodeName());
-
-			NodeList inputs = element.getElementsByTagName("sml:input");
-			for (int j = 0; j < inputs.getLength(); j++) {
-				element = (Element) inputs.item(j);
-				// System.out.println("Input Attribute: " +
-				// element.getAttribute("name"));
-				attr = element.getAttribute("name");
-
-				NodeList vls = element.getElementsByTagName("swe:Count");
-
-				for (int z = 0; z < vls.getLength(); z++) {
-					element = (Element) vls.item(z);
-					// System.out.println("Input Value: " +
-					// element.getAttribute("definition"));
-					vals.add(element.getAttribute("definition"));
-				}
-				il.put(attr, vals);
-			}
-		}
-		return il;
-	}
-
-	public Map<String, List<String>> getDOMCapabilities(Element firstPElement,
-			String elem) {
-
-		Map<String, List<String>> capabilities = new HashMap<String, List<String>>();
-		String attr = "";
-		List<String> vals = new ArrayList<String>();
-
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-		NodeList datarecord = element.getElementsByTagName("swe:DataRecord");
-		element = (Element) datarecord.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-		NodeList fields = element.getElementsByTagName("swe:field");
-		for (int i = 0; i < fields.getLength(); i++) {
-			vals.clear();
-			element = (Element) fields.item(i);
-			// System.out.println("I'm in: " + element.getNodeName());
-			// System.out.println("Attribute: "+element.getAttribute("name"));
-			// //GET CAP NAME
-			attr = element.getAttribute("name");
-
-			NodeList quantities = element.getElementsByTagName("swe:Quantity");
-			for (int j = 0; j < quantities.getLength(); j++) {
-				element = (Element) quantities.item(j);
-				NodeList values = element.getElementsByTagName("swe:value");
-				element = (Element) values.item(0);
-				// System.out.println("Value: "+element.getFirstChild().getNodeValue());
-				// //GET CAP VALUE
-				vals.add(element.getFirstChild().getNodeValue());
-			}
-			capabilities.put(attr, vals);
-		}
-		return capabilities;
-	}
-
-	public Map<String, String> getDOMPosition(Element firstPElement, String elem) {
-
-		Map<String, String> position = new HashMap<String, String>();
-		String value = "";
-		// List<String> values = new ArrayList<String>();
-		String attr = "";
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-		NodeList location = element.getElementsByTagName("swe:Location");
-		element = (Element) location.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-		NodeList coord = element.getElementsByTagName("swe:coordinate");
-		for (int i = 0; i < coord.getLength(); i++) {
-			// values.clear();
-			element = (Element) coord.item(i);
-
-			// System.out.println("Attribute: "+element.getAttribute("name"));
-			// //GET COORD NAME
-			attr = element.getAttribute("name");
-			NodeList quantities = element.getElementsByTagName("swe:Quantity");
-			for (int j = 0; j < quantities.getLength(); j++) {
-				element = (Element) quantities.item(j);
-
-				// System.out.println("Value: "+element.getFirstChild().getNodeValue());
-				// //GET COORD VALUE
-				// values.add(element.getFirstChild().getNodeValue());
-				value = element.getFirstChild().getNodeValue();
-			}
-			position.put(attr, value);
-		}
-		return position;
-	}
-
-	public Map<String, List<String>> getDOMIdentificationList(
-			Element firstPElement, String elem) {
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-		NodeList identifierList = element
-				.getElementsByTagName("sml:IdentifierList");
-		element = (Element) identifierList.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-
-		return getDOMSMLIdentifier(element, "sml:identifier");
-
-	}
-
-	public String getDOMModel(Element firstPElement, String elem) {
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		// System.out.println("I'm in: " + element.getNodeName());
-		NodeList identifierList = element
-				.getElementsByTagName("sml:IdentifierList");
-		element = (Element) identifierList.item(0);
-		String model = "";
-		list = element.getElementsByTagName("sml:identifier");
-		element = (Element) list.item(0);
-		try {
-			String n = getDOMAttribute(element, "name");
-			if (n.equalsIgnoreCase("Model_Number")) {
-				NodeList list1 = element.getElementsByTagName("sml:Term");
-				for (int j = 0; j < list1.getLength(); j++) {
-					element = (Element) list1.item(j);
-					// System.out.println("I'm in: " + element.getNodeName());
-					NodeList list2 = element.getElementsByTagName("sml:value");
-					for (int k = 0; k < list2.getLength(); k++) {
-						element = (Element) list2.item(k);
-						// System.out.println("I'm in: "
-						// + element.getNodeName());
-						/*
-						 * System.out.println("Value for Model Number: " +
-						 * element.getFirstChild().getNodeValue());
-						 */
-/*						model = element.getFirstChild().getNodeValue();
-					}
-				}
-			} else {
-				System.out.println("Error getting model!");
-				return "Error getting model!";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "Error getting model!";
-		}
-		return model;
-	}
-
-	public Map<String, List<String>> getDOMSMLIdentifier(Element element,
-			String el) {
-		List<String> bsinfo = new ArrayList<String>();
-		List<String> zoneinfo = new ArrayList<String>();
-		Map<String, List<String>> toreturn = new HashMap<String, List<String>>();
-
-		NodeList list = element.getElementsByTagName(el);
-		for (int i = 0; i < list.getLength(); i++) {
-			element = (Element) list.item(i);
-			try {
-				String n = getDOMAttribute(element, "name");
-				if (n.equalsIgnoreCase("Model_Number")) {
-					/*
-					 * NodeList list1 =
-					 * element.getElementsByTagName("sml:Term"); for (int j = 0;
-					 * j < list1.getLength(); j++) { element = (Element)
-					 * list1.item(j); //System.out.println("I'm in: " +
-					 * element.getNodeName()); NodeList list2 = element
-					 * .getElementsByTagName("sml:value"); for (int k = 0; k <
-					 * list2.getLength(); k++) { element = (Element)
-					 * list2.item(k); //System.out.println("I'm in: " //+
-					 * element.getNodeName());
-					 * /*System.out.println("Value for Model Number: " +
-					 * element.getFirstChild().getNodeValue());
-					 */
-					/*
-					 * model = element.getFirstChild().getNodeValue(); } }
-					 */
-/*				}
-
-				if (n.equalsIgnoreCase("NetParams")) {
-					NodeList list1 = element.getElementsByTagName("sml:Term");
-					for (int j = 0; j < list1.getLength(); j++) {
-						element = (Element) list1.item(j);
-						// System.out.println("I'm in: " +
-						// element.getNodeName());
-
-						if (element.getAttribute("definition")
-								.equalsIgnoreCase("zone")) {
-							// System.out.println("I'm in zone fields");
-							NodeList list2 = element
-									.getElementsByTagName("zone");
-							element = (Element) list2.item(0);
-
-							zoneinfo.add(getDOMAttribute(element, "gml:id"));
-							zoneinfo.add(getDOMSimpleElement(element,
-									"gml:description"));
-							zoneinfo.add(getDOMSimpleElement(element,
-									"gml:name"));
-							zoneinfo.add(getDOMSimpleElement(element,
-									"edificio"));
-							zoneinfo.add(getDOMSimpleElement(element, "piano"));
-						}
-
-						else if (element.getAttribute("definition")
-								.equalsIgnoreCase("base_station")) {
-							// System.out.println("I'm in base station fields");
-
-							NodeList list2 = element.getElementsByTagName("bs");
-							element = (Element) list2.item(0);
-
-							bsinfo.add(getDOMAttribute(element, "gml:id"));
-							bsinfo.add(getDOMSimpleElement(element,
-									"gml:description"));
-							bsinfo.add(getDOMSimpleElement(element, "gml:name"));
-							bsinfo.add(getDOMSimpleElement(element,
-									"gml:localip"));
-						}
-					}
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		toreturn.put("bsinfo", bsinfo);
-		toreturn.put("zoneinfo", zoneinfo);
-		return toreturn;
-	}
-
-	public String getDOMAttribute(Element firstPElement, String elem)
-			throws IOException {
-		return firstPElement.getAttribute(elem);
-		// System.out.println("Element " + elem + ": " + s);
-	}
-
-	public String getDOMSimpleElement(Element firstPElement, String elem) {
-		NodeList list = firstPElement.getElementsByTagName(elem);
-		Element element = (Element) list.item(0);
-		NodeList textList = element.getChildNodes();
-		// System.out.println("Element " + elem + ": "
-		// + ((Node) textList.item(0)).getNodeValue().trim());
-		return ((Node) textList.item(0)).getNodeValue().trim();
-	}
-*/
+	/*
+	 * public String DOMSID(Document doc){ NodeList LOP =
+	 * doc.getElementsByTagName("sml:Component"); String id=""; for (int s = 0;
+	 * s < LOP.getLength(); s++) {
+	 * 
+	 * Node FPN = LOP.item(s);
+	 * 
+	 * if (FPN.getNodeType() == Node.ELEMENT_NODE) { Element firstPElement =
+	 * (Element) FPN;
+	 * 
+	 * try { id= getDOMAttribute(firstPElement, "gml:id"); } catch (IOException
+	 * e) { e.printStackTrace(); } } } return id; }
+	 * 
+	 * 
+	 * public Sensor DOMparse(Document doc) { try {
+	 * System.out.println(doc.getXmlEncoding());
+	 * System.out.println("Root element of the doc is " +
+	 * doc.getDocumentElement().getNodeName()); NodeList LOP =
+	 * doc.getElementsByTagName("sml:Component"); for (int s = 0; s <
+	 * LOP.getLength(); s++) {
+	 * 
+	 * Node FPN = LOP.item(s);
+	 * 
+	 * if (FPN.getNodeType() == Node.ELEMENT_NODE) { Element firstPElement =
+	 * (Element) FPN;
+	 * 
+	 * System.out.println("[SENSOR:Id]-> " + getDOMAttribute(firstPElement,
+	 * "gml:id"));
+	 * 
+	 * System.out.println("[SENSOR:Name]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:name"));
+	 * 
+	 * System.out.println("[SENSOR:Description]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:description"));
+	 * 
+	 * System.out.println("[SENSOR:Type]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:type"));
+	 * 
+	 * System.out.println("[SENSOR:Model]-> " + getDOMModel(firstPElement,
+	 * "sml:identification"));
+	 * 
+	 * System.out.println("[SENSOR:State]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:state"));
+	 * 
+	 * // TODO: NATURA DEL SENSORE.. /* System.out.println("[SENSOR:Nature]-> "
+	 * + getDOMSimpleElement(firstPElement, "sml:state"));
+	 */
+
+	/*
+	 * System.out.println("[SENSOR:Position]-> " + getDOMPosition(firstPElement,
+	 * "sml:Position") .toString());
+	 * 
+	 * System.out.println("[SENSOR:Info]-> " +
+	 * getDOMIdentificationList(firstPElement,
+	 * "sml:identification").toString());
+	 * 
+	 * System.out .println("[SENSOR:Capabilities]-> " +
+	 * getDOMCapabilities(firstPElement, "capabilities"));
+	 * 
+	 * System.out.println("[SENSOR:InputList]-> " +
+	 * getDOMInputList(firstPElement, "sml:inputs"));
+	 * 
+	 * System.out.println("[SENSOR:OutputList]-> " +
+	 * getDOMOutputList(firstPElement, "sml:outputs"));
+	 * 
+	 * Sensor sensor = new Sensor(getDOMAttribute(firstPElement, "gml:id"),
+	 * getDOMSimpleElement(firstPElement, "gml:name"),
+	 * getDOMModel(firstPElement, "sml:identification"), getDOMSimpleElement(
+	 * firstPElement, "gml:type"), getDOMSimpleElement( firstPElement,
+	 * "gml:state"), getDOMSimpleElement( firstPElement, "gml:description"),
+	 * "TODO:nature", getDOMInputList(firstPElement, "sml:inputs"),
+	 * getDOMOutputList(firstPElement, "sml:outputs"),
+	 * getDOMIdentificationList(firstPElement, "sml:identification"),
+	 * getDOMCapabilities( firstPElement, "capabilities"),
+	 * getDOMPosition(firstPElement, "sml:Position")); return sensor; } // end
+	 * of if clause } // end of for loop with variable s } catch (Throwable t) {
+	 * t.printStackTrace(); } return null;
+	 * 
+	 * }
+	 * 
+	 * public void processNode(Node node, String spacer) throws IOException { if
+	 * (node == null) return; switch (node.getNodeType()) { case
+	 * Node.ELEMENT_NODE: String name = node.getNodeName();
+	 * System.out.print(spacer + "<" + name); NamedNodeMap nnm =
+	 * node.getAttributes();
+	 * 
+	 * for (int i = 0; i < nnm.getLength(); i++) { Node current = nnm.item(i);
+	 * System.out.print(" " + current.getNodeName() + "= " +
+	 * current.getNodeValue()); }
+	 * 
+	 * System.out.print(">");
+	 * 
+	 * NodeList nl = node.getChildNodes();
+	 * 
+	 * if (nl != null) { for (int i = 0; i < nl.getLength(); i++) {
+	 * processNode(nl.item(i), ""); } } System.out.println(spacer + "</" + name
+	 * + ">"); break; case Node.TEXT_NODE:
+	 * System.out.print(node.getNodeValue()); break; case
+	 * Node.CDATA_SECTION_NODE: System.out.print("" + node.getNodeValue() + "");
+	 * break; case Node.ENTITY_REFERENCE_NODE: System.out.print("&" +
+	 * node.getNodeName() + ";"); break; case Node.ENTITY_NODE:
+	 * System.out.print("<ENTITY: " + node.getNodeName() + "> </" +
+	 * node.getNodeName() + "/>"); break; case Node.DOCUMENT_NODE: NodeList
+	 * nodes = node.getChildNodes(); if (nodes != null) { for (int i = 0; i <
+	 * nodes.getLength(); i++) { processNode(nodes.item(i), ""); } } break;
+	 * 
+	 * case Node.DOCUMENT_TYPE_NODE: DocumentType docType = (DocumentType) node;
+	 * System.out.print("<!DOCTYPE " + docType.getName()); if
+	 * (docType.getPublicId() != null) { System.out.print(" PUBLIC " +
+	 * docType.getPublicId() + " "); } else { System.out.print(" SYSTEM "); }
+	 * System.out.println(" " + docType.getSystemId() + ">"); break; default:
+	 * break; } }
+	 * 
+	 * /* public Document getDOMDocument(String path){ try {
+	 * System.out.println("Parsing XML File: " + path + "\n\n"); DOMParser
+	 * parser = new DOMParser(); parser.parse(path); Document doc =
+	 * parser.getDocument(); System.out.println(doc.getXmlEncoding()); return
+	 * doc; }catch(Exception e){ e.printStackTrace(); } return null; }
+	 * 
+	 * public Sensor parse(String path) { try {
+	 * System.out.println("Parsing XML File: " + path + "\n\n"); DOMParser
+	 * parser = new DOMParser(); parser.parse(path); Document doc =
+	 * parser.getDocument(); System.out.println(doc.getXmlEncoding());
+	 * System.out.println("Root element of the doc is " +
+	 * doc.getDocumentElement().getNodeName()); NodeList LOP =
+	 * doc.getElementsByTagName("sml:Component"); for (int s = 0; s <
+	 * LOP.getLength(); s++) {
+	 * 
+	 * Node FPN = LOP.item(s);
+	 * 
+	 * if (FPN.getNodeType() == Node.ELEMENT_NODE) { Element firstPElement =
+	 * (Element) FPN;
+	 * 
+	 * System.out.println("[SENSOR:Id]-> " + getDOMAttribute(firstPElement,
+	 * "gml:id"));
+	 * 
+	 * System.out.println("[SENSOR:Name]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:name"));
+	 * 
+	 * System.out.println("[SENSOR:Description]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:description"));
+	 * 
+	 * System.out.println("[SENSOR:Type]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:type"));
+	 * 
+	 * System.out.println("[SENSOR:Model]-> " + getDOMModel(firstPElement,
+	 * "sml:identification"));
+	 * 
+	 * System.out.println("[SENSOR:State]-> " +
+	 * getDOMSimpleElement(firstPElement, "gml:state"));
+	 * 
+	 * // TODO: NATURA DEL SENSORE.. /* System.out.println("[SENSOR:Nature]-> "
+	 * + getDOMSimpleElement(firstPElement, "sml:state"));
+	 */
+
+	/*
+	 * System.out.println("[SENSOR:Position]-> " + getDOMPosition(firstPElement,
+	 * "sml:Position") .toString());
+	 * 
+	 * System.out.println("[SENSOR:Info]-> " +
+	 * getDOMIdentificationList(firstPElement,
+	 * "sml:identification").toString());
+	 * 
+	 * System.out .println("[SENSOR:Capabilities]-> " +
+	 * getDOMCapabilities(firstPElement, "capabilities"));
+	 * 
+	 * System.out.println("[SENSOR:InputList]-> " +
+	 * getDOMInputList(firstPElement, "sml:inputs"));
+	 * 
+	 * System.out.println("[SENSOR:OutputList]-> " +
+	 * getDOMOutputList(firstPElement, "sml:outputs"));
+	 * 
+	 * Sensor sensor = new Sensor(getDOMAttribute(firstPElement, "gml:id"),
+	 * getDOMSimpleElement(firstPElement, "gml:name"),
+	 * getDOMModel(firstPElement, "sml:identification"), getDOMSimpleElement(
+	 * firstPElement, "gml:type"), getDOMSimpleElement( firstPElement,
+	 * "gml:state"), getDOMSimpleElement( firstPElement, "gml:description"),
+	 * "TODO:nature", getDOMInputList(firstPElement, "sml:inputs"),
+	 * getDOMOutputList(firstPElement, "sml:outputs"),
+	 * getDOMIdentificationList(firstPElement, "sml:identification"),
+	 * getDOMCapabilities( firstPElement, "capabilities"),
+	 * getDOMPosition(firstPElement, "sml:Position"));
+	 * 
+	 * System.out.println(JSonUtil.SensorToJSON(sensor)); return sensor; } //
+	 * end of if clause } // end of for loop with variable s } catch
+	 * (SAXParseException err) { System.out.println(err.getMessage()); } catch
+	 * (SAXException e) { e.printStackTrace(); } catch (Throwable t) {
+	 * t.printStackTrace(); } return null; }
+	 * 
+	 * public Map<String, List<String>> getDOMOutputList(Element firstPElement,
+	 * String elem) {
+	 * 
+	 * Map<String, List<String>> ol = new HashMap<String, List<String>>();
+	 * String attr = ""; List<String> vals = new ArrayList<String>();
+	 * 
+	 * NodeList list = firstPElement.getElementsByTagName(elem); Element element
+	 * = (Element) list.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName());
+	 * 
+	 * NodeList datarecord = element.getElementsByTagName("sml:OutputList"); for
+	 * (int i = 0; i < datarecord.getLength(); i++) {
+	 * 
+	 * element = (Element) datarecord.item(i); // System.out.println("I'm in: "
+	 * + element.getNodeName());
+	 * 
+	 * NodeList inputs = element.getElementsByTagName("sml:output"); for (int j
+	 * = 0; j < inputs.getLength(); j++) { vals.clear(); element = (Element)
+	 * inputs.item(j); // System.out.println("Output Attribute: " + //
+	 * element.getAttribute("name")); attr = element.getAttribute("name");
+	 * NodeList vls = element.getElementsByTagName("swe:Count");
+	 * 
+	 * for (int z = 0; z < vls.getLength(); z++) {
+	 * 
+	 * element = (Element) vls.item(z); // System.out.println("Output Value: " +
+	 * // element.getAttribute("definition"));
+	 * 
+	 * vals.add(element.getAttribute("definition")); } ol.put(attr, vals); } }
+	 * return ol; }
+	 * 
+	 * public Map<String, List<String>> getDOMInputList(Element firstPElement,
+	 * String elem) {
+	 * 
+	 * Map<String, List<String>> il = new HashMap<String, List<String>>();
+	 * String attr = ""; List<String> vals = new ArrayList<String>();
+	 * 
+	 * NodeList list = firstPElement.getElementsByTagName(elem); Element element
+	 * = (Element) list.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName());
+	 * 
+	 * NodeList datarecord = element.getElementsByTagName("sml:InputList"); for
+	 * (int i = 0; i < datarecord.getLength(); i++) { vals.clear(); element =
+	 * (Element) datarecord.item(i); // System.out.println("I'm in: " +
+	 * element.getNodeName());
+	 * 
+	 * NodeList inputs = element.getElementsByTagName("sml:input"); for (int j =
+	 * 0; j < inputs.getLength(); j++) { element = (Element) inputs.item(j); //
+	 * System.out.println("Input Attribute: " + //
+	 * element.getAttribute("name")); attr = element.getAttribute("name");
+	 * 
+	 * NodeList vls = element.getElementsByTagName("swe:Count");
+	 * 
+	 * for (int z = 0; z < vls.getLength(); z++) { element = (Element)
+	 * vls.item(z); // System.out.println("Input Value: " + //
+	 * element.getAttribute("definition"));
+	 * vals.add(element.getAttribute("definition")); } il.put(attr, vals); } }
+	 * return il; }
+	 * 
+	 * public Map<String, List<String>> getDOMCapabilities(Element
+	 * firstPElement, String elem) {
+	 * 
+	 * Map<String, List<String>> capabilities = new HashMap<String,
+	 * List<String>>(); String attr = ""; List<String> vals = new
+	 * ArrayList<String>();
+	 * 
+	 * NodeList list = firstPElement.getElementsByTagName(elem); Element element
+	 * = (Element) list.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName()); NodeList datarecord =
+	 * element.getElementsByTagName("swe:DataRecord"); element = (Element)
+	 * datarecord.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName()); NodeList fields =
+	 * element.getElementsByTagName("swe:field"); for (int i = 0; i <
+	 * fields.getLength(); i++) { vals.clear(); element = (Element)
+	 * fields.item(i); // System.out.println("I'm in: " +
+	 * element.getNodeName()); //
+	 * System.out.println("Attribute: "+element.getAttribute("name")); // //GET
+	 * CAP NAME attr = element.getAttribute("name");
+	 * 
+	 * NodeList quantities = element.getElementsByTagName("swe:Quantity"); for
+	 * (int j = 0; j < quantities.getLength(); j++) { element = (Element)
+	 * quantities.item(j); NodeList values =
+	 * element.getElementsByTagName("swe:value"); element = (Element)
+	 * values.item(0); //
+	 * System.out.println("Value: "+element.getFirstChild().getNodeValue()); //
+	 * //GET CAP VALUE vals.add(element.getFirstChild().getNodeValue()); }
+	 * capabilities.put(attr, vals); } return capabilities; }
+	 * 
+	 * public Map<String, String> getDOMPosition(Element firstPElement, String
+	 * elem) {
+	 * 
+	 * Map<String, String> position = new HashMap<String, String>(); String
+	 * value = ""; // List<String> values = new ArrayList<String>(); String attr
+	 * = ""; NodeList list = firstPElement.getElementsByTagName(elem); Element
+	 * element = (Element) list.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName()); NodeList location =
+	 * element.getElementsByTagName("swe:Location"); element = (Element)
+	 * location.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName()); NodeList coord =
+	 * element.getElementsByTagName("swe:coordinate"); for (int i = 0; i <
+	 * coord.getLength(); i++) { // values.clear(); element = (Element)
+	 * coord.item(i);
+	 * 
+	 * // System.out.println("Attribute: "+element.getAttribute("name")); //
+	 * //GET COORD NAME attr = element.getAttribute("name"); NodeList quantities
+	 * = element.getElementsByTagName("swe:Quantity"); for (int j = 0; j <
+	 * quantities.getLength(); j++) { element = (Element) quantities.item(j);
+	 * 
+	 * // System.out.println("Value: "+element.getFirstChild().getNodeValue());
+	 * // //GET COORD VALUE //
+	 * values.add(element.getFirstChild().getNodeValue()); value =
+	 * element.getFirstChild().getNodeValue(); } position.put(attr, value); }
+	 * return position; }
+	 * 
+	 * public Map<String, List<String>> getDOMIdentificationList( Element
+	 * firstPElement, String elem) { NodeList list =
+	 * firstPElement.getElementsByTagName(elem); Element element = (Element)
+	 * list.item(0); // System.out.println("I'm in: " + element.getNodeName());
+	 * NodeList identifierList = element
+	 * .getElementsByTagName("sml:IdentifierList"); element = (Element)
+	 * identifierList.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName());
+	 * 
+	 * return getDOMSMLIdentifier(element, "sml:identifier");
+	 * 
+	 * }
+	 * 
+	 * public String getDOMModel(Element firstPElement, String elem) { NodeList
+	 * list = firstPElement.getElementsByTagName(elem); Element element =
+	 * (Element) list.item(0); // System.out.println("I'm in: " +
+	 * element.getNodeName()); NodeList identifierList = element
+	 * .getElementsByTagName("sml:IdentifierList"); element = (Element)
+	 * identifierList.item(0); String model = ""; list =
+	 * element.getElementsByTagName("sml:identifier"); element = (Element)
+	 * list.item(0); try { String n = getDOMAttribute(element, "name"); if
+	 * (n.equalsIgnoreCase("Model_Number")) { NodeList list1 =
+	 * element.getElementsByTagName("sml:Term"); for (int j = 0; j <
+	 * list1.getLength(); j++) { element = (Element) list1.item(j); //
+	 * System.out.println("I'm in: " + element.getNodeName()); NodeList list2 =
+	 * element.getElementsByTagName("sml:value"); for (int k = 0; k <
+	 * list2.getLength(); k++) { element = (Element) list2.item(k); //
+	 * System.out.println("I'm in: " // + element.getNodeName()); /*
+	 * System.out.println("Value for Model Number: " +
+	 * element.getFirstChild().getNodeValue());
+	 */
+	/*
+	 * model = element.getFirstChild().getNodeValue(); } } } else {
+	 * System.out.println("Error getting model!"); return
+	 * "Error getting model!"; } } catch (Exception e) { e.printStackTrace();
+	 * return "Error getting model!"; } return model; }
+	 * 
+	 * public Map<String, List<String>> getDOMSMLIdentifier(Element element,
+	 * String el) { List<String> bsinfo = new ArrayList<String>(); List<String>
+	 * zoneinfo = new ArrayList<String>(); Map<String, List<String>> toreturn =
+	 * new HashMap<String, List<String>>();
+	 * 
+	 * NodeList list = element.getElementsByTagName(el); for (int i = 0; i <
+	 * list.getLength(); i++) { element = (Element) list.item(i); try { String n
+	 * = getDOMAttribute(element, "name"); if
+	 * (n.equalsIgnoreCase("Model_Number")) { /* NodeList list1 =
+	 * element.getElementsByTagName("sml:Term"); for (int j = 0; j <
+	 * list1.getLength(); j++) { element = (Element) list1.item(j);
+	 * //System.out.println("I'm in: " + element.getNodeName()); NodeList list2
+	 * = element .getElementsByTagName("sml:value"); for (int k = 0; k <
+	 * list2.getLength(); k++) { element = (Element) list2.item(k);
+	 * //System.out.println("I'm in: " //+ element.getNodeName());
+	 * /*System.out.println("Value for Model Number: " +
+	 * element.getFirstChild().getNodeValue());
+	 */
+	/*
+	 * model = element.getFirstChild().getNodeValue(); } }
+	 */
+	/*
+	 * }
+	 * 
+	 * if (n.equalsIgnoreCase("NetParams")) { NodeList list1 =
+	 * element.getElementsByTagName("sml:Term"); for (int j = 0; j <
+	 * list1.getLength(); j++) { element = (Element) list1.item(j); //
+	 * System.out.println("I'm in: " + // element.getNodeName());
+	 * 
+	 * if (element.getAttribute("definition") .equalsIgnoreCase("zone")) { //
+	 * System.out.println("I'm in zone fields"); NodeList list2 = element
+	 * .getElementsByTagName("zone"); element = (Element) list2.item(0);
+	 * 
+	 * zoneinfo.add(getDOMAttribute(element, "gml:id"));
+	 * zoneinfo.add(getDOMSimpleElement(element, "gml:description"));
+	 * zoneinfo.add(getDOMSimpleElement(element, "gml:name"));
+	 * zoneinfo.add(getDOMSimpleElement(element, "edificio"));
+	 * zoneinfo.add(getDOMSimpleElement(element, "piano")); }
+	 * 
+	 * else if (element.getAttribute("definition")
+	 * .equalsIgnoreCase("base_station")) { //
+	 * System.out.println("I'm in base station fields");
+	 * 
+	 * NodeList list2 = element.getElementsByTagName("bs"); element = (Element)
+	 * list2.item(0);
+	 * 
+	 * bsinfo.add(getDOMAttribute(element, "gml:id"));
+	 * bsinfo.add(getDOMSimpleElement(element, "gml:description"));
+	 * bsinfo.add(getDOMSimpleElement(element, "gml:name"));
+	 * bsinfo.add(getDOMSimpleElement(element, "gml:localip")); } } } } catch
+	 * (IOException e) { e.printStackTrace(); } }
+	 * 
+	 * toreturn.put("bsinfo", bsinfo); toreturn.put("zoneinfo", zoneinfo);
+	 * return toreturn; }
+	 * 
+	 * public String getDOMAttribute(Element firstPElement, String elem) throws
+	 * IOException { return firstPElement.getAttribute(elem); //
+	 * System.out.println("Element " + elem + ": " + s); }
+	 * 
+	 * public String getDOMSimpleElement(Element firstPElement, String elem) {
+	 * NodeList list = firstPElement.getElementsByTagName(elem); Element element
+	 * = (Element) list.item(0); NodeList textList = element.getChildNodes(); //
+	 * System.out.println("Element " + elem + ": " // + ((Node)
+	 * textList.item(0)).getNodeValue().trim()); return ((Node)
+	 * textList.item(0)).getNodeValue().trim(); }
+	 */
 	@Override
 	public Map<String, List<String>> getBSReference(XPath xpath,
 			Document description) {
@@ -795,8 +634,8 @@ public class ParserService implements Parser {
 			}
 			// System.out.println(coord.toString());
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
+
 		}
 		return coord;
 	}
@@ -1235,8 +1074,17 @@ public class ParserService implements Parser {
 		// STEP 6: GET POSITION (X,Y)
 		System.out.println("[STEP 6]");
 		Map<String, String> position = getPosition(xpath, description);
-		System.out.println("[SENSOR] Position: " + position.toString());
-		
+		if (position == null || position.isEmpty() ) {
+			System.out.println("[SENSOR] Position: " + " ");
+			return null;
+		} else {
+			System.out.println("[SENSOR] Position: " + position.toString());
+		}
+		if (id.equals("") || name.equals("") || model.equals("")
+				|| type.equals("") || state.equals("") || desc.equals("")
+				|| nature.equals("") || netParams.isEmpty()
+				|| capabilities.isEmpty())
+			return null;
 
 		// FINAL STAGE
 		Sensor sens = new Sensor(id, name, model, type, state, desc, nature,
@@ -1274,37 +1122,29 @@ public class ParserService implements Parser {
 	@Override
 	public Document getDocument(String path) {
 		try {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
-		//description = builder.parse(new File("sensorDescription.xml"));
-		return builder.parse(new File(path));
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			// description = builder.parse(new File("sensorDescription.xml"));
+			return builder.parse(new File(path));
 		} catch (Exception e) {
+			System.out.println("SensorML Malformed");
 			System.out.println(e.getMessage());
 			return null;
 		}
 	}
 
-/*	@Override
-	public String DOMSID(Document doc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Document getDOMDocument(String path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Sensor parse(String path) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Sensor DOMparse(Document document) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	/*
+	 * @Override public String DOMSID(Document doc) { // TODO Auto-generated
+	 * method stub return null; }
+	 * 
+	 * @Override public Document getDOMDocument(String path) { // TODO
+	 * Auto-generated method stub return null; }
+	 * 
+	 * @Override public Sensor parse(String path) { // TODO Auto-generated
+	 * method stub return null; }
+	 * 
+	 * @Override public Sensor DOMparse(Document document) { // TODO
+	 * Auto-generated method stub return null; }
+	 */
 }

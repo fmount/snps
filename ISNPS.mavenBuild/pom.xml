@@ -20,12 +20,13 @@
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/rt/ecf/3.6.0/site.p2</url>
 		</repository>
-		<repository>
+		<!-- <repository>
                <id>rxtx</id>
                <url>http://rxtx.qbang.org/eclipse</url>
                <layout>p2</layout>
           </repository>
-        <repository>
+         -->
+         <repository>
     			<id>orbit</id>
     			<layout>p2</layout>
     			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</url>

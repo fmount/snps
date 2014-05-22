@@ -273,24 +273,24 @@ public class Util {
 		String tmp[] = whatTimeIsIt().split(":");
 		String phen[] = nature.split(":");
 		int hour = Integer.parseInt(tmp[0]);
-
+		
 		switch (phenomena.valueOf(phen[4])) {
 
 		case temperature:
 			if ((hour >= 0 && hour < 8) || (hour >= 20 && hour <= 23)) {
 				min = 20;
-				max = 22;
+				max = 21;
 			} else if ((hour >= 8 && hour < 11) || (hour >= 17 && hour < 20)) {
 				min = 22;
-				max = 26;
+				max = 23;
 			} else if (hour >= 11 && hour < 17) {
-				min = 25;
-				max = 28;
+				min = 24;
+				max = 25;
 			}
 			break;
 		case light:
 			if (hour >= 0 && hour < 6) {
-				min = 0;
+				min = 5;
 				max = 6;
 			} else if (hour >= 6 && hour < 8) {
 				min = 6;
@@ -305,7 +305,7 @@ public class Util {
 			break;
 		case humidity:
 			min = 46;
-			max = 51;
+			max = 47;
 			break;
 		case voltage:
 			min = 2.28f;

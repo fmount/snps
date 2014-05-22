@@ -35,8 +35,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 	BundleContext context;
 	protected Map<String, ABComponent> sensList;
 	protected Map<String, String> actions;
-	
-	
+
 	ServiceData sThread;
 	public ArrayList<String> testCmds;
 
@@ -58,20 +57,20 @@ public class CoreServices extends Observable implements iCoreInterface {
 		actions = new HashMap<String, String>();
 		testCmds = new ArrayList<String>();
 
-		//Inserisco un sensore virtuale per testare i servizi..
-		Sensor test = new Sensor("test", "test", "test", "DETECTOR", "on", "test",
-				"temperature", new HashMap<String, List<String>>(),
+		// Inserisco un sensore virtuale per testare i servizi..
+		Sensor test = new Sensor("test", "test", "test", "DETECTOR", "on",
+				"test", "temperature", new HashMap<String, List<String>>(),
 				new HashMap<String, List<String>>(),
 				new HashMap<String, String>());
-		
+
 		List<Sensor> mList = JSonUtil.JSONTOAList(loadData());
 		Iterator<Sensor> it = mList.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			ABComponent s = (ABComponent) it.next();
 			sensList.put(s.getID(), s);
 		}
 		sensList.put("test", test);
-		
+
 	}
 
 	public enum commands {
@@ -79,11 +78,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 	}
 
 	public enum registrycommands {
-		persist, image, check, updateComponent, removeComponent, getSensor, getSDesc,
-		getAllSensors, sensType, history, allhistory, getSensInfo, getsenslist, 
-		getzonelist, inszone, insbs, rmvzone, rmvbs, getbsinfo, getzoneinfo, 
-		insertentry, rmventry, updateentry, getnodelist, detection, detectbydate,
-		detectbytime, detectbydateandtime, detectbyzone, getSensorbyzone, getSensorbynode
+		persist, image, check, updateComponent, removeComponent, getSensor, getSDesc, getAllSensors, sensType, history, allhistory, getSensInfo, getsenslist, getzonelist, inszone, insbs, rmvzone, rmvbs, getbsinfo, getzoneinfo, insertentry, rmventry, updateentry, getnodelist, detection, detectbydate, detectbytime, detectbydateandtime, detectbyzone, getSensorbyzone, getSensorbynode
 	}
 
 	public enum interpretercommands {
@@ -107,14 +102,12 @@ public class CoreServices extends Observable implements iCoreInterface {
 		this.actions = actions;
 	}
 
-	
-	public String loadData(){
-		String jsonSensors = regCall("getAllSensors", 3, "", null, null, "", null);
+	public String loadData() {
+		String jsonSensors = regCall("getAllSensors", 3, "", null, null, "",
+				null);
 		return jsonSensors;
 	}
-	
-	
-	
+
 	@Override
 	public String sayHello() {
 		Random random = new Random();
@@ -139,9 +132,10 @@ public class CoreServices extends Observable implements iCoreInterface {
 	/* Metodi di Interazione con il bundle iRegistry */
 
 	@Override
-	@SuppressWarnings({ "unchecked"})
+	@SuppressWarnings({ "unchecked" })
 	public String regCall(String command, int opcode, String key,
-			Document description, ABComponent s, String type, List<String> params) {
+			Document description, ABComponent s, String type,
+			List<String> params) {
 		try {
 			serviceRef = context.getServiceReference(iRegistryInterface.class
 					.getName());
@@ -156,11 +150,9 @@ public class CoreServices extends Observable implements iCoreInterface {
 						.getServiceReference(Parser.class.getName());
 				pservice = (Parser) context.getService(serviceRef);
 				/*
-				 * USING XERCES..
-				 * Sensor sens = pservice.DOMparse(description);
-				 * 
-				 * */
-				//I USE XPATH (is the better way..)
+				 * USING XERCES.. Sensor sens = pservice.DOMparse(description);
+				 */
+				// I USE XPATH (is the better way..)
 				Sensor sens = pservice.parse(description);
 				// System.out.println("Putting: "+sens.toString());
 				sensList.put(sens.getID(), sens);
@@ -175,36 +167,43 @@ public class CoreServices extends Observable implements iCoreInterface {
 			case persist:
 
 				if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-										
+
 					return String.valueOf(registryservice.serializeComponent(
 							opcode, key, JSonUtil.DocumentTOJson(description),
-							s.getNature(),JSonUtil.HybridToJSON((SensHybrid) s)));
-				}else{
-					
-					try{
-					String nodeId = ((Sensor)s).getNetParams().get("base_station").get(0);
-					
-					String zoneId = ((Sensor)s).getNetParams().get("zone").get(0);
-					
-					sensList.put(s.getID(), s);
-					
-					registryservice.insertEntry(opcode, key, nodeId, zoneId);
-					
-					registryservice.insertBS(opcode, nodeId, 
-							((Sensor)s).getNetParams().get("base_station").get(1),
-							((Sensor)s).getNetParams().get("base_station").get(2),
-							((Sensor)s).getNetParams().get("base_station").get(3));
-					
-					registryservice.insertZone(opcode, zoneId, 
-							((Sensor)s).getNetParams().get("zone").get(1),
-							((Sensor)s).getNetParams().get("zone").get(2),
-							((Sensor)s).getNetParams().get("zone").get(3),
-							((Sensor)s).getNetParams().get("zone").get(4));
-					
-					return String.valueOf(registryservice.serializeComponent(
-							opcode, key, JSonUtil.DocumentTOJson(description),
-							s.getNature(),JSonUtil.SensorToJSON((Sensor) s)));
-					}catch(Exception e){
+							s.getNature(),
+							JSonUtil.HybridToJSON((SensHybrid) s)));
+				} else {
+
+					try {
+						String nodeId = ((Sensor) s).getNetParams()
+								.get("base_station").get(0);
+
+						String zoneId = ((Sensor) s).getNetParams().get("zone")
+								.get(0);
+
+						sensList.put(s.getID(), s);
+
+						registryservice
+								.insertEntry(opcode, key, nodeId, zoneId);
+
+						registryservice.insertBS(opcode, nodeId, ((Sensor) s)
+								.getNetParams().get("base_station").get(1),
+								((Sensor) s).getNetParams().get("base_station")
+										.get(2), ((Sensor) s).getNetParams()
+										.get("base_station").get(3));
+
+						registryservice.insertZone(opcode, zoneId, ((Sensor) s)
+								.getNetParams().get("zone").get(1),
+								((Sensor) s).getNetParams().get("zone").get(2),
+								((Sensor) s).getNetParams().get("zone").get(3),
+								((Sensor) s).getNetParams().get("zone").get(4));
+
+						return String.valueOf(registryservice
+								.serializeComponent(opcode, key,
+										JSonUtil.DocumentTOJson(description),
+										s.getNature(),
+										JSonUtil.SensorToJSON((Sensor) s)));
+					} catch (Exception e) {
 						e.printStackTrace();
 						return "";
 					}
@@ -214,72 +213,77 @@ public class CoreServices extends Observable implements iCoreInterface {
 				if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
 					return String.valueOf(registryservice.updateComponent(
 							opcode, key, JSonUtil.DocumentTOJson(description),
-							s.getNature(),JSonUtil.HybridToJSON((SensHybrid) s)));
-				}else{
+							s.getNature(),
+							JSonUtil.HybridToJSON((SensHybrid) s)));
+				} else {
 					getSensList().remove(key);
-					addToSensList(key, (Sensor)s);
+					addToSensList(key, (Sensor) s);
 					return String.valueOf(registryservice.updateComponent(
 							opcode, key, JSonUtil.DocumentTOJson(description),
-							s.getNature(),JSonUtil.SensorToJSON((Sensor) s)));
+							s.getNature(), JSonUtil.SensorToJSON((Sensor) s)));
 				}
-				
-				
 
 			case removeComponent:
-				
+
 				if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-					return String.valueOf(registryservice.removeComponent(opcode,
-							key));
-				}
-				else{
-					
-					//Elimino le info ad esso associate..
-					
+					return String.valueOf(registryservice.removeComponent(
+							opcode, key));
+				} else {
+
+					// Elimino le info ad esso associate..
+
 					registryservice.removeEntry(opcode, key);
-					registryservice.removeBaseStation(opcode, ((Sensor)s).getNetParams().get("base_station").get(0));
-					registryservice.removeZone(opcode, ((Sensor)s).getNetParams().get("zone").get(0));
-					
-					//Rimuovo il componente..
-					
-					return String.valueOf(registryservice.removeComponent(opcode,
-							key));
+					registryservice.removeBaseStation(opcode, ((Sensor) s)
+							.getNetParams().get("base_station").get(0));
+					registryservice.removeZone(opcode, ((Sensor) s)
+							.getNetParams().get("zone").get(0));
+
+					// Rimuovo il componente..
+
+					return String.valueOf(registryservice.removeComponent(
+							opcode, key));
 				}
 
 			case getSensor:
-				
+
 				return registryservice.getImageComponent(opcode, key);
-				
+
 			case getSensorbyzone:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
 				String zoneid = params.get(0);
-				return JSonUtil.ArrayListToJSON((ArrayList<String>) registryservice.getSensorBYZone(opcode, zoneid));
-				
+				return JSonUtil
+						.ArrayListToJSON((ArrayList<String>) registryservice
+								.getSensorBYZone(opcode, zoneid));
+
 			case getSensorbynode:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
 				String bsid = params.get(0);
-				return JSonUtil.ArrayListToJSON((ArrayList<String>) registryservice.getSensorBYNode(opcode, bsid));
-				
+				return JSonUtil
+						.ArrayListToJSON((ArrayList<String>) registryservice
+								.getSensorBYNode(opcode, bsid));
+
 			case getSDesc:
-				
+
 				return registryservice.getComponentDescription(opcode, key);
 
 			case getAllSensors:
-				
+
 				List<String> slist = registryservice.getAllImages(opcode);
-				
+
 				return JSonUtil.ArrayListToJSON((ArrayList<String>) slist);
 
 			case sensType:
-				List<String> list = registryservice.getSensorBYType(opcode,type);
-				
+				List<String> list = registryservice.getSensorBYType(opcode,
+						type);
+
 				return JSonUtil.ArrayListToJSON((ArrayList<String>) list);
-				
+
 			case getSensInfo:
 				return JSonUtil
 						.HashMapToJSON((HashMap<String, String>) registryservice
@@ -299,39 +303,44 @@ public class CoreServices extends Observable implements iCoreInterface {
 				List<String> sd = registryservice.history(opcode, key);
 				return JSonUtil.ArrayListToJSON((ArrayList<String>) sd);
 			case allhistory:
-				Map<String,List<String>> datas = registryservice.Allhistory(opcode);
-			    return JSonUtil.HLToJSon((HashMap<String, List<String>>) datas);
-				
+				Map<String, List<String>> datas = registryservice
+						.Allhistory(opcode);
+				return JSonUtil.HLToJSon((HashMap<String, List<String>>) datas);
+
 			case detection:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
 				String id_meas = params.get(0);
 				return registryservice.getSingleDetect(opcode, id_meas);
-			
+
 			case detectbydate:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
 				String initDate = params.get(0);
 				String endDate = params.get(1);
-				return JSonUtil.ArrayListToJSON((ArrayList<String>) registryservice.getDetectionByDate(
-						opcode, key, initDate, endDate));
+				return JSonUtil
+						.ArrayListToJSON((ArrayList<String>) registryservice
+								.getDetectionByDate(opcode, key, initDate,
+										endDate));
 			case detectbytime:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
 				String date = params.get(0);
 				String initTime = params.get(1);
 				String endTime = params.get(2);
-				return JSonUtil.ArrayListToJSON((ArrayList<String>) registryservice.getDetectionByTime(
-						opcode, key, date, initTime, endTime));
-				
+				return JSonUtil
+						.ArrayListToJSON((ArrayList<String>) registryservice
+								.getDetectionByTime(opcode, key, date,
+										initTime, endTime));
+
 			case detectbydateandtime:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
@@ -339,10 +348,12 @@ public class CoreServices extends Observable implements iCoreInterface {
 				String date2 = params.get(1);
 				String initTime1 = params.get(2);
 				String endTime2 = params.get(3);
-				return JSonUtil.ArrayListToJSON((ArrayList<String>) registryservice.getDetectionByDateAndTime(
-						opcode, key,date1, date2, initTime1, endTime2));
+				return JSonUtil
+						.ArrayListToJSON((ArrayList<String>) registryservice
+								.getDetectionByDateAndTime(opcode, key, date1,
+										date2, initTime1, endTime2));
 			case detectbyzone:
-				if(params==null){
+				if (params == null) {
 					System.out.println("Error processing dates!");
 					return null;
 				}
@@ -353,8 +364,9 @@ public class CoreServices extends Observable implements iCoreInterface {
 			}
 
 		} catch (Exception e) {
-			System.out.println("[Core:Alert] -> Command or Parameters not found!");
-			//System.out.println(e.getMessage());
+			System.out
+					.println("[Core:Alert] -> Command or Parameters not found!");
+			// System.out.println(e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
@@ -366,210 +378,224 @@ public class CoreServices extends Observable implements iCoreInterface {
 	@SuppressWarnings({ "unchecked" })
 	public String interprCall(String command, SamplingPlan sPlan,
 			List<String> sids, String mode) {
-		boolean check=true;
+		boolean check = true;
 		try {
 			serviceRef = context.getServiceReference(iGWInterface.class
 					.getName());
 			interpreterService = (iGWInterface) context.getService(serviceRef);
-
+			
 			switch (interpretercommands.valueOf(command)) {
 			case check:
 				return interpreterService.sayhello();
-			
+
 			case splan:
 				List<String> sIds = sPlan.getNodesId();
-				if(sensorExist(sIds)){
+				if (sensorExist(sIds)) {
 					/*
 					 * Verificare se si tratta di un sensore semplice o di un
 					 * sensore Ibrido..
-					 *  
 					 */
-					for(int i=0;i<sIds.size();i++){
+					for (int i = 0; i < sIds.size(); i++) {
 						try {
 							ABComponent s = sensList.get(sIds.get(i));
-							if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-									System.out.println("Hybrid!");
-									SensHybrid s1 = (SensHybrid)sensList.get(sIds.get(i));
-									sIds.remove(s1.getID());
-									List<Sensor> ids = s1.getSensors();
-									for(int h=0;h<ids.size();h++){
-										sIds.add(ids.get(h).getID());
-									}
-							}else{
+							if (s.getClass().getSimpleName()
+									.equalsIgnoreCase("senshybrid")) {
+								System.out.println("Hybrid!");
+								SensHybrid s1 = (SensHybrid) sensList.get(sIds
+										.get(i));
+								sIds.remove(s1.getID());
+								List<Sensor> ids = s1.getSensors();
+								for (int h = 0; h < ids.size(); h++) {
+									sIds.add(ids.get(h).getID());
+								}
+							} else {
 								System.out.println("Simple!");
 							}
-						}catch(Exception e){
+						} catch (Exception e) {
 							e.printStackTrace();
 							return "Error";
 						}
 					}
 					rmvDpl(sIds);
-					System.out.println("LIST: "+sIds.toString());
+					System.out.println("LIST: " + sIds.toString());
 					return String.valueOf(interpreterService.setSPlan(sPlan));
-				}
-				else{
+				} else {
 					System.out.println("Cannot send sPlan to this sens list!");
 					return "Error";
 				}
-			
+
 			case enable:
-				if(sensorExist(sids)){
-					//System.out.println("Sensor exist!");
-					for(int i=0;i<sids.size();i++){
-						if(checkState(sids.get(i), "on")){
-							check=false;
+				if (sensorExist(sids)) {
+					// System.out.println("Sensor exist!");
+					for (int i = 0; i < sids.size(); i++) {
+						if (checkState(sids.get(i), "on")) {
+							check = false;
 						}
 					}
-					if(check){					
+					if (check) {
 						/*
-						 * Verifico se ci sono sensori ibridi, al fine di inviare le richieste
-						 * ai singoli sensori che li compongono..
-						 * 
+						 * Verifico se ci sono sensori ibridi, al fine di
+						 * inviare le richieste ai singoli sensori che li
+						 * compongono..
 						 */
-						for(int i=0;i<sids.size();i++){
+						for (int i = 0; i < sids.size(); i++) {
 							try {
 								ABComponent s = sensList.get(sids.get(i));
-								if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-										//Change sensor's state..	
-										getSensList().get(sids.get(i)).setState("on");
-										System.out.println("Hybrid!");
-										SensHybrid s1 = (SensHybrid)sensList.get(sids.get(i));
-										sids.remove(s1.getID());
-										List<Sensor> ids = s1.getSensors();
-										for(int h=0;h<ids.size();h++){
-											sids.add(ids.get(h).getID());
-										}
-								}else{
+								if (s.getClass().getSimpleName()
+										.equalsIgnoreCase("senshybrid")) {
+									// Change sensor's state..
+									getSensList().get(sids.get(i)).setState(
+											"on");
+									System.out.println("Hybrid!");
+									SensHybrid s1 = (SensHybrid) sensList
+											.get(sids.get(i));
+									sids.remove(s1.getID());
+									List<Sensor> ids = s1.getSensors();
+									for (int h = 0; h < ids.size(); h++) {
+										sids.add(ids.get(h).getID());
+									}
+								} else {
 									System.out.println("Simple!");
 								}
-							}catch(Exception e){
+							} catch (Exception e) {
 								e.printStackTrace();
 								return "Error";
 							}
 						}
 						rmvDpl(sids);
-						System.out.println("Send command to phisical sensors: "+sids.toString());
-						for(int i=0;i<sids.size();i++){
+						System.out.println("Send command to phisical sensors: "
+								+ sids.toString());
+						for (int i = 0; i < sids.size(); i++) {
 							getSensList().get(sids.get(i)).setState("on");
-							//Aggiorno eventuali riferimenti a sensori ibridi..
-							/*Sensor s = (Sensor)getSensList().get(sids.get(i));
-							if(!(s.getReferToHybrid().isEmpty())){
-								updateRef(s.getID(),s.getReferToHybrid(),"on");
-							}*/
+							// Aggiorno eventuali riferimenti a sensori ibridi..
+							/*
+							 * Sensor s =
+							 * (Sensor)getSensList().get(sids.get(i));
+							 * if(!(s.getReferToHybrid().isEmpty())){
+							 * updateRef(s.getID(),s.getReferToHybrid(),"on"); }
+							 */
 						}
-						return String.valueOf(interpreterService.sendCommand(command,sids, mode));
-					}
-					else{
+						return String.valueOf(interpreterService.sendCommand(
+								command, sids, mode));
+					} else {
 						System.out.println("Sensor already active!");
 						return "Sensor Already Active";
 					}
-				}else{
+				} else {
 					System.out.println("Error retrieving sensor!");
 					return "Error Retrieving Sensor";
 				}
-			
+
 			case disable:
-				if(sensorExist(sids)){
-					//System.out.println("Sensor exist!");
-					for(int i=0;i<sids.size();i++){
-						if(checkState(sids.get(i), "off")){
-							check=false;
+				if (sensorExist(sids)) {
+					// System.out.println("Sensor exist!");
+					for (int i = 0; i < sids.size(); i++) {
+						if (checkState(sids.get(i), "off")) {
+							check = false;
 						}
 					}
-					if(check){						
+					if (check) {
 						/*
-						 * Verifico se ci sono sensori ibridi, al fine di inviare le richieste
-						 * ai singoli sensori che li compongono..
-						 * 
+						 * Verifico se ci sono sensori ibridi, al fine di
+						 * inviare le richieste ai singoli sensori che li
+						 * compongono..
 						 */
-						for(int i=0;i<sids.size();i++){
+						for (int i = 0; i < sids.size(); i++) {
 							try {
 								ABComponent s = sensList.get(sids.get(i));
-								if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-										//Change sensor's state..	
-										getSensList().get(sids.get(i)).setState("off");
-										System.out.println("Hybrid!");
-										SensHybrid s1 = (SensHybrid)sensList.get(sids.get(i));
-										sids.remove(s1.getID());
-										List<Sensor> ids = s1.getSensors();
-										for(int h=0;h<ids.size();h++){
-											sids.add(ids.get(h).getID());
-										}
-								}else{
+								if (s.getClass().getSimpleName()
+										.equalsIgnoreCase("senshybrid")) {
+									// Change sensor's state..
+									getSensList().get(sids.get(i)).setState(
+											"off");
+									System.out.println("Hybrid!");
+									SensHybrid s1 = (SensHybrid) sensList
+											.get(sids.get(i));
+									sids.remove(s1.getID());
+									List<Sensor> ids = s1.getSensors();
+									for (int h = 0; h < ids.size(); h++) {
+										sids.add(ids.get(h).getID());
+									}
+								} else {
 									System.out.println("Simple!");
 								}
-							}catch(Exception e){
+							} catch (Exception e) {
 								e.printStackTrace();
 								return "Error";
 							}
 						}
 						rmvDpl(sids);
-						System.out.println("Send command to phisical sensors: "+sids.toString());
-						for(int i=0;i<sids.size();i++){
+						System.out.println("Send command to phisical sensors: "
+								+ sids.toString());
+						for (int i = 0; i < sids.size(); i++) {
 							getSensList().get(sids.get(i)).setState("off");
 						}
-						return String.valueOf(interpreterService.sendCommand(command,sids, mode));
-					}
-					else{
+						return String.valueOf(interpreterService.sendCommand(
+								command, sids, mode));
+					} else {
 						System.out.println("Sensor already disabled!");
 						return "Sensor already disabled!";
 					}
-				}else{
+				} else {
 					System.out.println("Error retrieving sensor!");
 					return "Error retrieving sensor!";
 				}
-				
+
 			case genCmd:
-				if(sensorExist(sids)){
+				if (sensorExist(sids)) {
 					System.out.println("Sensor exist!");
-					for(int i=0;i<sids.size();i++){
-						if(checkState(sids.get(i), "off")){
-							check=false;
+					for (int i = 0; i < sids.size(); i++) {
+						if (checkState(sids.get(i), "off")) {
+							check = false;
 						}
 					}
-					if(check){						
+					if (check) {
 						/*
-						 * Verifico se ci sono sensori ibridi, al fine di inviare le richieste
-						 * ai singoli sensori che li compongono..
-						 * 
+						 * Verifico se ci sono sensori ibridi, al fine di
+						 * inviare le richieste ai singoli sensori che li
+						 * compongono..
 						 */
-						for(int i=0;i<sids.size();i++){
+						for (int i = 0; i < sids.size(); i++) {
 							try {
 								ABComponent s = sensList.get(sids.get(i));
-								if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-										//Change sensor's state..	
-										getSensList().get(sids.get(i)).setState("off");
-										System.out.println("Hybrid!");
-										SensHybrid s1 = (SensHybrid)sensList.get(sids.get(i));
-										sids.remove(s1.getID());
-										List<Sensor> ids = s1.getSensors();
-										for(int h=0;h<ids.size();h++){
-											sids.add(ids.get(h).getID());
-										}
-								}else{
+								if (s.getClass().getSimpleName()
+										.equalsIgnoreCase("senshybrid")) {
+									// Change sensor's state..
+									getSensList().get(sids.get(i)).setState(
+											"off");
+									System.out.println("Hybrid!");
+									SensHybrid s1 = (SensHybrid) sensList
+											.get(sids.get(i));
+									sids.remove(s1.getID());
+									List<Sensor> ids = s1.getSensors();
+									for (int h = 0; h < ids.size(); h++) {
+										sids.add(ids.get(h).getID());
+									}
+								} else {
 									System.out.println("Simple!");
 								}
-							}catch(Exception e){
+							} catch (Exception e) {
 								e.printStackTrace();
 								return "Error";
 							}
 						}
 						rmvDpl(sids);
-						System.out.println("Send command to phisical sensors: "+sids.toString());
-						for(int i=0;i<sids.size();i++){
+						System.out.println("Send command to phisical sensors: "
+								+ sids.toString());
+						for (int i = 0; i < sids.size(); i++) {
 							getSensList().get(sids.get(i)).setState("off");
 						}
-						return String.valueOf(interpreterService.sendCommand(command,sids, mode));
-					}
-					else{
+						return String.valueOf(interpreterService.sendCommand(
+								command, sids, mode));
+					} else {
 						System.out.println("Sensor already active!");
 						return "";
 					}
-				}else{
+				} else {
 					System.out.println("Error retrieving sensor!");
 					return "";
 				}
-				
+
 			default:
 				return null;
 			}
@@ -583,8 +609,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 	@SuppressWarnings("unchecked")
 	public String composerCall(String command, List<String> slist, String mode) {
 		try {
-			serviceRef = context
-					.getServiceReference(iCompose.class.getName());
+			serviceRef = context.getServiceReference(iCompose.class.getName());
 			composerService = (iCompose) context.getService(serviceRef);
 
 			switch (composercommands.valueOf(command)) {
@@ -598,14 +623,14 @@ public class CoreServices extends Observable implements iCoreInterface {
 					}
 					SensHybrid s = composerService.compose(toCompose);
 					sensList.put(s.getID(), s);
-					
-					//Aggiorno il riferimento ai sensori..
-					for(int i=0;i<slist.size();i++){
-							Sensor s3 = (Sensor)getSensList().get(slist.get(i));
-							s3.getReferToHybrid().add(s.getID());
-							getSensList().put(s3.getID(), s3);
+
+					// Aggiorno il riferimento ai sensori..
+					for (int i = 0; i < slist.size(); i++) {
+						Sensor s3 = (Sensor) getSensList().get(slist.get(i));
+						s3.getReferToHybrid().add(s.getID());
+						getSensList().put(s3.getID(), s3);
 					}
-					
+
 					return s.getID();
 				} else {
 					System.out.println("Error retrieving sensors!!");
@@ -625,27 +650,34 @@ public class CoreServices extends Observable implements iCoreInterface {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getData(String sId, String mode,String action) {
-		
-			try {
-				serviceRef = context.getServiceReference(iDataFlow.class.getName());
-				processorService = (iDataFlow) context.getService(serviceRef);
+	public String getData(String sId, String mode, String action) {
+
+		try {
+			serviceRef = context.getServiceReference(iDataFlow.class.getName());
+			processorService = (iDataFlow) context.getService(serviceRef);
 			ABComponent s = sensList.get(sId);
-			if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-				System.out.println("Hybrid!");
-				
-				String[] options = {s.getID()+"#"+Util.IdGenerator().replace("-","")};
-				
-				processorService.Accumulate(options[0],new ArrayBlockingQueue<String>(
-						((SensHybrid) s).getSensors().size()),context,action);
-				
-				
-				
-				return ((SensHybrid) s).getData(context, mode,options,action);
-			} else {
-				System.out.println("Selected Simple sensor: "+s.getID());
-				return ((Sensor) s).getData(context, mode,null,action);
+			if(checkState(sId, "ON")){
+				if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
+					System.out.println("Hybrid!");
+
+					String[] options = { s.getID() + "#"
+							+ Util.IdGenerator().replace("-", "") };
+
+					processorService.Accumulate(options[0],
+							new ArrayBlockingQueue<String>(((SensHybrid) s)
+									.getSensors().size()), context, action);
+
+					return ((SensHybrid) s).getData(context, mode, options,
+							action);
+				} else {
+					System.out.println("Selected Simple sensor: " + s.getID());
+					return ((Sensor) s).getData(context, mode, null, action);
+				}
+				}
+			else{
+				return " Alert, Sensor " + sId + " disabled !" ;
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error retrieving sensor!");
@@ -653,16 +685,17 @@ public class CoreServices extends Observable implements iCoreInterface {
 		}
 	}
 
-	
 	@Override
 	public String processorCall(String command, SimpleData sd, String mode,
 			String[] options) {
 		try {
 			switch (processorcommands.valueOf(command)) {
 			case push:
-				
-				System.out.println("[PUSH] -> Core Event generated..waiting for Subs");
-				return String.valueOf(processorService.pushData(sd, mode,context));
+
+				System.out
+						.println("[PUSH] -> Core Event generated..waiting for Subs");
+				return String.valueOf(processorService.pushData(sd, mode,
+						context));
 			case process:
 				return "";
 			default:
@@ -675,9 +708,8 @@ public class CoreServices extends Observable implements iCoreInterface {
 		}
 	}
 
-
 	/* UTILITY METHODS */
-	
+
 	@Override
 	public Map<String, ABComponent> getSensList() {
 		return sensList;
@@ -692,7 +724,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public boolean addToActionList(String key, String value) {
 		try {
@@ -736,21 +768,21 @@ public class CoreServices extends Observable implements iCoreInterface {
 		try {
 			ABComponent s = getSensList().get(sid);
 			if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
-					System.out.println("Hybrid!");
-					SensHybrid s1 = (SensHybrid)getSensList().get(sid);
-					System.out.println(s1.getState()+" - "+state);
-					if (s1.getState().equalsIgnoreCase(state))
-						return true;
-					return false;
-			}else{
+				System.out.println("Hybrid!");
+				SensHybrid s1 = (SensHybrid) getSensList().get(sid);
+				System.out.println(s1.getState() + " - " + state);
+				if (s1.getState().equalsIgnoreCase(state))
+					return true;
+				return false;
+			} else {
 				System.out.println("Simple!");
 				Sensor s2 = (Sensor) getSensList().get(sid);
-				System.out.println(s2.getState()+" - "+state);
+				System.out.println(s2.getState() + " - " + state);
 				if (s2.getState().equalsIgnoreCase(state))
 					return true;
 				return false;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return true;
 		}
@@ -770,27 +802,27 @@ public class CoreServices extends Observable implements iCoreInterface {
 			return false;
 		}
 	}
-	
-	public void rmvDpl(List<String> sIds){
-		for (int i = 0 ; i < sIds.size() ; i++){
-			String curr=sIds.get(i);
-			for (int j=i+1 ; j< sIds.size() ; j++){
-				String tmp=sIds.get(j);
-				if (curr.equals(tmp)){
+
+	public void rmvDpl(List<String> sIds) {
+		for (int i = 0; i < sIds.size(); i++) {
+			String curr = sIds.get(i);
+			for (int j = i + 1; j < sIds.size(); j++) {
+				String tmp = sIds.get(j);
+				if (curr.equals(tmp)) {
 					sIds.remove(j);
 					j--;
 				}
 			}
 		}
 	}
-	
-	public void updateRef(String sid,List<String> referTo, String state){
-		
-		for(int i=0;i<referTo.size();i++){
-			SensHybrid s = (SensHybrid)getSensList().get(referTo.get(i));
+
+	public void updateRef(String sid, List<String> referTo, String state) {
+
+		for (int i = 0; i < referTo.size(); i++) {
+			SensHybrid s = (SensHybrid) getSensList().get(referTo.get(i));
 			List<Sensor> sl = s.getSensors();
-			for(int j=0;j<sl.size();j++){
-				if(sl.get(j).getID().equalsIgnoreCase(sid)){
+			for (int j = 0; j < sl.size(); j++) {
+				if (sl.get(j).getID().equalsIgnoreCase(sid)) {
 					System.out.println("Update reference..");
 					Sensor s1 = sl.get(j);
 					sl.remove(s1);
@@ -799,21 +831,22 @@ public class CoreServices extends Observable implements iCoreInterface {
 				}
 			}
 		}
-		
+
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public List<String> getActuators(){
+	public List<String> getActuators() {
 		List<String> actList = new ArrayList<String>();
 		Iterator it = getSensList().entrySet().iterator();
-		    while (it.hasNext()) {
-		        Map.Entry pairs = (Map.Entry)it.next();
-		        ABComponent a = getSensList().get(pairs.getKey());
-		        if(a.getType().equalsIgnoreCase("ACTUATOR"))
-		        //System.out.println(pairs.getKey() + " = " + pairs.getValue());
-		        	actList.add(a.getID());
-		    }
+		while (it.hasNext()) {
+			Map.Entry pairs = (Map.Entry) it.next();
+			ABComponent a = getSensList().get(pairs.getKey());
+			if (a.getType().equalsIgnoreCase("ACTUATOR"))
+				// System.out.println(pairs.getKey() + " = " +
+				// pairs.getValue());
+				actList.add(a.getID());
+		}
 		return actList;
 	}
 
@@ -821,13 +854,13 @@ public class CoreServices extends Observable implements iCoreInterface {
 	@Override
 	public boolean monitorCall(String action, String param) {
 		try {
-			if(action.equals("stop")){
+			if (action.equals("stop")) {
 				serviceRef = context.getServiceReference(iMonitor.class
 						.getName());
 				monitorService = (iMonitor) context.getService(serviceRef);
 				return monitorService.stop(param);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		return false;
@@ -842,12 +875,14 @@ public class CoreServices extends Observable implements iCoreInterface {
 			ABComponent s = sensList.get(sId);
 			if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
 				System.out.println("Hybrid!");
-				String[] options = {s.getID()+"#"+Util.IdGenerator().replace("-","")};
-				//return ((SensHybrid) s).getData(context, mode,options,action);
+				String[] options = { s.getID() + "#"
+						+ Util.IdGenerator().replace("-", "") };
+				// return ((SensHybrid) s).getData(context,
+				// mode,options,action);
 				return ((SensHybrid) s).isAlive(context);
 			} else {
-				System.out.println("Selected Simple sensor: "+s.getID());
-				//return ((Sensor) s).getData(context, mode,null,action);
+				System.out.println("Selected Simple sensor: " + s.getID());
+				// return ((Sensor) s).getData(context, mode,null,action);
 				return ((Sensor) s).isAlive(context);
 			}
 		} catch (Exception e) {
@@ -856,5 +891,5 @@ public class CoreServices extends Observable implements iCoreInterface {
 			return "Error!";
 		}
 	}
-	
+
 }

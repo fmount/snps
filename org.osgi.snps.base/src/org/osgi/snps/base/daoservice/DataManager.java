@@ -897,32 +897,74 @@ public class DataManager implements DataInterface {
 	public List<String> getDetectionByDateAndTime(String sid, String initDate,
 			String endDate, String initTime, String endTime) {
 		try {
-			String tmp1[] = initDate.split("-");
-			String date_1= tmp1[2]+"-"+tmp1[1]+"-"+tmp1[0];
-			String tmp2[] = endDate.split("-");
-			String date_2= tmp2[2]+"-"+tmp2[1]+"-"+tmp2[0];
+			
 			List<String> dList = new ArrayList<String>();
-			DateFormat formatter;
-			formatter = new SimpleDateFormat("yyyy-MM-dd");
-			Date date1 = (Date) formatter.parse(date_1);
-			Date date2 = (Date) formatter.parse(date_2);
-
-			if (sid.equalsIgnoreCase("")) {
-				String SQL = "SELECT * FROM Measures WHERE STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \""
-						+ formatter.format(date1) + "\"AND \""
-						+ formatter.format(date2) + "\" AND time BETWEEN \""
-						+ initTime + "\"AND \"" + endTime + "\";";
-				dList = getDetect(SQL);
-				return dList;
+			String SQL = "";
+			
+			if (initDate.equals(endDate)) {
+			return getDetectionByTime(sid, initDate, initTime, endTime);
+				
 			} else {
-				String SQL = "SELECT * FROM Measures WHERE SensorId=\"" + sid
-						+ "\" AND STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \"" + formatter.format(date1)
-						+ "\"AND \"" + formatter.format(date2)
-						+ "\" AND time BETWEEN \"" + initTime + "\"AND \""
-						+ endTime + "\";";
-				dList = getDetect(SQL);
-				return dList;
+				String tmp1[] = initDate.split("-");
+				String date_1 = tmp1[2] + "-" + tmp1[1] + "-" + tmp1[0];
+				String tmp2[] = endDate.split("-");
+				String date_2 = tmp2[2] + "-" + tmp2[1] + "-" + tmp2[0];
+				DateFormat formatter;
+				formatter = new SimpleDateFormat("yyyy-MM-dd");
+				Date date1 = (Date) formatter.parse(date_1);
+				Date date2 = (Date) formatter.parse(date_2);
+				Date dateAfter = new Date(date1.getTime() + (1000 * 60 * 60 * 24));
+				Date dateBefore = new Date(date2.getTime() - (1000 * 60 * 60 * 24));
+								
+				if (sid.equalsIgnoreCase("")) {
+					SQL = "SELECT * FROM Measures WHERE  ( ( STR_TO_DATE(date,'%d-%m-%Y')=\""
+							+ formatter.format(date1)
+							+ "\" AND time >= \""
+							+ initTime
+							+ "\") OR  (STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \""
+							+ formatter.format(dateAfter)
+							+ "\" AND \""
+							+ formatter.format(dateBefore)
+							+ "\") OR (STR_TO_DATE(date,'%d-%m-%Y')=\""
+							+ formatter.format(date2)
+							+ "\" AND time <= \""
+							+ endTime + "\"));";
+				} else {
+					// String SQL = "( SELECT * From Measures WHERE SensorId=\""
+					// + sid
+					// + "\" AND STR_TO_DATE(date,'%d-%m-%Y')=\""
+					// + formatter.format(date1)
+					// + "\" AND time >= \""
+					// + initTime
+					// + "\") UNION(SELECT * FROM Measures WHERE SensorId=\""
+					// + sid
+					// + "\" AND STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \""
+					// + formatter.format(dateAfter)
+					// + "\" AND \""
+					// + formatter.format(dateBefore)
+					// + "\") UNION  ( SELECT * From Measures WHERE SensorId=\""
+					// + sid + "\" AND STR_TO_DATE(date,'%d-%m-%Y')=\""
+					// + formatter.format(date2) + "\" AND time <= \""
+					// + endTime + "\")";
+					SQL = "SELECT * FROM Measures WHERE SensorId=\""
+							+ sid
+							+ "\" AND ( ( STR_TO_DATE(date,'%d-%m-%Y')=\""
+							+ formatter.format(date1)
+							+ "\" AND time >= \""
+							+ initTime
+							+ "\") OR  (STR_TO_DATE(date,'%d-%m-%Y') BETWEEN \""
+							+ formatter.format(dateAfter) + "\" AND \""
+							+ formatter.format(dateBefore)
+							+ "\") OR (STR_TO_DATE(date,'%d-%m-%Y')=\""
+							+ formatter.format(date2) + "\" AND time <= \""
+							+ endTime + "\"));";
+					
+				}
 			}
+			
+			dList = getDetect(SQL);
+			return dList;
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return null;
