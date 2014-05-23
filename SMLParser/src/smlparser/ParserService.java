@@ -661,6 +661,7 @@ public class ParserService implements Parser {
 	public Map<String, List<String>> getNetReferences(XPath xpath,
 			Document document, String ex) {
 		Map<String, List<String>> netinfo = new HashMap<String, List<String>>();
+		List<String> values = new ArrayList<String>();
 		try {
 			XPathExpression expr = xpath.compile(ex);
 			Object result = expr.evaluate(document, XPathConstants.NODESET);
@@ -676,10 +677,11 @@ public class ParserService implements Parser {
 					NodeList n = (NodeList) re;
 					for (int j = 0; j < n.getLength(); j++) {
 						// System.out.println(n.item(j).getNodeValue());
-						netinfo.put(
-								n.item(j).getNodeValue(),
-								getValues(xpath, document, n.item(j)
-										.getNodeValue(), "netParams"));
+						values = getValues(xpath, document, n.item(j)
+								.getNodeValue(), "netParams");
+						if (values == null)
+							return null;
+						netinfo.put(n.item(j).getNodeValue(), values);
 					}
 				}
 			}
@@ -694,15 +696,17 @@ public class ParserService implements Parser {
 	public Map<String, List<String>> getComplex(XPath xpath, Document document,
 			String ex, String tag) {
 		Map<String, List<String>> capab = new HashMap<String, List<String>>();
+		List<String> values = new ArrayList<String>();
 		try {
 			XPathExpression expr = xpath.compile(ex);
 			Object result = expr.evaluate(document, XPathConstants.NODESET);
 			NodeList nodes = (NodeList) result;
 			for (int i = 0; i < nodes.getLength(); i++) {
-				capab.put(
-						nodes.item(i).getNodeValue(),
-						getValues(xpath, document,
-								nodes.item(i).getNodeValue(), tag));
+				values = getValues(xpath, document, nodes.item(i)
+						.getNodeValue(), tag);
+				if (values.isEmpty())
+					return null;
+				capab.put(nodes.item(i).getNodeValue(), values);
 			}
 			// System.out.println(capab.toString());
 		} catch (Exception e) {
@@ -718,6 +722,7 @@ public class ParserService implements Parser {
 		XPathExpression ex;
 		Object result;
 		NodeList nodes;
+		String value;
 		try {
 			switch (tags.valueOf(tag)) {
 			case capabilities:
@@ -728,7 +733,8 @@ public class ParserService implements Parser {
 				nodes = (NodeList) result;
 				for (int k = 0; k < nodes.getLength(); k++) {
 					// System.out.println("SELECTED FOR "+node+": "+n.item(k).getNodeValue());
-					values.add(nodes.item(k).getNodeValue());
+					value = nodes.item(k).getNodeValue();
+					values.add(value);
 				}
 				return values;
 			case inputList:
@@ -759,20 +765,42 @@ public class ParserService implements Parser {
 									+ node + "']/value/text()");
 					result = ex.evaluate(document, XPathConstants.NODESET);
 					nodes = (NodeList) result;
+					String id = getZoneId(xpath, document, node);
+					String description = getZoneFields(xpath, document, node,
+							"description");
+					String name = getZoneFields(xpath, document, node, "name");
+					String edificio = getZoneFields(xpath, document, node,
+							"edificio");
+					String piano = getZoneFields(xpath, document, node, "piano");
 
-					values.add(getZoneId(xpath, document, node));
-					values.add(getZoneFields(xpath, document, node,
-							"description"));
-					values.add(getZoneFields(xpath, document, node, "name"));
-					values.add(getZoneFields(xpath, document, node, "edificio"));
-					values.add(getZoneFields(xpath, document, node, "piano"));
+					if (id.equals("") || description.equals("")
+							|| name.equals("") || edificio.equals("")
+							|| piano.equals(""))
+						return null;
+
+					values.add(id);
+					values.add(description);
+					values.add(name);
+					values.add(edificio);
+					values.add(piano);
 
 					return values;
 				} else if (node.equalsIgnoreCase("base_station")) {
-					values.add(getBSId(xpath, document, node));
-					values.add(getBSFields(xpath, document, node, "description"));
-					values.add(getBSFields(xpath, document, node, "name"));
-					values.add(getBSFields(xpath, document, node, "localip"));
+					String id = getBSId(xpath, document, node);
+					String description = getBSFields(xpath, document, node,
+							"description");
+					String name = getBSFields(xpath, document, node, "name");
+					String localip = getBSFields(xpath, document, node,
+							"localip");
+
+					if (id.equals("") || description.equals("")
+							|| name.equals("") || localip.equals(""))
+						return null;
+
+					values.add(id);
+					values.add(description);
+					values.add(name);
+					values.add(localip);
 				}
 
 			default:
@@ -1051,31 +1079,48 @@ public class ParserService implements Parser {
 		System.out.println("[STEP 2]");
 		Map<String, List<String>> il = new HashMap<String, List<String>>();
 		il = getInputList(xpath, description);
-		System.out.println("[SENSOR] Input List: " + il.toString());
+		if (il == null || il.isEmpty()) {
+			System.out.println("[SENSOR] Input List: [MISSING]");
+		} else {
+			System.out.println("[SENSOR] Input List: " + il.toString());
+		}
 
 		// STEP 3: GET OUTPUT LIST
 		System.out.println("[STEP 3]");
 		Map<String, List<String>> ol = new HashMap<String, List<String>>();
 		ol = getOutputList(xpath, description);
-		System.out.println("[SENSOR] Output List: " + ol.toString());
-
+		if (ol == null || ol.isEmpty()) {
+			System.out.println("[SENSOR] Output List: [MISSING]");
+		} else {
+			System.out.println("[SENSOR] Output List: " + ol.toString());
+		}
 		// STEP 4: GET BS REFERENCE
 		System.out.println("[STEP 4]");
 		Map<String, List<String>> netParams = new HashMap<String, List<String>>();
 		netParams = getBSReference(xpath, description);
-		System.out.println("[SENSOR] BS REF: " + netParams.toString());
+		if (netParams == null || netParams.isEmpty()) {
+			System.out.println("[SENSOR] BS REF: ");
+			return null;
+		} else {
+			System.out.println("[SENSOR] BS REF: " + netParams.toString());
+		}
 
 		// STEP 5: GET CAPABILITIES
 		System.out.println("[STEP 5]");
 		Map<String, List<String>> capabilities = new HashMap<String, List<String>>();
 		capabilities = getCapabilities(xpath, description);
-		System.out.println("[SENSOR] Capabilities: " + capabilities.toString());
-
+		if (capabilities == null || capabilities.isEmpty()) {
+			System.out.println("[SENSOR] Capabilities: ");
+			return null;
+		} else {
+			System.out.println("[SENSOR] Capabilities: "
+					+ capabilities.toString());
+		}
 		// STEP 6: GET POSITION (X,Y)
 		System.out.println("[STEP 6]");
 		Map<String, String> position = getPosition(xpath, description);
-		if (position == null || position.isEmpty() ) {
-			System.out.println("[SENSOR] Position: " + " ");
+		if (position == null || position.isEmpty()) {
+			System.out.println("[SENSOR] Position: ");
 			return null;
 		} else {
 			System.out.println("[SENSOR] Position: " + position.toString());
@@ -1128,7 +1173,7 @@ public class ParserService implements Parser {
 			// description = builder.parse(new File("sensorDescription.xml"));
 			return builder.parse(new File(path));
 		} catch (Exception e) {
-			System.out.println("SensorML Malformed");
+			System.out.println("[CML:Alert]-> SensorML Malformed or Missing");
 			System.out.println(e.getMessage());
 			return null;
 		}

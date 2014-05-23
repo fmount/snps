@@ -16,37 +16,33 @@ import org.w3c.dom.Document;
 
 import smlparser.Parser;
 
-public class iWebService implements iWebIntegrationInterface{
+public class iWebService implements iWebIntegrationInterface {
 
 	BundleContext context;
 	protected ComponentContext contex;
 	iCoreInterface service;
 	Parser pservice;
-	private final int MY_SQL= 3;
-	
+	private final int MY_SQL = 3;
+
 	public enum commands {
-		getSensor, getSDesc,getAllSensors, sensType, history, allhistory, 
-		getSensInfo, getsenslist, getzonelist, inszone, insbs, rmvzone, rmvbs,
-		getbsinfo, getzoneinfo, insertentry, rmventry, updateentry, getnodelist,
-		detection, detectbydate, detectbytime, detectbydateandtime, detectbyzone,
-		getSensorbyzone, getSensorbynode, updateComponent
+		getSensor, getSDesc, getAllSensors, sensType, history, allhistory, getSensInfo, getsenslist, getzonelist, inszone, insbs, rmvzone, rmvbs, getbsinfo, getzoneinfo, insertentry, rmventry, updateentry, getnodelist, detection, detectbydate, detectbytime, detectbydateandtime, detectbyzone, getSensorbyzone, getSensorbynode, updateComponent
 	}
-	
-	/* protected void activate(ComponentContext ctx){
-	    	contex = ctx;
-	    	service = (iCoreInterface) contex.locateService("iCoreInterface");
-	        System.out.println(service.sayHello());
-	        System.out.println("FINISH..");
-	    	
-	 }*/
-	
-	public iWebService(BundleContext cntx){
+
+	/*
+	 * protected void activate(ComponentContext ctx){ contex = ctx; service =
+	 * (iCoreInterface) contex.locateService("iCoreInterface");
+	 * System.out.println(service.sayHello()); System.out.println("FINISH..");
+	 * 
+	 * }
+	 */
+
+	public iWebService(BundleContext cntx) {
 		this.context = cntx;
 		System.out.println("[Wii:Info]-> Started");
 	}
-	 
+
 	@Override
-	public String sayhello(){
+	public String sayhello() {
 		Random random = new Random();
 		// Create a number between 0 and 5
 		int nextInt = random.nextInt(6);
@@ -66,19 +62,21 @@ public class iWebService implements iWebIntegrationInterface{
 		}
 	}
 
-	
 	/**
-	 * @param command: it accepts enable/disable
-	 * @param sids: sensors' id list 
-	 * @param mode: sync/async (default async mode)
+	 * @param command
+	 *            : it accepts enable/disable
+	 * @param sids
+	 *            : sensors' id list
+	 * @param mode
+	 *            : sync/async (default async mode)
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String sendCommand(String command, List<String> sids, String mode) {
 		try {
 			ServiceReference reference;
-			reference = context
-					.getServiceReference(iCoreInterface.class.getName());
+			reference = context.getServiceReference(iCoreInterface.class
+					.getName());
 
 			service = (iCoreInterface) context.getService(reference);
 			// TRUE OR FALSE..
@@ -90,19 +88,21 @@ public class iWebService implements iWebIntegrationInterface{
 	}
 
 	/**
-	 * @param splan: json format of samplingPlan, provided by JsonUtil transformation Class
-	 *	
-	 *
-	 *  String id = Util.IdGenerator().replace("-","");
-	 *	sp.setSplan_identifier(id);
+	 * @param splan
+	 *            : json format of samplingPlan, provided by JsonUtil
+	 *            transformation Class
+	 * 
+	 * 
+	 *            String id = Util.IdGenerator().replace("-","");
+	 *            sp.setSplan_identifier(id);
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String setSPlan(String splan) {
 		try {
 			ServiceReference reference;
-			reference = context
-					.getServiceReference(iCoreInterface.class.getName());
+			reference = context.getServiceReference(iCoreInterface.class
+					.getName());
 
 			service = (iCoreInterface) context.getService(reference);
 			SamplingPlan sp = JSonUtil.JsonToSamplingPlan(splan);
@@ -120,18 +120,20 @@ public class iWebService implements iWebIntegrationInterface{
 		return "Feature not supported..";
 	}
 
-	
 	/**
-	 * @param sensors: list of sensors identifiers
-	 * @param schema: template (or operator) that contain function for data processing
+	 * @param sensors
+	 *            : list of sensors identifiers
+	 * @param schema
+	 *            : template (or operator) that contain function for data
+	 *            processing
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String buildVirtualSensor(List<String> sensors, String schema) {
 		try {
 			ServiceReference reference;
-			reference = context
-					.getServiceReference(iCoreInterface.class.getName());
+			reference = context.getServiceReference(iCoreInterface.class
+					.getName());
 
 			service = (iCoreInterface) context.getService(reference);
 			return service.composerCall("compose", sensors, "");
@@ -141,124 +143,130 @@ public class iWebService implements iWebIntegrationInterface{
 		}
 	}
 
-	
 	/**
 	 * 
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public String discoverySensorsAndMeasurements(String command, String sid,String type,
-			String id_detection,String initDate, String endDate, String initTime, 
-			String endTime,String zoneid,String bsid) {
+	public String discoverySensorsAndMeasurements(String command, String sid,
+			String type, String id_detection, String initDate, String endDate,
+			String initTime, String endTime, String zoneid, String bsid) {
 		ServiceReference reference;
-		reference = context
-				.getServiceReference(iCoreInterface.class.getName());
+		reference = context.getServiceReference(iCoreInterface.class.getName());
 
 		service = (iCoreInterface) context.getService(reference);
 		List<String> params = new ArrayList<String>();
-		
+
 		switch (commands.valueOf(command)) {
-		
+
 		case getSensor:
-			return service.regCall(command, MY_SQL, sid, null, null,"", null);
-						
-		/*case getSDesc:
-			return service.regCall(command, MY_SQL, sid, null, null, "",null); */
-			
-		case getAllSensors:			
-			return service.regCall(command, MY_SQL, "", null, null,"",null);
+			return service.regCall(command, MY_SQL, sid, null, null, "", null);
+
+			/*
+			 * case getSDesc: return service.regCall(command, MY_SQL, sid, null,
+			 * null, "",null);
+			 */
+
+		case getAllSensors:
+			return service.regCall(command, MY_SQL, "", null, null, "", null);
 
 		case sensType:
-			return service.regCall(command, MY_SQL, "", null, null,type,null);
+			return service.regCall(command, MY_SQL, "", null, null, type, null);
 
 		case getSensInfo:
-			return service.regCall(command, MY_SQL, sid, null, null, "",null);
+			return service.regCall(command, MY_SQL, sid, null, null, "", null);
 
 		case getbsinfo:
-			return service.regCall(command, MY_SQL, sid, null, null, "",null);
+			return service.regCall(command, MY_SQL, sid, null, null, "", null);
 
 		case getzoneinfo:
-			return service.regCall(command, MY_SQL, sid, null, null, "",null);
-		
+			return service.regCall(command, MY_SQL, sid, null, null, "", null);
+
 		case getSensorbyzone:
-			if(zoneid.equalsIgnoreCase(""))
+			if (zoneid.equalsIgnoreCase(""))
 				return "Error processing request!";
-			
+
 			params.add(zoneid);
-			return service.regCall(command, MY_SQL, "", null, null, "",params);
-			
+			return service.regCall(command, MY_SQL, "", null, null, "", params);
+
 		case getSensorbynode:
-			if(bsid.equalsIgnoreCase(""))
+			if (bsid.equalsIgnoreCase(""))
 				return "Error processing request!";
-			
+
 			params.add(bsid);
-			return service.regCall(command, MY_SQL, "", null, null, "",params);
+			return service.regCall(command, MY_SQL, "", null, null, "", params);
 
 		case history:
-			return service.regCall(command, MY_SQL, sid, null, null, "",null);
+			return service.regCall(command, MY_SQL, sid, null, null, "", null);
 
 		case allhistory:
-			return service.regCall(command, MY_SQL, "", null, null, "",null);
+			return service.regCall(command, MY_SQL, "", null, null, "", null);
 
 		case detection:
-			if(id_detection.equalsIgnoreCase("")) 
-					return "Error processing request!";
+			if (id_detection.equalsIgnoreCase(""))
+				return "Error processing request!";
 			params.add(id_detection);
-			return service.regCall(command, MY_SQL, "",null,null,"",params);
-			
+			return service.regCall(command, MY_SQL, "", null, null, "", params);
+
 		case detectbydate:
-			if(initDate.equalsIgnoreCase(""))
+			if (initDate.equalsIgnoreCase(""))
 				return "Error processing request!";
-			if(endDate.equalsIgnoreCase(""))
+			if (endDate.equalsIgnoreCase(""))
 				endDate = initDate;
-			
+
 			params.add(initDate);
 			params.add(endDate);
-			return service.regCall(command, MY_SQL, sid,null,null,"",params);
-		
+			return service
+					.regCall(command, MY_SQL, sid, null, null, "", params);
+
 		case detectbytime:
-			if(initDate.equalsIgnoreCase("") || initTime.equalsIgnoreCase(""))
+			if (initDate.equalsIgnoreCase("") || initTime.equalsIgnoreCase(""))
 				return "Error processing request!";
-			if(endTime.equalsIgnoreCase(""))
-				endTime="23:59:59";
+			if (endTime.equalsIgnoreCase(""))
+				endTime = "23:59:59";
 			params.add(initDate);
 			params.add(initTime);
 			params.add(endTime);
-			return service.regCall(command, MY_SQL, sid,null,null,"",params);
-		
+			return service
+					.regCall(command, MY_SQL, sid, null, null, "", params);
+
 		case detectbydateandtime:
-			if(initDate.equalsIgnoreCase("") || initTime.equalsIgnoreCase(""))
+			if (initDate.equalsIgnoreCase("") || initTime.equalsIgnoreCase(""))
 				return "Error processing request!";
-			if(endDate.equalsIgnoreCase(""))
+			if (endDate.equalsIgnoreCase(""))
 				endDate = initDate;
-			if(endTime.equalsIgnoreCase(""))
-				endTime="23:59:59";
+			if (endTime.equalsIgnoreCase(""))
+				endTime = "23:59:59";
 			params.add(initDate);
 			params.add(endDate);
 			params.add(initTime);
 			params.add(endTime);
-			return service.regCall(command, MY_SQL, sid,null,null,"",params);
-		
+			return service
+					.regCall(command, MY_SQL, sid, null, null, "", params);
+
 		case detectbyzone:
-			if(zoneid.equalsIgnoreCase(""))
+			if (zoneid.equalsIgnoreCase(""))
 				return "Error processing request!";
 			params.add(zoneid);
-			return service.regCall(command, MY_SQL, sid,null,null,"",params);
+			return service
+					.regCall(command, MY_SQL, sid, null, null, "", params);
 		default:
 			return null;
 		}
 	}
 
-	
 	/**
-	 * @param sId : sensor identifier
-	 * @param mode: sync/async
-	 * @param action: json action format (specificare meglio)..
+	 * @param sId
+	 *            : sensor identifier
+	 * @param mode
+	 *            : sync/async
+	 * @param action
+	 *            : json action format (specificare meglio)..
 	 */
 	@Override
-	public String getData(String sId, String mode,String action) {
+	public String getData(String sId, String mode, String action) {
 		try {
-			return service.getData(sId, mode,action);
+			return service.getData(sId, mode, action);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -271,26 +279,32 @@ public class iWebService implements iWebIntegrationInterface{
 		ServiceReference reference;
 		reference = context.getServiceReference(iCoreInterface.class.getName());
 		service = (iCoreInterface) context.getService(reference);
-		return service.regCall("getSDesc", MY_SQL, sid, null, null, "",null);
+		return service.regCall("getSDesc", MY_SQL, sid, null, null, "", null);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public String setSensorConfiguration(String sid, String sensormlpath) {
-		try {	
-			
+		try {
+
 			Document description;
-			ServiceReference reference = context.getServiceReference(Parser.class.getName());
+			ServiceReference reference = context
+					.getServiceReference(Parser.class.getName());
 			Sensor s;
 			if (reference != null) {
 				description = JSonUtil.JSONToDocument(sensormlpath);
 				pservice = (Parser) context.getService(reference);
-				description = pservice.getDocument(sensormlpath);
 				s = pservice.parse(description);
-				s.setID(sid);
-				reference = context.getServiceReference(iCoreInterface.class.getName());
-				service = (iCoreInterface) context.getService(reference);
-				return service.regCall("updateComponent",MY_SQL, sid, description, s, "",null);
+				if (s == null) {
+					return "[Alert]-> Missing required fields";
+				} else {
+					s.setID(sid);
+					reference = context
+							.getServiceReference(iCoreInterface.class.getName());
+					service = (iCoreInterface) context.getService(reference);
+					return service.regCall("updateComponent", MY_SQL, sid,
+							description, s, "", null);
+				}
 			}
 			return "Service not available";
 		} catch (Exception e) {
@@ -303,7 +317,8 @@ public class iWebService implements iWebIntegrationInterface{
 	public String isAlive(String sId) {
 		try {
 			ServiceReference reference;
-			reference = context.getServiceReference(iCoreInterface.class.getName());
+			reference = context.getServiceReference(iCoreInterface.class
+					.getName());
 			service = (iCoreInterface) context.getService(reference);
 			return service.isAlive(sId);
 		} catch (Exception e) {

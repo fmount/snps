@@ -235,8 +235,6 @@ public class CommandLine implements Runnable {
 										description = pservice
 												.getDocument(options.get(0));
 										if (description != null) {
-											System.out.println("DESCRIPTION "
-													+ description);
 											s = pservice.parse(description);
 											if (s != null) {
 												String id = service.regCall(
@@ -248,7 +246,7 @@ public class CommandLine implements Runnable {
 														.println("[CML:Info]-> New Sensor: "
 																+ id);
 											}else{
-												System.out.println("[Alert]-> Missing required fields");
+												System.out.println("[CML:Alert]-> Missing required fields");
 											}
 											
 										}

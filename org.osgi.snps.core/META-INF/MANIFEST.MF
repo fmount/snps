@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core
-Bundle-SymbolicName: org.osgi.snps.core
+Bundle-SymbolicName: org.osgi.snps.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.osgi.snps.core.Activator
 Export-Package: org.osgi.snps.core
