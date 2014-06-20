@@ -24,7 +24,12 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+
+import org.osgi.framework.ServiceReference;
+import org.osgi.snps.base.common.ABComponent;
+import org.osgi.snps.base.common.SensHybrid;
 import org.osgi.snps.base.common.Sensor;
+import org.osgi.snps.base.interfaces.iCoreInterface;
 //import org.osgi.snps.base.util.JSonUtil;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -1042,9 +1047,33 @@ public class ParserService implements Parser {
 
 		prev.appendChild(el);
 	}
+	
+	public ArrayList<String> getSensorsFromHybrid (XPath xpath, Document document){
+		
+		ArrayList<String> sensors = new ArrayList<String>();
+		
+ 		String expr = "//Component/components/ComponentList/component/@id";
+		
+		NodeList nodeList;
+		try {
+			nodeList = (NodeList) xpath.compile(expr).evaluate(document, XPathConstants.NODESET);
+			for(int i = 0; i < nodeList.getLength(); i++){
+				sensors.add(nodeList.item(i).getFirstChild().getNodeValue());
+			}
+			
+		
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		
+		return sensors;
+		
+	}
 
 	@Override
-	public Sensor parse(Document description)
+	public ABComponent parse(Document description)
 			throws ParserConfigurationException, SAXException, IOException,
 			XPathExpressionException {
 
@@ -1132,11 +1161,23 @@ public class ParserService implements Parser {
 			return null;
 
 		// FINAL STAGE
-		Sensor sens = new Sensor(id, name, model, type, state, desc, nature,
-				il, ol, netParams, capabilities, position);
 
-		sens.setCapabilities(capabilities);
-		sens.setNetParams(netParams);
+		if (!type.equalsIgnoreCase("DETECTOR_COMPOSED")) {
+			Sensor sens = new Sensor(id, name, model, type, state, desc,
+					nature, il, ol, netParams, capabilities, position);
+			return sens;
+		} else {
+			ArrayList<String> sensors = new ArrayList<String>();
+			sensors = getSensorsFromHybrid(xpath, description);
+			SensHybrid sensH = new SensHybrid(id, name, model, type, state, desc, nature, sensors);
+			sensH.setExpression(ol.get("MathFunctionOutput").get(0));
+			sensH.setCapabilities(capabilities);
+			sensH.setINPUT_LIST(il);
+			sensH.setOUTPUT_LIST(ol);
+			sensH.setPosition(position);
+			sensH.setNetParams(netParams);
+			return sensH;
+		}
 		/*
 		 * Map<String,String> bs = new HashMap<String, String>();
 		 * 
@@ -1161,7 +1202,6 @@ public class ParserService implements Parser {
 		 * HashMap<String, String>()); }
 		 */
 
-		return sens;
 	}
 
 	@Override

@@ -18,6 +18,8 @@ public interface iWsnInterface {
 	
 	public String registerSensor();
 
+	public boolean sendDataToMiddleware(String data);
+	
 	String helloMsg();
 		
 }

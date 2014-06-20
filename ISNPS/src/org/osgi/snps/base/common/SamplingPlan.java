@@ -9,6 +9,8 @@ public class SamplingPlan {
 	double threshold_min;
 	double threshold_max;
 	int interval;
+	private String startDate="";
+	private String endDate="";
 	
 	public SamplingPlan(){}
 	
@@ -16,6 +18,14 @@ public class SamplingPlan {
 		nodesId = nID;
 		threshold_max = th_max;
 		threshold_min = th_min;
+		this.interval = interval;
+		splan_identifier = splanId;
+	}
+	
+	public SamplingPlan(String splanId, List<String> nID, String startDate, String endDate, int interval){
+		nodesId = nID;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.interval = interval;
 		splan_identifier = splanId;
 	}
@@ -60,12 +70,29 @@ public class SamplingPlan {
 		this.interval = interval;
 	}
 	
+	
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
 	/**
 	 * Print the Sampling Plan
 	 */
 	@Override
 	public String toString(){
-		String str = this.getSplan_identifier()+","+this.getNodesId().toString()+","+this.getThreshold_max()+","+this.getThreshold_min()+","+this.getInterval();
+		String str = this.getSplan_identifier()+","+this.getNodesId().toString()+","+this.getThreshold_max()+","+this.getThreshold_min()+","+this.getInterval()+","+this.getStartDate()+","+this.getEndDate();
 		System.out.println("[Sampling Plan]: "+str);
 		return str;
 	}

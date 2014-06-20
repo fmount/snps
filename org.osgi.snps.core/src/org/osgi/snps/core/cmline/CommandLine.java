@@ -22,6 +22,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.packageadmin.PackageAdmin;
 import org.osgi.snps.base.util.*;
+import org.osgi.snps.base.common.Sensor;
 import org.osgi.snps.base.common.SimpleData;
 import org.osgi.snps.base.interfaces.*;
 import org.osgi.snps.base.common.*;
@@ -169,7 +170,7 @@ public class CommandLine implements Runnable {
 								reference = context
 										.getServiceReference(Parser.class
 												.getName());
-								Sensor s;
+								ABComponent s;
 								if (reference != null) {
 									String originPath = "/home/francesco/Dropbox/S-SENSORI/DocsMilan/BerkeleyDB/SML";
 									final File folder = new File(originPath);
@@ -184,6 +185,15 @@ public class CommandLine implements Runnable {
 										description = pservice
 												.getDocument(flist.get(i));
 										s = pservice.parse(description);
+										if(s instanceof SensHybrid){
+											ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+											ArrayList<String> sensids = new ArrayList<String>();
+											sensids = ((SensHybrid) s).getSensids();
+											for(String sid : sensids){
+												sensors.add((Sensor) service.getSensList().get(sid));
+											}
+											((SensHybrid) s).setSensors(sensors);
+										}
 										String id = service.regCall("persist",
 												3, s.getID(), description, s,
 												s.getNature(), null);
@@ -205,7 +215,7 @@ public class CommandLine implements Runnable {
 								reference = context
 										.getServiceReference(Parser.class
 												.getName());
-								Sensor s;
+								ABComponent s;
 								if (reference != null) {
 
 									pservice = (Parser) context
@@ -237,6 +247,20 @@ public class CommandLine implements Runnable {
 										if (description != null) {
 											s = pservice.parse(description);
 											if (s != null) {
+												if(s instanceof SensHybrid){
+													ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+													ArrayList<String> sensids = new ArrayList<String>();
+													sensids = ((SensHybrid) s).getSensids();
+													Sensor sensIntoHybrid;
+													for(String sid : sensids){
+														sensIntoHybrid = (Sensor) service.getSensList().get(sid);
+														if(!sensIntoHybrid.getReferToHybrid().contains(s.getID())){
+															sensIntoHybrid.getReferToHybrid().add(s.getID());
+														}
+														sensors.add(sensIntoHybrid);
+													}
+													((SensHybrid) s).setSensors(sensors);
+												}
 												String id = service.regCall(
 														"persist", 3,
 														s.getID(), description,
@@ -245,10 +269,11 @@ public class CommandLine implements Runnable {
 												System.out
 														.println("[CML:Info]-> New Sensor: "
 																+ id);
-											}else{
-												System.out.println("[CML:Alert]-> Missing required fields");
+											} else {
+												System.out
+														.println("[CML:Alert]-> Missing required fields");
 											}
-											
+
 										}
 									}
 								} else {
@@ -292,7 +317,7 @@ public class CommandLine implements Runnable {
 										String splanId = org.osgi.snps.base.util.Util
 												.IdGenerator().replace("-", "");
 										SamplingPlan sPlan = new SamplingPlan(
-												splanId, ids, 45, 75, 200);
+												splanId, ids, 45, 75, 5000);
 
 										opres = Boolean.parseBoolean(service
 												.interprCall("splan", sPlan,
@@ -321,6 +346,7 @@ public class CommandLine implements Runnable {
 						case compose: // OKOK
 							// Phase 1: Register sensors..
 							List<String> tocompose = new ArrayList<String>();
+							String expression="none";
 							if (options.isEmpty()) {
 								System.out
 										.println("[CML:Alert] -> Arguments Error!!");
@@ -343,13 +369,16 @@ public class CommandLine implements Runnable {
 									options.clear();
 									break;
 								}
-
-								System.out.println(options.size());
 								options.remove(0);
+								if(options.get(options.size()-2).equals("-e") ){
+									expression = options.get(options.size()-1);
+									options.remove(options.size()-2);
+									options.remove(options.size()-1);
+								}
 								if (service.sensorExist(options)) {
 									System.out.println("I CAN COMPOSE");
 									System.out.println(service.composerCall(
-											"compose", options, ""));
+											"compose", options, expression));
 									options.clear();
 									break;
 								} else {
@@ -445,8 +474,18 @@ public class CommandLine implements Runnable {
 										Document description = pservice
 												.getDocument(options.get(3)
 														.toString());
-										Sensor s = pservice.parse(description);
+										ABComponent s = pservice.parse(description);
 										s.setID(options.get(1));
+										if(s instanceof SensHybrid){
+											ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+											ArrayList<String> sensids = new ArrayList<String>();
+											sensids = ((SensHybrid) s).getSensids();
+											for(String sid : sensids){
+												sensors.add((Sensor) service.getSensList().get(sid));
+											}
+											((SensHybrid) s).setSensors(sensors);
+										}
+										System.out.println("SENSORS: " + ((SensHybrid) s).getSensors().toString());
 										// ABComponent s =
 										// service.getSensList().get(options.get(1));
 										service.regCall("updateComponent", 3,
@@ -1136,8 +1175,11 @@ public class CommandLine implements Runnable {
 				}
 				break;
 			case async:
-				String ac = defineAction(sid);
-
+				String ac = "none";
+				if (!sid.equals("all")) {
+					ac = defineAction(sid);
+				}
+				System.out.println("ACTION: " + ac);
 				System.out.println("ASYNC MODE: " + com);
 				System.out.println("Rate for monitoring: (time in ms)");
 				BufferedReader stdIn = new BufferedReader(
@@ -1145,9 +1187,16 @@ public class CommandLine implements Runnable {
 				String rate = stdIn.readLine();
 				System.out.println("How long? (time in ms)");
 				String finish = stdIn.readLine();
-				new ServiceData(context, service.getSensList().get(sid), com,
-						null, Integer.parseInt(rate), Integer.parseInt(finish),
-						ac);
+
+				if (sid.equals("all")) {
+					new ServiceData(context, null, com, null,
+							Integer.parseInt(rate), Integer.parseInt(finish),
+							ac);
+				} else {
+					new ServiceData(context, service.getSensList().get(sid),
+							com, null, Integer.parseInt(rate),
+							Integer.parseInt(finish), ac);
+				}
 
 				break;
 			default:
@@ -1220,6 +1269,7 @@ public class CommandLine implements Runnable {
 		}
 	}
 
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void sensor_cu_2(ServiceReference reference, String fname) {
 		try {
@@ -1505,7 +1555,7 @@ public class CommandLine implements Runnable {
 			Document description = pservice.getDocument("SensorML.xml");
 			System.out.println("Document obtained!");
 			try {
-				Sensor s = pservice.parse(description);
+				ABComponent s = pservice.parse(description);
 
 				reference = context.getServiceReference(iCoreInterface.class
 						.getName());
@@ -1515,6 +1565,15 @@ public class CommandLine implements Runnable {
 				// La rendo persistente..
 				System.out.println("[CML: STEP 1] -> Persist image..");
 
+				if(s instanceof SensHybrid){
+					ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+					ArrayList<String> sensids = new ArrayList<String>();
+					sensids = ((SensHybrid) s).getSensids();
+					for(String sid : sensids){
+						sensors.add((Sensor) service.getSensList().get(sid));
+					}
+					((SensHybrid) s).setSensors(sensors);
+				}
 				service.regCall("persist", 3, s.getID(), description, s, "",
 						null);
 

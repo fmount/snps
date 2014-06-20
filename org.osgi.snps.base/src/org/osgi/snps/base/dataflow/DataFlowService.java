@@ -1,5 +1,7 @@
 package org.osgi.snps.base.dataflow;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 
@@ -8,7 +10,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.snps.base.common.Accumulator;
 import org.osgi.snps.base.common.SimpleData;
 import org.osgi.snps.base.interfaces.*;
-
+import org.osgi.snps.base.json.JSONObject;
 import org.osgi.snps.base.util.JSonUtil;
 import org.osgi.snps.base.util.Util;
 
@@ -40,7 +42,9 @@ public class DataFlowService implements iDataFlow {
 				System.out.println("-------------------------------");
 				if(!data.getRef().equals("")){
 					//System.out.println("Data for the Hybrid: "+data.getRef());
-					acc.addElementToBQ(data.getRef(), data.getData());
+					HashMap<String, String> hm = new HashMap<String,String>();
+					hm.put(data.getSid(), data.getData());
+					//acc.addElementToBQ(data.getRef(), data.getData());
 				}
 				//System.out.println("[ACCUMULATOR]: "+acc.getBQ(data.getRef()).toString());
 				return Util.writeTmpData(JSonUtil.SimpleDataToJSON(data));
@@ -63,9 +67,17 @@ public class DataFlowService implements iDataFlow {
 				System.out.println("-------------------------------");
 				if(!data.getRef().equals("")){
 					//System.out.println("Data for the Hybrid: "+data.getRef());
-					acc.addElementToBQ(data.getRef(), data.getData());
+
+					JSONObject json = new JSONObject();
+					json.put("id", data.getSid());
+					json.put("value", data.getData());
+					//System.out.println(json.toString());
+
+					acc.addElementToBQ(data.getRef(), json.toString());
 				}
-				//System.out.println("[ACCUMULATOR]: "+acc.getBQ(data.getRef()).toString());
+				
+				//System.out.println("[ACCUMULATOR]: " + acc.getBQ(data.getRef()), json.toString());
+				System.out.println(JSonUtil.SimpleDataToJSON(data));
 				Util.writeTmpData(JSonUtil.SimpleDataToJSON(data));
 				return daoservice.recDetect(3, data);
 			}
@@ -112,8 +124,8 @@ public class DataFlowService implements iDataFlow {
 	public void Accumulate(String hid, BlockingQueue<String> bq,
 			BundleContext context,String action){
 		this.acc.Accumulate(hid, bq);
-		System.out.println("[ACCUMULATOR] -> Add entry for: "+hid);
-		new ExecDispatcher(acc, hid, 2,context,action);
+		System.out.println("[ACCUMULATOR] -> Add entry for: "+hid + " size: " + bq.remainingCapacity());
+		new ExecDispatcher(acc, hid, bq.remainingCapacity(),context,action);
 	}
 
 }

@@ -26,4 +26,5 @@ public class Accumulator{
 		struct.get(hid).add(data);
 		System.out.println(struct.get(hid).toString());
 	}	
+
 }

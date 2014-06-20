@@ -1,5 +1,6 @@
 package org.osgi.snps.base.interfaces;
 
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 import org.osgi.framework.BundleContext;
@@ -18,10 +19,8 @@ public interface iDataFlow {
 
 	//void Accumulate(String hid, BlockingQueue<String> bq);
 
-	//public void Accumulate(String hid, BlockingQueue<String> bq, BundleContext context);
+	public void Accumulate(String hid, BlockingQueue<String> bq, BundleContext context, String action);
 
-	void Accumulate(String hid, BlockingQueue<String> bq,
-			BundleContext context,String action);
 
 	//public boolean pushData(SimpleData data, String mode, BundleContext context,Action ac);
 }

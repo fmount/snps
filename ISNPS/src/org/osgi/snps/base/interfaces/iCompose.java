@@ -9,6 +9,8 @@ public interface iCompose {
 
 	public SensHybrid compose(List<Sensor> ids);
 	
+	public SensHybrid compose(List<Sensor> ids, String expr);
+	
 	public boolean destroy(List<String> isd);
 	
 }

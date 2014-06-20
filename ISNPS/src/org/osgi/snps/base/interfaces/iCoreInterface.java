@@ -16,7 +16,7 @@ public interface iCoreInterface {
 	
 	public Map<String, ABComponent> getSensList();
 	
-	public boolean addToSensList(String key,Sensor value);
+	public boolean addToSensList(String key,ABComponent value);
 	
 	
 	public ArrayList<String> getTestCmd();

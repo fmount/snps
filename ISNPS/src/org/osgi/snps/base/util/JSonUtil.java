@@ -28,14 +28,13 @@ import org.xml.sax.SAXException;
  * 
  */
 public class JSonUtil {
-	
-	
-	public static String ABComponentToJSon(ABComponent s){
+
+	public static String ABComponentToJSon(ABComponent s) {
 		JSONWriter json = new JSONStringer();
 		String str = null;
 		try {
 			json = json.object();
-			
+
 			json.key("sid");
 			json.value(s.getID());
 
@@ -53,28 +52,27 @@ public class JSonUtil {
 
 			json.key("description");
 			json.value(s.getDescription());
-			
+
 			json.key("nature");
 			json.value(s.getNature());
-			
+
 			json = json.endObject();
 			str = json.toString();
 
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
-			 return "";
-		}		
+			return "";
+		}
 
-		
 	}
-		
-	public static String HybridToJSON(SensHybrid s){
+
+	public static String HybridToJSON(SensHybrid s) {
 		JSONWriter json = new JSONStringer();
 		String str = null;
 		try {
 			json = json.object();
-			
+
 			json.key("sid");
 			json.value(s.getID());
 
@@ -92,36 +90,58 @@ public class JSonUtil {
 
 			json.key("description");
 			json.value(s.getDescription());
-			
+
 			json.key("nature");
 			json.value(s.getNature());
+			
+			json.key("expression");
+			json.value(s.getExpression());
+
+			json.key("il");
+			json.value(HLToJSon((HashMap<String, List<String>>) s
+					.getINPUT_LIST()));
+
+			json.key("ol");
+			json.value(HLToJSon((HashMap<String, List<String>>) s
+					.getOUTPUT_LIST()));
+
+			json.key("netParams");
+			json.value(HLToJSon((HashMap<String, List<String>>) s
+					.getNetParams()));
+
+			json.key("capabilities");
+			json.value(HLToJSon((HashMap<String, List<String>>) s
+					.getCapabilities()));
+
+			json.key("position");
+			json.value(HashMapToJSON((HashMap<String, String>) s.getPosition()));
+
 			
 			json.key("sensors");
 			json.value(arrayLstToJSON(s.getSensors()));
-			
+
 			json = json.endObject();
 			str = json.toString();
 
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
-			 return "";
-		}		
+			return "";
+		}
 	}
-	
+
 	@SuppressWarnings("rawtypes")
-	public static SensHybrid JSONToHybrid(String str){
-		
-		//System.out.println("Hybrid: " + str);
-		SensHybrid sd = new SensHybrid("sid1", "test", "test", "test", "active",
-				"test","temperature",new ArrayList<Sensor>());
+	public static SensHybrid JSONToHybrid(String str) {
+
+		System.out.println("Hybrid: " + str);
+		SensHybrid sd = new SensHybrid("sid1", "test", "test", "test",
+				"active", "test", "temperature", new ArrayList<Sensor>());
 		try {
 			JSONObject json = new JSONObject(str);
 			Iterator keys = json.keys();
 			String key;
 			while (keys.hasNext()) {
 				key = (String) keys.next();
-				
 				if (key.equalsIgnoreCase("sid"))
 					sd.setID(json.getString(key));
 				else if (key.equalsIgnoreCase("name"))
@@ -136,9 +156,28 @@ public class JSonUtil {
 					sd.setState(json.getString(key));
 				else if (key.equalsIgnoreCase("nature"))
 					sd.setNature(json.getString(key));
-				else if(key.equalsIgnoreCase("sensors"))
-					sd.setSensors(JSONTOAList(json.getString(key)));
-				
+				else if (key.equalsIgnoreCase("expression"))
+					sd.setExpression(json.getString(key));
+				else if (key.equalsIgnoreCase("il"))
+					sd.setINPUT_LIST(JSonToHL((json.getString(key))));
+				else if (key.equalsIgnoreCase("ol"))
+					sd.setOUTPUT_LIST(JSonToHL((json.getString(key))));
+				else if (key.equalsIgnoreCase("netparams"))
+					sd.setNetParams(JSonToHL((json.getString(key))));
+				else if (key.equalsIgnoreCase("capabilities"))
+					sd.setCapabilities(JSonToHL((json.getString(key))));
+				else if (key.equalsIgnoreCase("position"))
+					sd.setPosition(JsonToHashMap((json.getString(key))));
+				else if (key.equalsIgnoreCase("sensors")){
+					List<ABComponent> sens = JSONTOAList(json.getString(key));
+					ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+					Iterator<ABComponent> sit = sens.iterator();
+					while(sit.hasNext()){
+						Sensor a = (Sensor) sit.next();
+						sensors.add(a);
+					}
+					sd.setSensors(sensors);
+				}
 				else {
 					System.out.println("[JSonConversion!]Error getting tag!!");
 					return sd;
@@ -148,10 +187,10 @@ public class JSonUtil {
 			e.printStackTrace();
 		}
 		return sd;
-		
+
 	}
-	
-	public static String ActionToJSON(Action a){
+
+	public static String ActionToJSON(Action a) {
 		JSONWriter json = new JSONStringer();
 		String str = null;
 		try {
@@ -167,39 +206,38 @@ public class JSonUtil {
 			str = json.toString();
 
 			return str;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			 return "";
+			return "";
 		}
 	}
-		
-		@SuppressWarnings("rawtypes")
-		public static Action JsonToAction(String action){
-			Action act = new Action();
-			try {
-				JSONObject json = new JSONObject(action);
-				Iterator keys = json.keys();
-				String key;
-				while (keys.hasNext()) {
-					key = (String) keys.next();
-					if (key.equalsIgnoreCase("component"))
-						act.setComponent(json.getString(key));
-					
-					else if (key.equalsIgnoreCase("cmd"))
-						act.setCmd(json.getString(key));
-					else {
-						System.out.println("[JSonConversion!]Error getting tag!!");
-						return act;
-					}
+
+	@SuppressWarnings("rawtypes")
+	public static Action JsonToAction(String action) {
+		Action act = new Action();
+		try {
+			JSONObject json = new JSONObject(action);
+			Iterator keys = json.keys();
+			String key;
+			while (keys.hasNext()) {
+				key = (String) keys.next();
+				if (key.equalsIgnoreCase("component"))
+					act.setComponent(json.getString(key));
+
+				else if (key.equalsIgnoreCase("cmd"))
+					act.setCmd(json.getString(key));
+				else {
+					System.out.println("[JSonConversion!]Error getting tag!!");
+					return act;
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
-			return act;
-			
-			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		return act;
+
+	}
 
 	public static String SensorToJSON(Sensor s) {
 		JSONWriter json = new JSONStringer();
@@ -224,7 +262,7 @@ public class JSonUtil {
 
 			json.key("description");
 			json.value(s.getDescription());
-			
+
 			json.key("nature");
 			json.value(s.getNature());
 
@@ -246,23 +284,24 @@ public class JSonUtil {
 
 			json.key("position");
 			json.value(HashMapToJSON((HashMap<String, String>) s.getPosition()));
-			
+
 			json = json.endObject();
 			str = json.toString();
 
 			return str;
 		} catch (Exception e) {
 			e.printStackTrace();
-			 return "";
+			return "";
 		}
 	}
-	
+
 	@SuppressWarnings({ "rawtypes" })
-	public static Sensor JsonToSensor(String str){
+	public static Sensor JsonToSensor(String str) {
 		//System.out.println("Sensor: " + str);
 		Sensor sd = new Sensor("sid1", "test", "test", "test", "active",
-				"test","temperature", new HashMap<String, List<String>>(),
-				new HashMap<String, List<String>>(),new HashMap<String, List<String>>(),
+				"test", "temperature", new HashMap<String, List<String>>(),
+				new HashMap<String, List<String>>(),
+				new HashMap<String, List<String>>(),
 				new HashMap<String, List<String>>(),
 				new HashMap<String, String>());
 		try {
@@ -273,7 +312,6 @@ public class JSonUtil {
 				key = (String) keys.next();
 				if (key.equalsIgnoreCase("sid"))
 					sd.setID(json.getString(key));
-				
 				else if (key.equalsIgnoreCase("name"))
 					sd.setName(json.getString(key));
 				else if (key.equalsIgnoreCase("model"))
@@ -301,12 +339,12 @@ public class JSonUtil {
 					return sd;
 				}
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return sd;
-		
-		
+
 	}
 
 	public static String SimpleDataToJSON(SimpleData data) {
@@ -320,17 +358,16 @@ public class JSonUtil {
 
 			json.key("data");
 			json.value(data.getData());
-			
+
 			json.key("ref");
 			json.value(data.getRef());
 
 			json.key("date");
 			json.value(data.getDate());
-			
+
 			json.key("time");
 			json.value(data.getTime());
-			
-			
+
 			json.key("_id_meas");
 			json.value(data.get_id_meas());
 
@@ -346,7 +383,7 @@ public class JSonUtil {
 
 	@SuppressWarnings("rawtypes")
 	public static SimpleData jsonToSimpleData(String data) {
-		//System.out.println("DATA: " + data);
+		// System.out.println("DATA: " + data);
 		SimpleData sd = new SimpleData();
 		try {
 			JSONObject json = new JSONObject(data);
@@ -386,7 +423,7 @@ public class JSonUtil {
 
 			json.key("splan_identifier");
 			json.value(plan.getSplan_identifier());
-			
+
 			json.key("nodesId");
 			json.value(ArrayListToJSON((ArrayList<String>) plan.getNodesId()));
 
@@ -395,6 +432,12 @@ public class JSonUtil {
 
 			json.key("th_max");
 			json.value(plan.getThreshold_max());
+			
+			json.key("startDate");
+			json.value(plan.getStartDate());
+			
+			json.key("endDate");
+			json.value(plan.getEndDate());
 
 			json.key("interval");
 			json.value(plan.getInterval());
@@ -423,6 +466,10 @@ public class JSonUtil {
 					pl.setThreshold_min(json.getDouble(key));
 				else if (key.equalsIgnoreCase("th_max"))
 					pl.setThreshold_max(json.getDouble(key));
+				else if (key.equalsIgnoreCase("startDate"))
+					pl.setStartDate(json.getString(key));
+				else if (key.equalsIgnoreCase("endDate"))
+					pl.setEndDate(json.getString(key));
 				else if (key.equalsIgnoreCase("interval"))
 					pl.setInterval(json.getInt(key));
 				else if (key.equalsIgnoreCase("splan_identifier"))
@@ -438,9 +485,7 @@ public class JSonUtil {
 		return pl;
 	}
 
-	
-	
-	public static String dArrayLstToJSON(List<SimpleData> list){
+	public static String dArrayLstToJSON(List<SimpleData> list) {
 		try {
 			JSONArray json = new JSONArray();
 			Iterator<SimpleData> it = list.iterator();
@@ -456,11 +501,8 @@ public class JSonUtil {
 		}
 		return null;
 	}
-	
-	
-	
-	
-	public static String arrayLstToJSON(List<Sensor> list){
+
+	public static String arrayLstToJSON(List<Sensor> list) {
 		try {
 			JSONArray json = new JSONArray();
 			Iterator<Sensor> it = list.iterator();
@@ -476,16 +518,21 @@ public class JSonUtil {
 		}
 		return null;
 	}
-	
-	
-	public static ArrayList<Sensor> JSONTOAList(String str){
-		
+
+	public static ArrayList<ABComponent> JSONTOAList(String str) {
+
 		try {
 			JSONArray json = new JSONArray(str);
-			ArrayList<Sensor> lst = new ArrayList<Sensor>();
+			ArrayList<ABComponent> lst = new ArrayList<ABComponent>();
 
 			for (int i = 0; i < json.length(); i++) {
-				lst.add(JsonToSensor(json.get(i).toString()));
+				if (new JSONObject(json.get(i).toString()).get("type").equals(
+						"DETECTOR_COMPOSED")) {
+					//System.out.println("Hybrid "+JSONToHybrid(json.get(i).toString()) + " : " + JSONToHybrid(json.get(i).toString()).getExpression());
+					lst.add(JSONToHybrid(json.get(i).toString()));
+				} else {
+					lst.add(JsonToSensor(json.get(i).toString()));
+				}
 			}
 			return lst;
 		} catch (Exception e) {
@@ -493,9 +540,9 @@ public class JSonUtil {
 		}
 		return null;
 	}
-	
-	public static ArrayList<SimpleData> dJSONTOAList(String str){
-		
+
+	public static ArrayList<SimpleData> dJSONTOAList(String str) {
+
 		try {
 			JSONArray json = new JSONArray(str);
 			ArrayList<SimpleData> lst = new ArrayList<SimpleData>();
@@ -508,9 +555,9 @@ public class JSonUtil {
 			System.out.println(e.getStackTrace());
 		}
 		return null;
-		
+
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public static String ArrayListToJSON(ArrayList<String> list) {
 		try {
@@ -544,7 +591,6 @@ public class JSonUtil {
 		return null;
 
 	}
-	
 
 	@SuppressWarnings("rawtypes")
 	public static String LinkedListToJSON(LinkedList<String> list) {
@@ -564,7 +610,6 @@ public class JSonUtil {
 		return null;
 
 	}
-	
 
 	public static LinkedList<String> JsonToLinkedList(String str) {
 		try {
@@ -727,97 +772,108 @@ public class JSonUtil {
 		}
 	}
 	
-	public static String DocumentTOJson(Document doc){
+//	public static String getMathExpression (HashMap<String, List<String>> hm){
+//		HashMap<String, List<String>> hl = hm;
+//		String expression = null;
+//		
+//		Iterator<String> it = hl.keySet().iterator();
+//		while(it.hasNext()){
+//			String s = (String) it.next();
+//			if(s.equalsIgnoreCase("MathFunctionOutput"))
+//				expression = hl.get(s).get(0);
+//		}
+//		
+//		return expression;
+//		
+//	}
+
+	public static String DocumentTOJson(Document doc) {
 		DOMSource domSource = new DOMSource(doc);
-        StringWriter writer = new StringWriter();
-        try{
-        StreamResult result = new StreamResult(writer);
-        TransformerFactory tf = TransformerFactory.newInstance();
-        Transformer transformer = tf.newTransformer();
-        transformer.transform(domSource, result);
-        //System.out.println("XML IN String format is: \n" + writer.toString());
-        }catch(Exception e){
-        	e.printStackTrace();
-        }
-		return writer.toString();		
-	}
-	
-	@SuppressWarnings("deprecation")
-	public static Document JSONToDocument(String xml){
-	   try{
-		   java.io.InputStream sbis = new java.io.StringBufferInputStream(xml);
-		   javax.xml.parsers.DocumentBuilderFactory b = javax.xml.parsers.
-				   DocumentBuilderFactory.newInstance();
-		   b.setNamespaceAware(false);
-		   org.w3c.dom.Document doc = null;
-		   javax.xml.parsers.DocumentBuilder db = null;
-		   db = b.newDocumentBuilder();
-		   doc = db.parse(sbis);
-		   return doc;
-	   }catch(Exception e){
-		   e.printStackTrace();
-		   return null;
-	   }
+		StringWriter writer = new StringWriter();
+		try {
+			StreamResult result = new StreamResult(writer);
+			TransformerFactory tf = TransformerFactory.newInstance();
+			Transformer transformer = tf.newTransformer();
+			transformer.transform(domSource, result);
+			// System.out.println("XML IN String format is: \n" +
+			// writer.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return writer.toString();
 	}
 
-	
+	@SuppressWarnings("deprecation")
+	public static Document JSONToDocument(String xml) {
+		try {
+			java.io.InputStream sbis = new java.io.StringBufferInputStream(xml);
+			javax.xml.parsers.DocumentBuilderFactory b = javax.xml.parsers.DocumentBuilderFactory
+					.newInstance();
+			b.setNamespaceAware(false);
+			org.w3c.dom.Document doc = null;
+			javax.xml.parsers.DocumentBuilder db = null;
+			db = b.newDocumentBuilder();
+			doc = db.parse(sbis);
+			return doc;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 	/* TEST MAIN */
 	public static void main(String argv[]) throws ParserConfigurationException,
-	SAXException, IOException, XPathExpressionException, TransformerException {
+			SAXException, IOException, XPathExpressionException,
+			TransformerException {
 		List<String> ids = new ArrayList<String>();
 		ids.add("12343");
 		ids.add("abcdoe");
-		SamplingPlan plan = new SamplingPlan("12ewdnhso9d",ids, 30.0, 40.0, 200);
+		SamplingPlan plan = new SamplingPlan("12ewdnhso9d", ids, 30.0, 40.0,
+				200);
 		System.out.println(JSonUtil.SamplingPlanToJSON(plan));
 		SamplingPlan newPlan = JSonUtil.JsonToSamplingPlan(JSonUtil
 				.SamplingPlanToJSON(plan));
 		newPlan.toString();
 
-		SimpleData s = new SimpleData("test35", "194328532121","simple", "1999-05-23","15:25:32");
-		//System.out.println(s.toString());
-		System.out.println("DATA TO JSON: "+JSonUtil.SimpleDataToJSON(s));
+		SimpleData s = new SimpleData("test35", "194328532121", "simple",
+				"1999-05-23", "15:25:32");
+		// System.out.println(s.toString());
+		System.out.println("DATA TO JSON: " + JSonUtil.SimpleDataToJSON(s));
 
 		SimpleData news = JSonUtil.jsonToSimpleData(JSonUtil
 				.SimpleDataToJSON(s));
-		System.out.println("JSON TO SIMPLE DATA: "+news.toString());
-				
-		
-		/*Sensor test*/
+		System.out.println("JSON TO SIMPLE DATA: " + news.toString());
+
+		/* Sensor test */
 		System.out.println("[CML] -> Generating Sensor..");
-		DocumentBuilderFactory factory = DocumentBuilderFactory
-				.newInstance();
-		DocumentBuilder builder = factory
-				.newDocumentBuilder();
-		Document description = builder.parse(new File(
-				"../../../SensorML.xml"));
-		
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document description = builder.parse(new File("../../../SensorML.xml"));
+
 		String d = DocumentTOJson(description);
 		description = JSONToDocument(d);
-		
+
 		Sensor se = SensorMLParser.parse(description);
 		String str = JSonUtil.SensorToJSON(se);
-		//System.out.println("SENSOR TO JSON: "+str);
-		//System.out.println("JSON TO SENSOR: "+JSonUtil.JsonToSensor(str));
-		
-		//COMPOSE..
+		// System.out.println("SENSOR TO JSON: "+str);
+		// System.out.println("JSON TO SENSOR: "+JSonUtil.JsonToSensor(str));
+
+		// COMPOSE..
 		List<Sensor> l = new ArrayList<Sensor>();
 		l.add(JSonUtil.JsonToSensor(str));
 		l.add(JSonUtil.JsonToSensor(str));
 		l.add(JSonUtil.JsonToSensor(str));
-		//String Cid = s.getSid()+s.getSid()+s.getSid();
-		//SensorMLParser.genDescription(l,Cid,"Virtual","boH","COMPOSED SENSOR","ACTIVE");
-		SensHybrid sd = new SensHybrid("a","b","c","d","e","f","g",l);
+		// String Cid = s.getSid()+s.getSid()+s.getSid();
+		// SensorMLParser.genDescription(l,Cid,"Virtual","boH","COMPOSED SENSOR","ACTIVE");
+		SensHybrid sd = new SensHybrid("a", "b", "c", "d", "e", "f", "g", l);
 		String str1 = HybridToJSON(sd);
-		System.out.println("HybridTOJSON: "+str1);
+		System.out.println("HybridTOJSON: " + str1);
 		sd = JSONToHybrid(str1);
-		System.out.println("JSONToHybrid: "+sd.toString());
-		
-		
+		System.out.println("JSONToHybrid: " + sd.toString());
+
 		/****/
 		Sensor s2 = l.get(0);
 		System.out.println(s2.getNetParams());
-		
-		
-		
+
 	}
 }

@@ -1,12 +1,18 @@
 package org.osgi.snps.composer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.snps.base.common.*;
 import org.osgi.snps.base.interfaces.iCompose;
 import org.osgi.snps.base.interfaces.iEventPublisherInterface;
 import org.osgi.snps.base.interfaces.iRegistryInterface;
+import org.osgi.snps.base.util.JSonUtil;
+import org.osgi.snps.base.util.SensorMLParser;
+import org.osgi.snps.base.util.Util;
 import org.osgi.framework.ServiceReference;
 
 
@@ -34,8 +40,12 @@ public class ComposerService implements iCompose{
 			s = new SensHybrid(genId(slist), genName(slist), "",genType(slist),
 					genState(slist),genDesc(slist),genNature(slist), slist);
 			
-			
-			
+			s.setCapabilities(genCapabilities(slist));
+			s.setINPUT_LIST(genIl(slist));
+			s.setOUTPUT_LIST(genOl("none"));
+			s.setNetParams(genNetParams(slist));
+			s.setPosition(genPosition(slist));
+						
 			//TODO: DECOMMENTARE PER DIALOGARE CON IL REGISTRY E SALVARE IL SENSORE VIRTUALE..
 			
 		/*	ServiceReference serviceRef = context
@@ -46,6 +56,12 @@ public class ComposerService implements iCompose{
 			registryservice.serializeComponent(3, sid, 
 					SensorMLParser.genDescription(slist, sid, "aaa",cname,
 							"DETECTOR", "ACTIVE"), s); */
+			ServiceReference serviceRef = context.getServiceReference(iRegistryInterface.class.getName());
+			registryservice = (iRegistryInterface) context
+					.getService(serviceRef);
+			
+			registryservice.serializeComponent(3, s.getID(), 
+					JSonUtil.DocumentTOJson(SensorMLParser.genDescription(slist, s)), "hybridNature" ,JSonUtil.HybridToJSON(s));
 			ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
 			pubservice = (iEventPublisherInterface) context.getService(reference);
 			pubservice.sendEvent(s.getID(),"registration");
@@ -58,6 +74,38 @@ public class ComposerService implements iCompose{
 				return null;
 		}
 		return s;
+	}
+
+	@Override
+	public SensHybrid compose(List<Sensor> slist, String expr) {
+		SensHybrid s;
+		try {
+			
+			s = new SensHybrid(genId(slist), genName(slist), "",genType(slist),
+					genState(slist),genDesc(slist),genNature(slist), slist);
+			s.setCapabilities(genCapabilities(slist));
+			s.setINPUT_LIST(genIl(slist));
+			s.setOUTPUT_LIST(genOl(expr));
+			s.setNetParams(genNetParams(slist));
+			s.setPosition(genPosition(slist));
+			s.setExpression(expr);
+			ServiceReference serviceRef = context.getServiceReference(iRegistryInterface.class.getName());
+			registryservice = (iRegistryInterface) context.getService(serviceRef);
+			
+			registryservice.serializeComponent(3, s.getID(), 
+					JSonUtil.DocumentTOJson(SensorMLParser.genDescription(slist, s)), s.getNature() ,JSonUtil.HybridToJSON(s));
+			
+			ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
+			pubservice = (iEventPublisherInterface) context.getService(reference);
+			pubservice.sendEvent(s.getID(),"registration");
+			
+			
+		} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+		}
+		return s;
+
 	}
 	
 	
@@ -90,7 +138,7 @@ public class ComposerService implements iCompose{
 		String toret="";
 		for(int i=0;i<slist.size();i++){
 			if(slist.get(i).getType().equalsIgnoreCase(type)){
-				toret="DETECTOR";
+				toret="DETECTOR_COMPOSED";
 			}
 			else toret="ACTUATOR";
 		}
@@ -109,7 +157,7 @@ public class ComposerService implements iCompose{
 	}
 	
 	public String genNature(List<Sensor> slist){
-		return "todo";
+		return "hybridNature";
 	}
 	
 	
@@ -128,9 +176,34 @@ public class ComposerService implements iCompose{
 		return state;
 	}
 	
+	public Map<String,List<String>> genIl(List<Sensor> slist){
+		return slist.get(0).getINPUT_LIST();
+	}
+	
+	public Map<String,List<String>> genCapabilities(List<Sensor> slist){
+		return slist.get(0).getCapabilities();
+	}
+	
+	public Map<String,String> genPosition(List<Sensor> slist){
+		return slist.get(0).getPosition();
+	}
+	
+	public Map<String,List<String>> genNetParams(List<Sensor> slist){
+		return slist.get(0).getNetParams();
+	}
+	
+	public Map<String ,List<String>> genOl(String expr){
+		Map<String ,List<String>> mathfunc = new HashMap<String, List<String>>();
+		ArrayList<String> exprfunc = new ArrayList<String>();
+		exprfunc.add(expr);
+		mathfunc.put("MathFunctionOutput", exprfunc);
+		return mathfunc;
+	}
+	
 	@Override
 	public boolean destroy(List<String> isd) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }

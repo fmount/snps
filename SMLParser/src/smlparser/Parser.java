@@ -9,6 +9,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.osgi.snps.base.common.ABComponent;
 import org.osgi.snps.base.common.Sensor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -79,7 +80,7 @@ public interface Parser {
 	public void addSensorElement(Document newXmlDocument,Element prev, 
 			String current, String id);
 	
-	public Sensor parse(Document description) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException;
+	public ABComponent parse(Document description) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException;
 	
 	public Document getDocument(String path);
 

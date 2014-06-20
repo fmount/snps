@@ -4,12 +4,21 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.event.EventConstants;
 import org.osgi.service.event.EventHandler;
+import org.osgi.snps.base.interfaces.iCoreInterface;
+import org.osgi.snps.base.interfaces.iDataFlow;
+import org.osgi.snps.base.interfaces.iGWInterface;
+import org.osgi.snps.base.json.JSONException;
+import org.osgi.snps.base.json.JSONObject;
+import org.osgi.snps.base.util.JSonUtil;
+
 
 public class SensHybrid extends ABComponent implements Component {
 
@@ -18,6 +27,14 @@ public class SensHybrid extends ABComponent implements Component {
 	 */
 	private static final long serialVersionUID = 1L;
 	List<Sensor> sensors;
+	ArrayList<String> sensids;
+	private String expression="";
+	private Map<String, List<String>> netParams;
+	private Map<String, List<String>> capabilities;
+	private Map<String, List<String>> INPUT_LIST;
+	private Map<String, List<String>> OUTPUT_LIST;
+	private Map<String, String> position;
+	
 
 	@SuppressWarnings("rawtypes")
 	public Dictionary dict;
@@ -29,13 +46,13 @@ public class SensHybrid extends ABComponent implements Component {
 	public enum modes {
 		sync, async
 	}
-
+	
 	public SensHybrid(String id, String name, String model, String type,
 			String state, String description, String nature,
 			List<Sensor> sensors) {
 		super(id, name, model, type, state, description, nature);
 		this.sensors = sensors;
-
+		this.expression = "none";
 		dict = new Properties();
 
 		//sbs = null;
@@ -43,7 +60,15 @@ public class SensHybrid extends ABComponent implements Component {
 		//addFilter(this.getID());
 	}
 	
-
+	public SensHybrid(String id, String name, String model, String type,
+			String state, String description, String nature,
+			ArrayList<String> sensids) {
+		super(id, name, model, type, state, description, nature);
+		this.sensids = sensids;
+		this.expression = "none";
+		dict = new Properties();
+	}
+	
 	public List<Sensor> getSensors() {
 		return sensors;
 	}
@@ -54,7 +79,7 @@ public class SensHybrid extends ABComponent implements Component {
 
 	@Override
 	public String toString() {
-		String str = super.toString();
+		String str = super.toString() + " , expression: " + expression;
 		str += " , Sensors: [ ";
 		for(int i=0;i<getSensors().size();i++){
 			str += getSensors().get(i).toString();
@@ -73,18 +98,49 @@ public class SensHybrid extends ABComponent implements Component {
 		switch (modes.valueOf(mode)) {
 		case sync:
 			List<String> values = new ArrayList<String>();
+			
+			ServiceReference servRef = context
+					.getServiceReference(iCoreInterface.class
+							.getName());
+			iCoreInterface coreservice = (iCoreInterface) context.getService(servRef);
+			
+//			iDataFlow dataflowservice;
+//			ServiceReference serviceRef;
+//			serviceRef = context.getServiceReference(iDataFlow.class
+//					.getName());
+//			dataflowservice = (iDataFlow) context.getService(serviceRef);
+			SimpleData data = null;
 			while (it.hasNext()) {
 				System.out.println("Getting data " + i);
 				Sensor s = it.next();
 				// s.updateFilter(this.getID());
-				values.add(s.getData(context, mode,null,action));// mode: sync or async
+				data = JSonUtil.jsonToSimpleData(s.getData(context, mode,options,action));
+				JSONObject json = new JSONObject();
+//				System.out.println("DATA FROM SENSOR: " + data.toString());
+				try {
+					json.put("id", data.getSid());
+					json.put("value", data.getData());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+//				dataflowservice.pushData(data, mode, context);
+				values.add(json.toString());// mode: sync or async
 				i++;
 			}
+			String expression = ((SensHybrid) coreservice.getSensList().get(this.getID())).getExpression();
+			String tmp[] = options[0].split("#");
+			data.setSid(this.getID());
+			data.setData(new Template().processExpression(values, expression));
+			data.setRef("");
+			data.set_id_meas(tmp[1]);
+
 			/*
 			 * Ritorno i dati al chiamante..
 			 */
-			
-			return values.toString();
+			return JSonUtil.SimpleDataToJSON(data);
+			//return values.toString();
 		case async:
 			while (it.hasNext()) {
 				System.out.println("Getting data " + i);
@@ -149,4 +205,63 @@ public class SensHybrid extends ABComponent implements Component {
 		}
 		return alivelist.toString();
 	}
+
+	public String getExpression() {
+		return expression;
+	}
+
+
+	public void setExpression(String expression) {
+		this.expression = expression;
+	}
+
+	public ArrayList<String> getSensids() {
+		return sensids;
+	}
+
+	public void setSensids(ArrayList<String> sensids) {
+		this.sensids = sensids;
+	}
+
+	public Map<String, List<String>> getNetParams() {
+		return netParams;
+	}
+
+	public void setNetParams(Map<String, List<String>> netParams) {
+		this.netParams = netParams;
+	}
+
+	public Map<String, List<String>> getCapabilities() {
+		return capabilities;
+	}
+
+	public void setCapabilities(Map<String, List<String>> capabilities) {
+		this.capabilities = capabilities;
+	}
+
+	public Map<String, List<String>> getINPUT_LIST() {
+		return INPUT_LIST;
+	}
+
+	public void setINPUT_LIST(Map<String, List<String>> iNPUT_LIST) {
+		INPUT_LIST = iNPUT_LIST;
+	}
+
+	public Map<String, List<String>> getOUTPUT_LIST() {
+		return OUTPUT_LIST;
+	}
+
+	public void setOUTPUT_LIST(Map<String, List<String>> oUTPUT_LIST) {
+		OUTPUT_LIST = oUTPUT_LIST;
+	}
+
+	public Map<String, String> getPosition() {
+		return position;
+	}
+
+	public void setPosition(Map<String, String> position) {
+		this.position = position;
+	}
+
+	
 }

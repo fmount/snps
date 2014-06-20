@@ -180,7 +180,7 @@ public class Sensor extends ABComponent implements Component, Serializable {
 					String received = gw.getData(id_meas_to_set, getID(),
 							getNature(), mode, options, action);
 					Util.writeTmpData(received);
-					System.out.println(getNature());
+					
 					/**
 					 * Ritorno i dati al chiamante, il quale si occupera' di
 					 * processarli..

@@ -63,14 +63,14 @@ public class CoreServices extends Observable implements iCoreInterface {
 				new HashMap<String, List<String>>(),
 				new HashMap<String, String>());
 
-		List<Sensor> mList = JSonUtil.JSONTOAList(loadData());
-		Iterator<Sensor> it = mList.iterator();
+		List<ABComponent> mList = JSonUtil.JSONTOAList(loadData());
+		Iterator<ABComponent> it = mList.iterator();
 		while (it.hasNext()) {
 			ABComponent s = (ABComponent) it.next();
 			sensList.put(s.getID(), s);
 		}
 		sensList.put("test", test);
-
+		
 	}
 
 	public enum commands {
@@ -153,21 +153,24 @@ public class CoreServices extends Observable implements iCoreInterface {
 				 * USING XERCES.. Sensor sens = pservice.DOMparse(description);
 				 */
 				// I USE XPATH (is the better way..)
-				Sensor sens = pservice.parse(description);
+				ABComponent component = pservice.parse(description);
 				// System.out.println("Putting: "+sens.toString());
-				sensList.put(sens.getID(), sens);
+				
+				sensList.put(component.getID(), component);
 				serviceRef = context
 						.getServiceReference(iEventPublisherInterface.class
 								.getName());
 				pubservice = (iEventPublisherInterface) context
 						.getService(serviceRef);
-				pubservice.sendEvent(sens.getID(), "registration");
-				return sens.getID();
+				pubservice.sendEvent(component.getID(), "registration");
+				return component.getID();
 
 			case persist:
 
 				if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
 
+					sensList.put(s.getID(), s);
+					
 					return String.valueOf(registryservice.serializeComponent(
 							opcode, key, JSonUtil.DocumentTOJson(description),
 							s.getNature(),
@@ -211,6 +214,8 @@ public class CoreServices extends Observable implements iCoreInterface {
 
 			case updateComponent:
 				if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
+					getSensList().remove(key);
+					addToSensList(key, (SensHybrid) s);
 					return String.valueOf(registryservice.updateComponent(
 							opcode, key, JSonUtil.DocumentTOJson(description),
 							s.getNature(),
@@ -401,13 +406,13 @@ public class CoreServices extends Observable implements iCoreInterface {
 							if (s.getClass().getSimpleName()
 									.equalsIgnoreCase("senshybrid")) {
 								System.out.println("Hybrid!");
-								SensHybrid s1 = (SensHybrid) sensList.get(sIds
-										.get(i));
-								sIds.remove(s1.getID());
-								List<Sensor> ids = s1.getSensors();
-								for (int h = 0; h < ids.size(); h++) {
-									sIds.add(ids.get(h).getID());
-								}
+//								SensHybrid s1 = (SensHybrid) sensList.get(sIds
+//										.get(i));
+//								sIds.remove(s1.getID());
+//								List<Sensor> ids = s1.getSensors();
+//								for (int h = 0; h < ids.size(); h++) {
+//									sIds.add(ids.get(h).getID());
+//								}
 							} else {
 								System.out.println("Simple!");
 							}
@@ -607,7 +612,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public String composerCall(String command, List<String> slist, String mode) {
+	public String composerCall(String command, List<String> slist, String expr) {
 		try {
 			serviceRef = context.getServiceReference(iCompose.class.getName());
 			composerService = (iCompose) context.getService(serviceRef);
@@ -618,10 +623,21 @@ public class CoreServices extends Observable implements iCoreInterface {
 				if (sensorExist(slist)) {
 					List<Sensor> toCompose = new ArrayList<Sensor>();
 					Iterator<String> it = slist.iterator();
+					String composedId = "";
+					for(int i=0;i<slist.size();i++){
+						if(i==0)
+							composedId +=slist.get(i);
+						else
+							composedId +="_"+slist.get(i);
+					}
+					if(getSensList().containsKey(composedId)){
+						return "Hybrid Sensor " + getSensList().get(composedId).getID() + " already created";
+					}
 					while (it.hasNext()) {
 						toCompose.add((Sensor) getSensList().get(it.next()));
 					}
-					SensHybrid s = composerService.compose(toCompose);
+//					SensHybrid s = composerService.compose(toCompose); Composition without math expression
+					SensHybrid s = composerService.compose(toCompose, expr);
 					sensList.put(s.getID(), s);
 
 					// Aggiorno il riferimento ai sensori..
@@ -662,11 +678,12 @@ public class CoreServices extends Observable implements iCoreInterface {
 
 					String[] options = { s.getID() + "#"
 							+ Util.IdGenerator().replace("-", "") };
-
+					System.out.println(((SensHybrid) s).toString());
+					if(mode.equalsIgnoreCase("async")){
 					processorService.Accumulate(options[0],
 							new ArrayBlockingQueue<String>(((SensHybrid) s)
 									.getSensors().size()), context, action);
-
+					}
 					return ((SensHybrid) s).getData(context, mode, options,
 							action);
 				} else {
@@ -716,7 +733,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 	}
 
 	@Override
-	public boolean addToSensList(String key, Sensor value) {
+	public boolean addToSensList(String key, ABComponent value) {
 		try {
 			sensList.put(key, value);
 			return true;
@@ -744,7 +761,6 @@ public class CoreServices extends Observable implements iCoreInterface {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public boolean sensorExist(List<String> sId) {
 		Iterator<String> it = sId.iterator();
-		System.out.println(sId.toString());
 		while (it.hasNext()) {
 			String cur = it.next();
 			// Controllo di primo livello (in memoria)
@@ -767,7 +783,8 @@ public class CoreServices extends Observable implements iCoreInterface {
 	public boolean checkState(String sid, String state) {
 		try {
 			ABComponent s = getSensList().get(sid);
-			if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
+ 			//System.out.println(getSensList().toString()); //TODO REMOVE DEBUG STAMP
+ 			if (s.getClass().getSimpleName().equalsIgnoreCase("senshybrid")) {
 				System.out.println("Hybrid!");
 				SensHybrid s1 = (SensHybrid) getSensList().get(sid);
 				System.out.println(s1.getState() + " - " + state);

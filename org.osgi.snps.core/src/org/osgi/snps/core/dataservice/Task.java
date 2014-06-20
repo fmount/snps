@@ -36,7 +36,13 @@ class Task extends TimerTask{
 				.getName());
 
 		service = (iCoreInterface) context.getService(reference);
-		service.getData(s.getID(), mode, action);
+		if(s==null){
+			for(String key : service.getSensList().keySet()){
+				service.getData(service.getSensList().get(key).getID(), mode, action);
+			}
+		}else{
+			service.getData(s.getID(), mode, action);
+		}
 	}
 	
 }

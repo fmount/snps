@@ -58,6 +58,7 @@ public class MDWExportService implements iGWInterface {
 	@Override
 	public boolean push(String data,String[] options) {
 		try {
+			System.out.println(data);
 			SimpleData sd = JSonUtil.jsonToSimpleData(data);
 			//System.out.println("[PUSH]-> "+sd.toString());
 			ServiceReference reference = context.getServiceReference(iCoreInterface.class.getName());
@@ -82,9 +83,9 @@ public class MDWExportService implements iGWInterface {
 		ipubservice = (iEventPublisherInterface) context.getService(reference);
 		ipubservice.sendEvent(JSonUtil.SamplingPlanToJSON(sPlan),"splan");
 		
-		/*wsnService = setRemoteConnection();
-		return wsnService.setSPlan(JSonUtil.SamplingPlanToJSON(sPlan)); */
-		return true;
+		wsnService = setRemoteConnection();
+		return wsnService.setSPlan(JSonUtil.SamplingPlanToJSON(sPlan)); 
+		//return true;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -207,10 +208,11 @@ public class MDWExportService implements iGWInterface {
 		ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
 		ipubservice = (iEventPublisherInterface) context.getService(reference);
 		ipubservice.sendEvent("INTERPRETER: SEND_COMMAND]-> ["+command+","+sids+","+mode+"]" ,"command");
-		
+	
 		
 		/*wsnService = setRemoteConnection();
 		/return wsnService.sendCommand(sids, command); */
+		
 		
 		/****************CLOSING INTERACTION*****************/
 		return true;
@@ -236,7 +238,7 @@ public class MDWExportService implements iGWInterface {
 		} else {
 			final RemoteOSGiService remote = (RemoteOSGiService) context
 					.getService(serviceRef);
-			URI uri = new URI("r-osgi://127.0.0.1:9279");
+			URI uri = new URI("r-osgi://127.0.0.1:9278");
 			try {
 				remote.connect(uri);
 				final RemoteServiceReference[] references = remote

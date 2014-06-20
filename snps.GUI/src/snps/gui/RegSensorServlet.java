@@ -340,7 +340,7 @@ public class RegSensorServlet extends HttpServlet {
 					out.println("<h2>REGISTRAZIONE SENSORE:</h2>");
 					Document description;
 					reference = context.getServiceReference(Parser.class.getName());
-					Sensor sens;
+					ABComponent sens;
 					//Controllo sull'estensione del file:
 					if (nomeFile.endsWith(".xml")) {
 						//out.println("Il file ha la giusta estensione!");
@@ -355,13 +355,13 @@ public class RegSensorServlet extends HttpServlet {
 								String ack = service.regCall("persist", 3, sens.getID(),description, sens, sens.getNature(), null);
 								if(ack.equals("true")) {
 									out.println("<P><B>CONGRATULAZIONI!!!</B>");
-									out.println("<BR>Il sensore con ID = "+sens.getID()+" è stato registrato correttamente "
+									out.println("<BR>Il sensore con ID = "+sens.getID()+" ï¿½ stato registrato correttamente "
 											+ "sia nella Lista dei Sensori Disponibili, sia nel Data Base del sistema!");
 								}
 								else {
 									out.println("<P><B>ATTENZIONE!!!</B>");
-									out.println("<BR>Il sensore con ID = "+sens.getID()+" era già presente nel Data Base del "
-											+ "sistema!<BR>Il sensore è stato quindi inserito nella Lista dei Sensori Disponibili.");
+									out.println("<BR>Il sensore con ID = "+sens.getID()+" era giï¿½ presente nel Data Base del "
+											+ "sistema!<BR>Il sensore ï¿½ stato quindi inserito nella Lista dei Sensori Disponibili.");
 								}
 								out.println("<P>Torna alla Home per verificare l'inserimento del nuovo sensore!");
 								aggiornaLista();
@@ -369,7 +369,7 @@ public class RegSensorServlet extends HttpServlet {
 							else out.println("<B>Error getting Parser service!</B>");
 						} catch (Exception e) {
 							e.printStackTrace();
-							out.println("<B>ERRORE:</B> il file che si sta cercando di caricare non è compatibile!");
+							out.println("<B>ERRORE:</B> il file che si sta cercando di caricare non ï¿½ compatibile!");
 						}
 					}
 					else { 

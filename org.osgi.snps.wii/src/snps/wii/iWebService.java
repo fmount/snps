@@ -7,11 +7,14 @@ import java.util.Random;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
+import org.osgi.snps.base.common.ABComponent;
 import org.osgi.snps.base.common.SamplingPlan;
+import org.osgi.snps.base.common.SensHybrid;
 import org.osgi.snps.base.common.Sensor;
 import org.osgi.snps.base.interfaces.iCoreInterface;
 import org.osgi.snps.base.interfaces.iWebIntegrationInterface;
 import org.osgi.snps.base.util.JSonUtil;
+import org.osgi.snps.core.dataservice.ServiceData;
 import org.w3c.dom.Document;
 
 import smlparser.Parser;
@@ -129,14 +132,19 @@ public class iWebService implements iWebIntegrationInterface {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public String buildVirtualSensor(List<String> sensors, String schema) {
+	public String buildVirtualSensor(List<String> sensors, String expression) {
 		try {
 			ServiceReference reference;
 			reference = context.getServiceReference(iCoreInterface.class
 					.getName());
 
 			service = (iCoreInterface) context.getService(reference);
-			return service.composerCall("compose", sensors, "");
+			if(expression.equals("") || expression==null){
+				return service.composerCall("compose", sensors, "none");
+			}
+			else{
+				return service.composerCall("compose", sensors, expression);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return "Error!";
@@ -266,7 +274,17 @@ public class iWebService implements iWebIntegrationInterface {
 	@Override
 	public String getData(String sId, String mode, String action) {
 		try {
-			return service.getData(sId, mode, action);
+			String[] tmp = sId.split(":");
+			String id = tmp[0];
+			if (id.equalsIgnoreCase("all")) {
+				int rate = Integer.parseInt(tmp[1]);
+				int finish = Integer.parseInt(tmp[2]);
+				Thread t = new monitorThread(rate, finish);
+				t.start();
+				return "Monitoring mode Started";
+			} else {
+				return service.getData(sId, mode, action);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -290,11 +308,20 @@ public class iWebService implements iWebIntegrationInterface {
 			Document description;
 			ServiceReference reference = context
 					.getServiceReference(Parser.class.getName());
-			Sensor s;
+			ABComponent s;
 			if (reference != null) {
 				description = JSonUtil.JSONToDocument(sensormlpath);
 				pservice = (Parser) context.getService(reference);
 				s = pservice.parse(description);
+				if(s instanceof SensHybrid){
+					ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+					ArrayList<String> sensids = new ArrayList<String>();
+					sensids = ((SensHybrid) s).getSensids();
+					for(String sids : sensids){
+						sensors.add((Sensor) service.getSensList().get(sids));
+					}
+					((SensHybrid) s).setSensors(sensors);
+				}
 				if (s == null) {
 					return "[Alert]-> Missing required fields";
 				} else {
@@ -325,5 +352,20 @@ public class iWebService implements iWebIntegrationInterface {
 			System.out.println(e.getMessage());
 		}
 		return "Error Sending isAlive request!";
+	}
+
+	class monitorThread extends Thread {
+		int rate;
+		int finish;
+
+		public monitorThread(int rate, int finish) {
+			this.rate = rate;
+			this.finish = finish;
+		}
+		
+		public void run(){
+			new ServiceData(context, null, "async", null, rate, finish, "none");
+		}
+
 	}
 }
