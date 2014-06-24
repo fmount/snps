@@ -110,6 +110,7 @@ public class iWebService implements iWebIntegrationInterface {
 			service = (iCoreInterface) context.getService(reference);
 			SamplingPlan sp = JSonUtil.JsonToSamplingPlan(splan);
 			String id = sp.getSplan_identifier();
+			System.out.println(splan);
 			service.interprCall("splan", sp, null, "");
 			return id;
 		} catch (Exception e) {
@@ -120,7 +121,13 @@ public class iWebService implements iWebIntegrationInterface {
 
 	@Override
 	public String stopSPlan(String idPlan) {
-		return "Feature not supported..";
+		ServiceReference reference;
+		reference = context.getServiceReference(iCoreInterface.class
+				.getName());
+		SamplingPlan sp = new SamplingPlan();
+		sp.setSplan_identifier(idPlan);
+		service.interprCall("splanstop", sp, null, "");
+		return sp.getSplan_identifier();
 	}
 
 	/**

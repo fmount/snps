@@ -1,6 +1,5 @@
 package snps.interpreter;
 
-
 import java.io.IOException;
 import java.util.List;
 
@@ -36,19 +35,22 @@ public class MDWExportService implements iGWInterface {
 
 	/* SERVIZI VERSO IL MIDDLEWARE */
 
-	
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public String registerSensor(String Sensorid, Document description) {
 		try {
-			System.out.println("Registering: "+Sensorid);
-			System.out.println("[INTERPRETER: Info] -> Persist Request sent to core");
-			ServiceReference reference = context.getServiceReference(iCoreInterface.class.getName());
+			System.out.println("Registering: " + Sensorid);
+			System.out
+					.println("[INTERPRETER: Info] -> Persist Request sent to core");
+			ServiceReference reference = context
+					.getServiceReference(iCoreInterface.class.getName());
 			icore = (iCoreInterface) context.getService(reference);
-			return icore.regCall("image", 3, Sensorid, description, null, "",null);
+			return icore.regCall("image", 3, Sensorid, description, null, "",
+					null);
 		} catch (Exception e) {
-			 e.printStackTrace();
-			System.out.println("[INTERPRETER: Alert] -> Error retrieving Core Services");
+			e.printStackTrace();
+			System.out
+					.println("[INTERPRETER: Alert] -> Error retrieving Core Services");
 			System.out.println("[INTERPRETER: Alert] -> Registration Abort");
 			return "";
 		}
@@ -56,16 +58,20 @@ public class MDWExportService implements iGWInterface {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public boolean push(String data,String[] options) {
+	public boolean push(String data, String[] options) {
 		try {
 			System.out.println(data);
 			SimpleData sd = JSonUtil.jsonToSimpleData(data);
-			//System.out.println("[PUSH]-> "+sd.toString());
-			ServiceReference reference = context.getServiceReference(iCoreInterface.class.getName());
+			// System.out.println("[PUSH]-> "+sd.toString());
+			ServiceReference reference = context
+					.getServiceReference(iCoreInterface.class.getName());
 			icore = (iCoreInterface) context.getService(reference);
-			
-			//mode=test: write file - mode=persist: write into db
-			icore.processorCall("push", sd, "persist",options);
+			if (sd.get_id_meas().equals("") || sd.get_id_meas() == null) {
+				String sdata = icore.getData(sd.getSid(), "sync", "");
+				sd = JSonUtil.jsonToSimpleData(sdata);
+			}
+			// mode=test: write file - mode=persist: write into db
+			icore.processorCall("push", sd, "persist", options);
 			return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -79,156 +85,175 @@ public class MDWExportService implements iGWInterface {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public boolean setSPlan(SamplingPlan sPlan) {
-		ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
+		ServiceReference reference = context
+				.getServiceReference(iEventPublisherInterface.class.getName());
 		ipubservice = (iEventPublisherInterface) context.getService(reference);
-		ipubservice.sendEvent(JSonUtil.SamplingPlanToJSON(sPlan),"splan");
-		
+		ipubservice.sendEvent(JSonUtil.SamplingPlanToJSON(sPlan), "splan");
+
 		wsnService = setRemoteConnection();
-		return wsnService.setSPlan(JSonUtil.SamplingPlanToJSON(sPlan)); 
-		//return true;
+		return wsnService.setSPlan(JSonUtil.SamplingPlanToJSON(sPlan));
+		// return true;
+	}
+
+	@Override
+	public boolean stopSPlan(String sPlanId) {
+//		 ServiceReference reference =
+//		 context.getServiceReference(iEventPublisherInterface.class.getName());
+//		 ipubservice = (iEventPublisherInterface)
+//		 context.getService(reference);
+//		 ipubservice.sendEvent(sPlanId,"splanStop");
+//		
+//		 wsnService = setRemoteConnection();
+//		 return wsnService.stopSPlan(sPlanId);
+		return false;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public String getData(String id_meas_to_set,String sid, String mode,String[] options,String action) {
-		//wsnService = setRemoteConnection();
-		ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
+	public String getData(String id_meas_to_set, String sid, String mode,
+			String[] options, String action) {
+		// wsnService = setRemoteConnection();
+		ServiceReference reference = context
+				.getServiceReference(iEventPublisherInterface.class.getName());
 		if (mode.equals("sync")) {
-			
+
 			/*
-			 * DISABLING WSN INTERACTION..
-			return wsnService.getData(sid,options);
-			*/
-			
-			/****************CLOSING INTERACTION*****************/
-			SimpleData sd = new SimpleData(sid,String.valueOf(0 + Math.random()*10) ,"",Util.whatDayIsToday(), Util.whatTimeIsIt());
-						//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-						  sd.set_id_meas(id_meas_to_set);
-			
-			if(options!=null){
+			 * DISABLING WSN INTERACTION.. return
+			 * wsnService.getData(sid,options);
+			 */
+
+			/**************** CLOSING INTERACTION *****************/
+			SimpleData sd = new SimpleData(sid, String.valueOf(0 + Math
+					.random() * 10), "", Util.whatDayIsToday(),
+					Util.whatTimeIsIt());
+			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+			sd.set_id_meas(id_meas_to_set);
+
+			if (options != null) {
 				sd.setRef(options[0]);
 			}
-			
+
 			return JSonUtil.SimpleDataToJSON(sd);
 			/*******************************/
-			
-			
-		} else if (mode.equals("async")){
+
+		} else if (mode.equals("async")) {
 			/*
-			 * DISABLING WSN INTERACTION..
-			String data = wsnService.getData(sid,options);
-			*/
-			
-			
-			/****************CLOSING INTERACTION*****************/
-			SimpleData sd = new SimpleData(sid,String.valueOf(0 + Math.random()*10),"",Util.whatDayIsToday(), Util.whatTimeIsIt());
-			//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+			 * DISABLING WSN INTERACTION.. String data =
+			 * wsnService.getData(sid,options);
+			 */
+
+			/**************** CLOSING INTERACTION *****************/
+			SimpleData sd = new SimpleData(sid, String.valueOf(0 + Math
+					.random() * 10), "", Util.whatDayIsToday(),
+					Util.whatTimeIsIt());
+			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
 			sd.set_id_meas(id_meas_to_set);
-				
-			if(options!=null){
+
+			if (options != null) {
 				sd.setRef(options[0]);
 			}
-			
+
 			String data = JSonUtil.SimpleDataToJSON(sd);
 			System.out.println(data);
 			/*******************************/
-			
-			ipubservice = (iEventPublisherInterface) context.getService(reference);
-			ipubservice.sendDataEventWithAction(sid,data,action);
-			
-			
+
+			ipubservice = (iEventPublisherInterface) context
+					.getService(reference);
+			ipubservice.sendDataEventWithAction(sid, data, action);
+
 			return "[PUSH] -> Event";
-		
+
 		}
-		
+
 		return "ERROR!!!";
 	}
 
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public String getData(String id_meas_to_set,String sid,String Nature, String mode,String[] options,String action) {
-		//wsnService = setRemoteConnection();
-		ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
+	public String getData(String id_meas_to_set, String sid, String Nature,
+			String mode, String[] options, String action) {
+		// wsnService = setRemoteConnection();
+		ServiceReference reference = context
+				.getServiceReference(iEventPublisherInterface.class.getName());
 		if (mode.equals("sync")) {
-			
+
 			/*
-			 * DISABLING WSN INTERACTION..
-			return wsnService.getData(sid,options);
-			*/
-			
-			/****************CLOSING INTERACTION*****************/
-			SimpleData sd = new SimpleData(sid,Util.getSampleValue(Nature) ,"",Util.whatDayIsToday(), Util.whatTimeIsIt());
-						//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-						  sd.set_id_meas(id_meas_to_set);
-			
-			if(options!=null){
+			 * DISABLING WSN INTERACTION.. return
+			 * wsnService.getData(sid,options);
+			 */
+
+			/**************** CLOSING INTERACTION *****************/
+			SimpleData sd = new SimpleData(sid, Util.getSampleValue(Nature),
+					"", Util.whatDayIsToday(), Util.whatTimeIsIt());
+			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+			sd.set_id_meas(id_meas_to_set);
+
+			if (options != null) {
 				sd.setRef(options[0]);
 			}
-			
+
 			return JSonUtil.SimpleDataToJSON(sd);
 			/*******************************/
-			
-			
-		} else if (mode.equals("async")){
+
+		} else if (mode.equals("async")) {
 			/*
-			 * DISABLING WSN INTERACTION..
-			String data = wsnService.getData(sid,options);
-			*/
-			
-			
-			/****************CLOSING INTERACTION*****************/
-			SimpleData sd = new SimpleData(sid,Util.getSampleValue(Nature),"",Util.whatDayIsToday(), Util.whatTimeIsIt());
-			//sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+			 * DISABLING WSN INTERACTION.. String data =
+			 * wsnService.getData(sid,options);
+			 */
+
+			/**************** CLOSING INTERACTION *****************/
+			SimpleData sd = new SimpleData(sid, Util.getSampleValue(Nature),
+					"", Util.whatDayIsToday(), Util.whatTimeIsIt());
+			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
 			sd.set_id_meas(id_meas_to_set);
-				
-			if(options!=null){
+
+			if (options != null) {
 				sd.setRef(options[0]);
 			}
-			
+
 			String data = JSonUtil.SimpleDataToJSON(sd);
 			System.out.println(data);
 			/*******************************/
-			
-			ipubservice = (iEventPublisherInterface) context.getService(reference);
-			ipubservice.sendDataEventWithAction(sid,data,action);
-			
-			
+
+			ipubservice = (iEventPublisherInterface) context
+					.getService(reference);
+			ipubservice.sendDataEventWithAction(sid, data, action);
+
 			return "[PUSH] -> Event";
-		
+
 		}
-		
+
 		return "ERROR!!!";
 	}
-	
+
 	@Override
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public boolean sendCommand(String command,List<String> sids, String mode) {
-		System.out.println("[INTERPRETER: SEND_COMMAND]-> ["+command+","+sids+","+mode+"]");		
-		ServiceReference reference = context.getServiceReference(iEventPublisherInterface.class.getName());
+	public boolean sendCommand(String command, List<String> sids, String mode) {
+		System.out.println("[INTERPRETER: SEND_COMMAND]-> [" + command + ","
+				+ sids + "," + mode + "]");
+		ServiceReference reference = context
+				.getServiceReference(iEventPublisherInterface.class.getName());
 		ipubservice = (iEventPublisherInterface) context.getService(reference);
-		ipubservice.sendEvent("INTERPRETER: SEND_COMMAND]-> ["+command+","+sids+","+mode+"]" ,"command");
-	
-		
-		/*wsnService = setRemoteConnection();
-		/return wsnService.sendCommand(sids, command); */
-		
-		
-		/****************CLOSING INTERACTION*****************/
+		ipubservice.sendEvent("INTERPRETER: SEND_COMMAND]-> [" + command + ","
+				+ sids + "," + mode + "]", "command");
+
+		/*
+		 * wsnService = setRemoteConnection(); /return
+		 * wsnService.sendCommand(sids, command);
+		 */
+
+		/**************** CLOSING INTERACTION *****************/
 		return true;
 		/*******************************/
 	}
-	
-	
-	
-	
+
 	/**
 	 * SET R-OSGI REMOTE CONNECTION..
 	 * 
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public iWsnInterface setRemoteConnection(){
+	public iWsnInterface setRemoteConnection() {
 		// Get WSN SERVICES..
 		ServiceReference serviceRef = context
 				.getServiceReference(RemoteOSGiService.class.getName());
@@ -238,7 +263,8 @@ public class MDWExportService implements iGWInterface {
 		} else {
 			final RemoteOSGiService remote = (RemoteOSGiService) context
 					.getService(serviceRef);
-			URI uri = new URI("r-osgi://127.0.0.1:9278");
+			// URI uri = new URI("r-osgi://127.0.0.1:9278");
+			URI uri = new URI("r-osgi://127.0.0.1:9279");
 			try {
 				remote.connect(uri);
 				final RemoteServiceReference[] references = remote
@@ -248,32 +274,29 @@ public class MDWExportService implements iGWInterface {
 					System.out.println("[MDW] -> Service not found!");
 					return null;
 				} else {
-					 wsnService = (iWsnInterface) remote
+					wsnService = (iWsnInterface) remote
 							.getRemoteService(references[0]);
 					return wsnService;
 				}
 			} catch (RemoteOSGiException e) {
-				 e.printStackTrace();
+				e.printStackTrace();
 				System.out.println("No NetworkChannelFactory for r-osgi found");
 			} catch (IOException e) {
-				 e.printStackTrace();
+				e.printStackTrace();
 				System.out.println("No NetworkChannelFactory for r-osgi found");
 			} finally {
 				// bundleContext.ungetService(serviceRef);
 			}
 		}
 		return wsnService;
-		
+
 	}
 
 	@Override
 	public String isAlive(String sid) {
-		//wsnService = setRemoteConnection();
-		//return wsnService.isAlive(sid);
-		
-		
-		
+		// wsnService = setRemoteConnection();
+		// return wsnService.isAlive(sid);
+
 		return "IS_ALIVE";
 	}
 }
-

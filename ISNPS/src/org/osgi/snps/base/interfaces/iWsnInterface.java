@@ -12,6 +12,8 @@ public interface iWsnInterface {
 	
 	public boolean setSPlan(String splan);
 	
+//	public boolean stopSPlan(String splanId);
+	
 	public String getData(String sensorId,String[] options);
 	
 	public boolean sendCommand(List<String> sids, String command);

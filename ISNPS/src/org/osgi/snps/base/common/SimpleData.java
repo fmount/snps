@@ -5,12 +5,12 @@ import org.osgi.snps.base.util.Util;
 
 public class SimpleData {
 
-	protected String sid;
-	protected String _id_meas;
-	protected String data;
-	protected String ref;
-	protected String date;
-	protected String time;
+	protected String sid="";
+	protected String _id_meas="";
+	protected String data="";
+	protected String ref="";
+	protected String date="";
+	protected String time="";
 	
 	public SimpleData(){}
 	

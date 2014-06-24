@@ -82,7 +82,7 @@ public class CoreServices extends Observable implements iCoreInterface {
 	}
 
 	public enum interpretercommands {
-		splan, check, splanTest, enable, disable, genCmd
+		splan, check, splanTest, enable, disable, genCmd, splanstop
 	}
 
 	public enum composercommands {
@@ -429,6 +429,8 @@ public class CoreServices extends Observable implements iCoreInterface {
 					return "Error";
 				}
 
+			case splanstop:
+				return String.valueOf(interpreterService.stopSPlan(sPlan.getSplan_identifier()));
 			case enable:
 				if (sensorExist(sids)) {
 					// System.out.println("Sensor exist!");

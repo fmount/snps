@@ -133,7 +133,7 @@ public class JSonUtil {
 	@SuppressWarnings("rawtypes")
 	public static SensHybrid JSONToHybrid(String str) {
 
-		System.out.println("Hybrid: " + str);
+		//System.out.println("Hybrid: " + str);
 		SensHybrid sd = new SensHybrid("sid1", "test", "test", "test",
 				"active", "test", "temperature", new ArrayList<Sensor>());
 		try {

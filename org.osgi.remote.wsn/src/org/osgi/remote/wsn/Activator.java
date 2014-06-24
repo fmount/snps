@@ -4,7 +4,7 @@ package org.osgi.remote.wsn;
 import java.util.Hashtable;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.osgi.rxtx.arduino.SerialTest;
+//import org.osgi.rxtx.arduino.SerialTest;
 import org.osgi.snps.base.interfaces.iWsnInterface;
 
 import ch.ethz.iks.r_osgi.RemoteOSGiService;
@@ -29,8 +29,9 @@ public class Activator implements BundleActivator {
 		 final Hashtable properties = new Hashtable();
 	     properties.put(RemoteOSGiService.R_OSGi_REGISTRATION, Boolean.TRUE);
 	     
-	     context.registerService(iWsnInterface.class.getName(), new WSNService(context,new SerialTest()), properties);
-		 System.out.println("[WSN GATEWAY:Info] -> State: ACTIVE");
+	     //context.registerService(iWsnInterface.class.getName(), new WSNService(context,new SerialTest()), properties);
+	     context.registerService(iWsnInterface.class.getName(), new WSNService(context), properties);
+	     System.out.println("[WSN GATEWAY:Info] -> State: ACTIVE");
 	    
 	     
 	    /* SerialTest main = new SerialTest();

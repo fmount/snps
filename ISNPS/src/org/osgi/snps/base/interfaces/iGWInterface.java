@@ -27,6 +27,8 @@ public interface iGWInterface {
 	public String sayhello();
 
 	boolean setSPlan(SamplingPlan sPlan);
+	
+	boolean stopSPlan(String sPlanId);
 
 	//public String getData(String sid, String mode, String[] options, String action);
 

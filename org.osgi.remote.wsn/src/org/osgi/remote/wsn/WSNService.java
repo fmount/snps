@@ -2,6 +2,8 @@ package org.osgi.remote.wsn;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,7 +16,7 @@ import javax.xml.xpath.XPathFactory;
 import org.osgi.demo.actuator.HttpExecutor;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.osgi.rxtx.arduino.SerialTest;
+//import org.osgi.rxtx.arduino.SerialTest;
 import org.osgi.snps.base.common.SamplingPlan;
 import org.osgi.snps.base.common.ServiceData;
 import org.osgi.snps.base.common.SimpleData;
@@ -34,11 +36,20 @@ public class WSNService implements iWsnInterface {
 	BundleContext context;
 	Parser pservice;
 	iGWInterface igwservice;
-	SerialTest t;
-
-	public WSNService(BundleContext context, SerialTest s) {
+//	ConcurrentHashMap<String, Timer> splans;
+//	SerialTest t;
+//	//Map<String, Timer> splans;
+//
+//	public WSNService(BundleContext context, SerialTest s) {
+//		this.context = context;
+//		this.t = s;
+//		//splans = new HashMap<String, Timer>();
+//	}
+	public WSNService(BundleContext context) {
 		this.context = context;
-		this.t = s;
+		//splans = new ConcurrentHashMap<String, Timer>();
+		//this.t = s;
+		//splans = new HashMap<String, Timer>();
 	}
 
 	/**
@@ -57,23 +68,38 @@ public class WSNService implements iWsnInterface {
 		 * Setto il piano di campionamento per il sensore dialogando con il
 		 * sensore fisico..una volta che il comando è andato a buon fine,
 		 * invocare il metodo push(String data) per inviare dati al middleware..
-		 * N.B. Eseguire controlli di priorità rispetto ai parametri settati nel
-		 * piano di campionamento (range ed intervalli)..
+		 * N.B. Eseguire controlli di priorità rstopSPlanispetto ai parametri
+		 * settati nel piano di campionamento (range ed intervalli)..
 		 */
 		System.out.println("AUTOMAGICAMENTE: " + plan);
 		SamplingPlan splan = JSonUtil.JsonToSamplingPlan(plan);
-		iCoreInterface coreservice;
-		ServiceReference serviceRef = context
-				.getServiceReference(iCoreInterface.class.getName());
-		coreservice = (iCoreInterface) context.getService(serviceRef);
-//		splan.setStartDate("19-06-2014 20:30:00");
-//		splan.setEndDate("19-06-2014 20:30:30");
-//		splan.setInterval(5000);
-		new ServiceData(context, splan.getNodesId(), "async", splan.getStartDate() , splan.getInterval(), splan.getEndDate() , "");
-//		System.out.println(splan.getNodesId().toString());
-	
-		return true;
+
+		if (splan.getStartDate().equals("") || splan.getEndDate().equals("")) {
+			return false;
+		} else {
+//			new ServiceData(context, splan.getNodesId(), "async",
+//					splan.getStartDate(), splan.getInterval(),
+//					splan.getEndDate(), splans, splan.getSplan_identifier());
+			new ServiceData(context, splan.getNodesId(), "async",
+					splan.getStartDate(), splan.getInterval(),
+					splan.getEndDate());
+			// System.out.println(splan.getNodesId().toString());
+			return true;
+		}
 	}
+
+//	@Override
+//	public boolean stopSPlan(String splanId) {
+//		System.out.println("SAMPLING MAP STOP " + splans.toString());
+//		if (splans.containsKey(splanId)) {
+//			Timer timer = splans.remove(splanId);
+//			timer.cancel();
+//			timer.purge();
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	@Override
 	public String getData(String sensorId, String[] options) {
@@ -102,17 +128,18 @@ public class WSNService implements iWsnInterface {
 		 */
 
 		/* RETRIEVE DATA FROM ARDUINO... */
-		SimpleData sd = new SimpleData(sensorId, t.getPhysicData(sensorId), "",
-				Util.whatDayIsToday(), Util.whatTimeIsIt());
-
-		sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-		if (options != null) {
-			sd.setRef(options[0]);
-		}
+//		SimpleData sd = new SimpleData(sensorId, t.getPhysicData(sensorId), "",
+//				Util.whatDayIsToday(), Util.whatTimeIsIt());
+//
+//		sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+//		if (options != null) {
+//			sd.setRef(options[0]);
+//		}
 		// System.out.println(JSonUtil.SimpleDataToJSON(sd));
 
 		// Lo converto in JSon..
-		return JSonUtil.SimpleDataToJSON(sd);
+		return null;
+		//return JSonUtil.SimpleDataToJSON(sd);
 	}
 
 	@Override
@@ -160,6 +187,7 @@ public class WSNService implements iWsnInterface {
 		} else {
 			final RemoteOSGiService remote = (RemoteOSGiService) context
 					.getService(serviceRef);
+//			URI uri = new URI("r-osgi://127.0.0.1:9279");
 			URI uri = new URI("r-osgi://127.0.0.1:9278");
 			try {
 				remote.connect(uri);
@@ -261,5 +289,5 @@ public class WSNService implements iWsnInterface {
 		return null;
 
 	}
-	
+
 }
