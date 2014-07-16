@@ -39,6 +39,8 @@ public interface iCoreInterface {
 	//public String getData(String sId, String mode);
 
 	public List<String> getActuators();
+
+	public List<String> getHybrids();
 	
 	public boolean monitorCall(String action, String param);
 

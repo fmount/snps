@@ -170,13 +170,15 @@ public class JSonUtil {
 					sd.setPosition(JsonToHashMap((json.getString(key))));
 				else if (key.equalsIgnoreCase("sensors")){
 					List<ABComponent> sens = JSONTOAList(json.getString(key));
-					ArrayList<Sensor> sensors = new ArrayList<Sensor>();
+					//ArrayList<Sensor> sensors = new ArrayList<Sensor>();
 					Iterator<ABComponent> sit = sens.iterator();
 					while(sit.hasNext()){
 						Sensor a = (Sensor) sit.next();
-						sensors.add(a);
+						//sensors.add(a);
+						sd.getSensors().add(a);
+						//sd.getSensids().add(a.getID());
 					}
-					sd.setSensors(sensors);
+					//sd.setSensors(sensors);
 				}
 				else {
 					System.out.println("[JSonConversion!]Error getting tag!!");
@@ -409,7 +411,8 @@ public class JSonUtil {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			return null;
 		}
 		return sd;
 	}
@@ -427,11 +430,11 @@ public class JSonUtil {
 			json.key("nodesId");
 			json.value(ArrayListToJSON((ArrayList<String>) plan.getNodesId()));
 
-			json.key("th_min");
-			json.value(plan.getThreshold_min());
-
-			json.key("th_max");
-			json.value(plan.getThreshold_max());
+//			json.key("th_min");
+//			json.value(plan.getThreshold_min());
+//
+//			json.key("th_max");
+//			json.value(plan.getThreshold_max());
 			
 			json.key("startDate");
 			json.value(plan.getStartDate());
@@ -462,10 +465,8 @@ public class JSonUtil {
 				key = (String) keys.next();
 				if (key.equalsIgnoreCase("nodesId"))
 					pl.setNodesId(JsonToArrayList(json.getString(key)));
-				else if (key.equalsIgnoreCase("th_min"))
-					pl.setThreshold_min(json.getDouble(key));
-				else if (key.equalsIgnoreCase("th_max"))
-					pl.setThreshold_max(json.getDouble(key));
+				else if (key.equalsIgnoreCase("th_min")){}
+				else if (key.equalsIgnoreCase("th_max")){}
 				else if (key.equalsIgnoreCase("startDate"))
 					pl.setStartDate(json.getString(key));
 				else if (key.equalsIgnoreCase("endDate"))
@@ -828,8 +829,7 @@ public class JSonUtil {
 		List<String> ids = new ArrayList<String>();
 		ids.add("12343");
 		ids.add("abcdoe");
-		SamplingPlan plan = new SamplingPlan("12ewdnhso9d", ids, 30.0, 40.0,
-				200);
+		SamplingPlan plan = new SamplingPlan("12ewdnhso9d", ids, "05-01-2014 12:23:33", "06-01-2014 12:24:22",200);
 		System.out.println(JSonUtil.SamplingPlanToJSON(plan));
 		SamplingPlan newPlan = JSonUtil.JsonToSamplingPlan(JSonUtil
 				.SamplingPlanToJSON(plan));

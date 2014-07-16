@@ -1,8 +1,14 @@
 package snps.wii;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import javax.xml.stream.events.EndDocument;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -28,7 +34,7 @@ public class iWebService implements iWebIntegrationInterface {
 	private final int MY_SQL = 3;
 
 	public enum commands {
-		getSensor, getSDesc, getAllSensors, sensType, history, allhistory, getSensInfo, getsenslist, getzonelist, inszone, insbs, rmvzone, rmvbs, getbsinfo, getzoneinfo, insertentry, rmventry, updateentry, getnodelist, detection, detectbydate, detectbytime, detectbydateandtime, detectbyzone, getSensorbyzone, getSensorbynode, updateComponent
+		getSensor, getSDesc, getAllSensors, getAllHybrids, sensType, history, allhistory, getSensInfo, getsenslist, getzonelist, inszone, insbs, rmvzone, rmvbs, getbsinfo, getzoneinfo, insertentry, rmventry, updateentry, getnodelist, detection, detectbydate, detectbytime, detectbydateandtime, detectbyzone, getSensorbyzone, getSensorbynode, updateComponent
 	}
 
 	/*
@@ -111,8 +117,13 @@ public class iWebService implements iWebIntegrationInterface {
 			SamplingPlan sp = JSonUtil.JsonToSamplingPlan(splan);
 			String id = sp.getSplan_identifier();
 			System.out.println(splan);
-			service.interprCall("splan", sp, null, "");
-			return id;
+			String result = service.interprCall("splan", sp, null, "");
+			if (result != null) {
+				return id + " " + result;
+			} else {
+				return " [Alert] Setting sampling plan failed !\n";
+			}
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return "Error!";
@@ -122,8 +133,7 @@ public class iWebService implements iWebIntegrationInterface {
 	@Override
 	public String stopSPlan(String idPlan) {
 		ServiceReference reference;
-		reference = context.getServiceReference(iCoreInterface.class
-				.getName());
+		reference = context.getServiceReference(iCoreInterface.class.getName());
 		SamplingPlan sp = new SamplingPlan();
 		sp.setSplan_identifier(idPlan);
 		service.interprCall("splanstop", sp, null, "");
@@ -146,10 +156,9 @@ public class iWebService implements iWebIntegrationInterface {
 					.getName());
 
 			service = (iCoreInterface) context.getService(reference);
-			if(expression.equals("") || expression==null){
+			if (expression.equals("") || expression == null) {
 				return service.composerCall("compose", sensors, "none");
-			}
-			else{
+			} else {
 				return service.composerCall("compose", sensors, expression);
 			}
 		} catch (Exception e) {
@@ -184,6 +193,9 @@ public class iWebService implements iWebIntegrationInterface {
 
 		case getAllSensors:
 			return service.regCall(command, MY_SQL, "", null, null, "", null);
+
+		case getAllHybrids:
+			return service.regCall(command, 0, "", null, null, "", null);
 
 		case sensType:
 			return service.regCall(command, MY_SQL, "", null, null, type, null);
@@ -320,11 +332,11 @@ public class iWebService implements iWebIntegrationInterface {
 				description = JSonUtil.JSONToDocument(sensormlpath);
 				pservice = (Parser) context.getService(reference);
 				s = pservice.parse(description);
-				if(s instanceof SensHybrid){
+				if (s instanceof SensHybrid) {
 					ArrayList<Sensor> sensors = new ArrayList<Sensor>();
 					ArrayList<String> sensids = new ArrayList<String>();
 					sensids = ((SensHybrid) s).getSensids();
-					for(String sids : sensids){
+					for (String sids : sensids) {
 						sensors.add((Sensor) service.getSensList().get(sids));
 					}
 					((SensHybrid) s).setSensors(sensors);
@@ -361,6 +373,8 @@ public class iWebService implements iWebIntegrationInterface {
 		return "Error Sending isAlive request!";
 	}
 
+	
+
 	class monitorThread extends Thread {
 		int rate;
 		int finish;
@@ -369,8 +383,8 @@ public class iWebService implements iWebIntegrationInterface {
 			this.rate = rate;
 			this.finish = finish;
 		}
-		
-		public void run(){
+
+		public void run() {
 			new ServiceData(context, null, "async", null, rate, finish, "none");
 		}
 

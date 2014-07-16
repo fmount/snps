@@ -302,7 +302,7 @@ public class CommandLine implements Runnable {
 								String splanId = org.osgi.snps.base.util.Util
 										.IdGenerator().replace("-", "");
 								SamplingPlan sPlan = new SamplingPlan(splanId,
-										ids, 45, 75, 200);
+										ids, "", "", 200);
 								opres = Boolean.parseBoolean(service
 										.interprCall("splan", sPlan, null, ""));
 
@@ -317,7 +317,7 @@ public class CommandLine implements Runnable {
 										String splanId = org.osgi.snps.base.util.Util
 												.IdGenerator().replace("-", "");
 										SamplingPlan sPlan = new SamplingPlan(
-												splanId, ids, 45, 75, 5000);
+												splanId, ids, "", "", 5000);
 
 										opres = Boolean.parseBoolean(service
 												.interprCall("splan", sPlan,
@@ -1283,7 +1283,7 @@ public class CommandLine implements Runnable {
 				List<String> ids = new ArrayList<String>();
 				ids.add("localhostSensorA");
 				ids.add("localhostSensorB");
-				SamplingPlan plan = new SamplingPlan("", ids, 30.0, 40.0, 200);
+				SamplingPlan plan = new SamplingPlan("", ids, "", "", 200);
 				plan.setSplan_identifier(org.osgi.snps.base.util.Util
 						.IdGenerator().replace("-", ""));
 

@@ -47,27 +47,26 @@ public class ServiceData {
 		}
 		Timer timer = new Timer();
 		timer.schedule(new Task(sids, context, timer, endDate), startDate, time);
-		//splans.put("MAP SAMPLING PLANS: " + splanId, timer);
 		//System.out.println(splans.toString());
 	}
 	
-//	public ServiceData(BundleContext context, List<String> sids, String mode,
-//			String start, int time, String finish, ConcurrentHashMap<String,Timer> splans, String splanId) {
-//		this.context = context;
-//		this.sids = sids;
-//		System.out.println("Starting Service Data Thread..");
-//		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-//		Date startDate = null;
-//		Date endDate = null;
-//		try {
-//			startDate = formatter.parse(start);
-//			endDate = formatter.parse(finish);
-//		} catch (ParseException e1) {
-//			e1.printStackTrace();
-//		}
-//		Timer timer = new Timer();
-//		timer.schedule(new Task(sids, context, timer, endDate, splanId, splans), startDate, time);
-//		splans.put(splanId, timer);
-//		System.out.println(splans.toString());
-//	}
+	public ServiceData(BundleContext context, List<String> sids, String mode,
+			String start, int time, String finish, ConcurrentHashMap<String,Timer> splans, String splanId) {
+		this.context = context;
+		this.sids = sids;
+		System.out.println("Starting Service Data Thread..");
+		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date startDate = null;
+		Date endDate = null;
+		try {
+			startDate = formatter.parse(start);
+			endDate = formatter.parse(finish);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		Timer timer = new Timer();
+		timer.schedule(new Task(sids, context, timer, endDate, splanId, splans), startDate, time);
+		splans.put(splanId, timer);
+		System.out.println(splans.toString());
+	}
 }

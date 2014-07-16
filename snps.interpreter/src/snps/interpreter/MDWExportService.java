@@ -69,6 +69,8 @@ public class MDWExportService implements iGWInterface {
 			if (sd.get_id_meas().equals("") || sd.get_id_meas() == null) {
 				String sdata = icore.getData(sd.getSid(), "sync", "");
 				sd = JSonUtil.jsonToSimpleData(sdata);
+				if (sd == null)
+					return false;
 			}
 			// mode=test: write file - mode=persist: write into db
 			icore.processorCall("push", sd, "persist", options);
@@ -91,21 +93,30 @@ public class MDWExportService implements iGWInterface {
 		ipubservice.sendEvent(JSonUtil.SamplingPlanToJSON(sPlan), "splan");
 
 		wsnService = setRemoteConnection();
-		return wsnService.setSPlan(JSonUtil.SamplingPlanToJSON(sPlan));
-		// return true;
+		if (wsnService != null)
+			return wsnService.setSPlan(JSonUtil.SamplingPlanToJSON(sPlan));
+		else {
+			System.out
+					.println("\n [Connection Problem] -> Impossible to communicate with WSN bundle ");
+			return false;
+		}
 	}
 
 	@Override
 	public boolean stopSPlan(String sPlanId) {
-//		 ServiceReference reference =
-//		 context.getServiceReference(iEventPublisherInterface.class.getName());
-//		 ipubservice = (iEventPublisherInterface)
-//		 context.getService(reference);
-//		 ipubservice.sendEvent(sPlanId,"splanStop");
-//		
-//		 wsnService = setRemoteConnection();
-//		 return wsnService.stopSPlan(sPlanId);
-		return false;
+		ServiceReference reference = context
+				.getServiceReference(iEventPublisherInterface.class.getName());
+		ipubservice = (iEventPublisherInterface) context.getService(reference);
+		ipubservice.sendEvent(sPlanId, "splanStop");
+
+		wsnService = setRemoteConnection();
+		if (wsnService != null)
+			return wsnService.stopSPlan(sPlanId);
+		else {
+			System.out
+					.println("\n [Connection Problem] -> Impossible to communicate with WSN bundle ");
+			return false;
+		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -237,10 +248,14 @@ public class MDWExportService implements iGWInterface {
 		ipubservice.sendEvent("INTERPRETER: SEND_COMMAND]-> [" + command + ","
 				+ sids + "," + mode + "]", "command");
 
-		/*
-		 * wsnService = setRemoteConnection(); /return
-		 * wsnService.sendCommand(sids, command);
-		 */
+		wsnService = setRemoteConnection();
+		if (wsnService == null) {
+			System.out
+					.println("\n [Connection Problem] -> Impossible to communicate with WSN bundle ");
+			return false;
+		}
+
+		wsnService.sendCommand(sids, command);
 
 		/**************** CLOSING INTERACTION *****************/
 		return true;
@@ -255,6 +270,7 @@ public class MDWExportService implements iGWInterface {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public iWsnInterface setRemoteConnection() {
 		// Get WSN SERVICES..
+		boolean connected = false;
 		ServiceReference serviceRef = context
 				.getServiceReference(RemoteOSGiService.class.getName());
 		if (serviceRef == null) {
@@ -263,33 +279,83 @@ public class MDWExportService implements iGWInterface {
 		} else {
 			final RemoteOSGiService remote = (RemoteOSGiService) context
 					.getService(serviceRef);
-			// URI uri = new URI("r-osgi://127.0.0.1:9278");
 			URI uri = new URI("r-osgi://127.0.0.1:9279");
-			try {
-				remote.connect(uri);
-				final RemoteServiceReference[] references = remote
-						.getRemoteServiceReferences(uri,
-								iWsnInterface.class.getName(), null);
-				if (references == null) {
-					System.out.println("[MDW] -> Service not found!");
-					return null;
+			int attempt = 1;
+			// URI uri = new URI("r-osgi://127.0.0.1:9279");
+			do {
+				wsnService = remoteConnection(remote, uri);
+				if (wsnService != null) {
+					connected = true;
 				} else {
-					wsnService = (iWsnInterface) remote
-							.getRemoteService(references[0]);
-					return wsnService;
+					System.out.println("Attempt " + attempt
+							+ " failed, trying to reconnect \n");
+					attempt++;
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			} catch (RemoteOSGiException e) {
-				e.printStackTrace();
-				System.out.println("No NetworkChannelFactory for r-osgi found");
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("No NetworkChannelFactory for r-osgi found");
-			} finally {
-				// bundleContext.ungetService(serviceRef);
-			}
+
+				System.out.println("Connection status: " + connected
+						+ " Attempt: " + attempt);
+			} while (!connected && attempt < 3);
+
+			// try {
+			// remote.connect(uri);
+			// final RemoteServiceReference[] references = remote
+			// .getRemoteServiceReferences(uri,
+			// iWsnInterface.class.getName(), null);
+			// if (references == null) {
+			// System.out.println("[MDW] -> Service not found!");
+			// return null;
+			// } else {
+			// wsnService = (iWsnInterface) remote
+			// .getRemoteService(references[0]);
+			// return wsnService;
+			// }
+			// } catch (RemoteOSGiException e) {
+			// e.printStackTrace();
+			// System.out.println("No NetworkChannelFactory for r-osgi found");
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// System.out.println("No NetworkChannelFactory for r-osgi found");
+			// } finally {
+			// // bundleContext.ungetService(serviceRef);
+			// }
 		}
 		return wsnService;
 
+	}
+
+	public iWsnInterface remoteConnection(RemoteOSGiService remote, URI uri) {
+
+		try {
+			remote.connect(uri);
+			final RemoteServiceReference[] references = remote
+					.getRemoteServiceReferences(uri,
+							iWsnInterface.class.getName(), null);
+			if (references == null) {
+				System.out.println("[MDW] -> Service not found!");
+				return null;
+			} else {
+				wsnService = (iWsnInterface) remote
+						.getRemoteService(references[0]);
+				return wsnService;
+			}
+		} catch (RemoteOSGiException e) {
+			e.printStackTrace();
+			System.out.println("No NetworkChannelFactory for r-osgi found");
+			wsnService = null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("No NetworkChannelFactory for r-osgi found");
+			wsnService = null;
+		} finally {
+			// bundleContext.ungetService(serviceRef);
+		}
+		return wsnService;
 	}
 
 	@Override

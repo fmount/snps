@@ -11,8 +11,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
 //import java.util.Random;
 
-
-
+import org.eclipse.core.runtime.dynamichelpers.IFilter;
+import org.eclipse.osgi.service.resolver.extras.DescriptionReference;
 import org.osgi.demo.actuator.HttpExecutor;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -36,20 +36,20 @@ public class WSNService implements iWsnInterface {
 	BundleContext context;
 	Parser pservice;
 	iGWInterface igwservice;
-//	ConcurrentHashMap<String, Timer> splans;
-//	SerialTest t;
-//	//Map<String, Timer> splans;
-//
-//	public WSNService(BundleContext context, SerialTest s) {
-//		this.context = context;
-//		this.t = s;
-//		//splans = new HashMap<String, Timer>();
-//	}
+	ConcurrentHashMap<String, Timer> splans;
+
+	// SerialTest t;
+	// //Map<String, Timer> splans;
+	//
+	// public WSNService(BundleContext context, SerialTest s) {
+	// this.context = context;
+	// this.t = s;
+	// //splans = new HashMap<String, Timer>();
+	// }
 	public WSNService(BundleContext context) {
 		this.context = context;
-		//splans = new ConcurrentHashMap<String, Timer>();
-		//this.t = s;
-		//splans = new HashMap<String, Timer>();
+		splans = new ConcurrentHashMap<String, Timer>();
+		// this.t = s;
 	}
 
 	/**
@@ -74,32 +74,40 @@ public class WSNService implements iWsnInterface {
 		System.out.println("AUTOMAGICAMENTE: " + plan);
 		SamplingPlan splan = JSonUtil.JsonToSamplingPlan(plan);
 
-		if (splan.getStartDate().equals("") || splan.getEndDate().equals("")) {
+		if (splan.getStartDate().equals("") || splan.getEndDate().equals("")
+				|| splans.containsKey(splan.getSplan_identifier())) {
 			return false;
 		} else {
-//			new ServiceData(context, splan.getNodesId(), "async",
-//					splan.getStartDate(), splan.getInterval(),
-//					splan.getEndDate(), splans, splan.getSplan_identifier());
 			new ServiceData(context, splan.getNodesId(), "async",
 					splan.getStartDate(), splan.getInterval(),
-					splan.getEndDate());
-			// System.out.println(splan.getNodesId().toString());
+					splan.getEndDate(), splans, splan.getSplan_identifier());
+			// new ServiceData(context, splan.getNodesId(), "async",
+			// splan.getStartDate(), splan.getInterval(),
+			// splan.getEndDate());
+			for (String s : splans.keySet()) {
+				System.out.println("CONCURRENT SPLAN " + s);
+			}
 			return true;
 		}
 	}
 
-//	@Override
-//	public boolean stopSPlan(String splanId) {
-//		System.out.println("SAMPLING MAP STOP " + splans.toString());
-//		if (splans.containsKey(splanId)) {
-//			Timer timer = splans.remove(splanId);
-//			timer.cancel();
-//			timer.purge();
-//			return true;
-//		} else {
-//			return false;
-//		}
-//	}
+	@Override
+	public boolean stopSPlan(String splanId) {
+		for (String s : splans.keySet()) {
+			System.out.println("stop plan in map" + s);
+		}
+		if (splans.containsKey(splanId)) {
+
+			System.out.println("Stop PLAN " + splanId);
+			Timer timerToStop = splans.remove(splanId);
+			timerToStop.cancel();
+			timerToStop.purge();
+			return true;
+		} else {
+			System.out.println("PLAN " + splanId + " not in map ");
+			return false;
+		}
+	}
 
 	@Override
 	public String getData(String sensorId, String[] options) {
@@ -128,18 +136,19 @@ public class WSNService implements iWsnInterface {
 		 */
 
 		/* RETRIEVE DATA FROM ARDUINO... */
-//		SimpleData sd = new SimpleData(sensorId, t.getPhysicData(sensorId), "",
-//				Util.whatDayIsToday(), Util.whatTimeIsIt());
-//
-//		sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-//		if (options != null) {
-//			sd.setRef(options[0]);
-//		}
+		// SimpleData sd = new SimpleData(sensorId, t.getPhysicData(sensorId),
+		// "",
+		// Util.whatDayIsToday(), Util.whatTimeIsIt());
+		//
+		// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+		// if (options != null) {
+		// sd.setRef(options[0]);
+		// }
 		// System.out.println(JSonUtil.SimpleDataToJSON(sd));
 
 		// Lo converto in JSon..
 		return null;
-		//return JSonUtil.SimpleDataToJSON(sd);
+		// return JSonUtil.SimpleDataToJSON(sd);
 	}
 
 	@Override
@@ -157,7 +166,7 @@ public class WSNService implements iWsnInterface {
 		// int nextInt = random.nextInt(8);
 
 		// STUPIDAMENTE...
-		HttpExecutor.exec(command + ":" + 0);
+		// HttpExecutor.exec(command + ":" + 0);
 		System.out.println("Sended command " + command + ":" + 1 + " to: "
 				+ sids.toString());
 		return true;
@@ -180,39 +189,48 @@ public class WSNService implements iWsnInterface {
 	 * **/
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean sendDataToMiddleware(String data) {
-		ServiceReference serviceRef = context
-				.getServiceReference(RemoteOSGiService.class.getName());
-		if (serviceRef == null) {
-			System.out.println("R-OSGi service not found!");
-		} else {
-			final RemoteOSGiService remote = (RemoteOSGiService) context
-					.getService(serviceRef);
-//			URI uri = new URI("r-osgi://127.0.0.1:9279");
-			URI uri = new URI("r-osgi://127.0.0.1:9278");
-			try {
-				remote.connect(uri);
+		// ServiceReference serviceRef = context
+		// .getServiceReference(RemoteOSGiService.class.getName());
+		// if (serviceRef == null) {
+		// System.out.println("R-OSGi service not found!");
+		// } else {
+		// final RemoteOSGiService remote = (RemoteOSGiService) context
+		// .getService(serviceRef);
+		// // URI uri = new URI("r-osgi://127.0.0.1:9279");
+		// URI uri = new URI("r-osgi://127.0.0.1:9278");
+		// try {
+		// remote.connect(uri);
+		//
+		// final RemoteServiceReference[] references = remote
+		// .getRemoteServiceReferences(uri,
+		// iGWInterface.class.getName(), null);
+		// if (references == null) {
+		// System.out.println("[WSN to MDW] -> Service not found!");
+		// } else {
+		// final iGWInterface igw = (iGWInterface) remote
+		// .getRemoteService(references[0]);
+		// return igw.push(data, null);
+		// }
+		// } catch (RemoteOSGiException e) {
+		// // e.printStackTrace();
+		// System.out.println("No NetworkChannelFactory for r-osgi found");
+		// } catch (IOException e) {
+		// // e.printStackTrace();
+		// System.out.println("No NetworkChannelFactory for r-osgi found");
+		// } finally {
+		// // bundleContext.ungetService(serviceRef);
+		// }
+		// }
+		igwservice = setRemoteConnection();
 
-				final RemoteServiceReference[] references = remote
-						.getRemoteServiceReferences(uri,
-								iGWInterface.class.getName(), null);
-				if (references == null) {
-					System.out.println("[WSN to MDW] -> Service not found!");
-				} else {
-					final iGWInterface igw = (iGWInterface) remote
-							.getRemoteService(references[0]);
-					return igw.push(data, null);
-				}
-			} catch (RemoteOSGiException e) {
-				// e.printStackTrace();
-				System.out.println("No NetworkChannelFactory for r-osgi found");
-			} catch (IOException e) {
-				// e.printStackTrace();
-				System.out.println("No NetworkChannelFactory for r-osgi found");
-			} finally {
-				// bundleContext.ungetService(serviceRef);
-			}
+		if (igwservice != null)
+			return igwservice.push(data, null);
+		else {
+			System.out
+					.println("\n [Connection Problem] -> Impossible to communicate with MDW ");
+			return false;
 		}
-		return false;
+
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -245,49 +263,109 @@ public class WSNService implements iWsnInterface {
 
 	@Override
 	public String registerSensor() {
-		Document doc = getDocument("SensorML.xml");
+		Document doc = getDocument("/home/marco/SensorML.xml");
+		if (doc == null) {
+			return "Malformed XML";
+		}
 		String ns = getSId(doc);
-
 		igwservice = setRemoteConnection();
-		return igwservice.registerSensor(ns, doc);
+		if (igwservice != null)
+			return igwservice.registerSensor(ns, doc);
+		else
+			return "\n [Connection Problem] -> Impossible to communicate with MDW ";
+
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public iGWInterface setRemoteConnection() {
 		ServiceReference serviceRef = context
 				.getServiceReference(RemoteOSGiService.class.getName());
+		boolean connected = false;
 		if (serviceRef == null) {
 			System.out.println("R-OSGi service not found!");
+			return null;
 		} else {
 			final RemoteOSGiService remote = (RemoteOSGiService) context
 					.getService(serviceRef);
 			URI uri = new URI("r-osgi://127.0.0.1:9278");
-			try {
-				remote.connect(uri);
-
-				final RemoteServiceReference[] references = remote
-						.getRemoteServiceReferences(uri,
-								iGWInterface.class.getName(), null);
-				if (references == null) {
-					System.out.println("[WSN to MDW] -> Service not found!");
+			int attempt = 1;
+			// URI uri = new URI("r-osgi://127.0.0.1:9279");
+			do {
+				igwservice = remoteConnection(remote, uri);
+				if (igwservice != null) {
+					connected = true;
 				} else {
-					igwservice = (iGWInterface) remote
-							.getRemoteService(references[0]);
-					// return igw.registerSensor("t1", doc);
-					return igwservice;
+					System.out.println("Attempt " + attempt
+							+ " failed, trying to reconnect \n");
+					attempt++;
+					try {
+						Thread.sleep(5000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			} catch (RemoteOSGiException e) {
-				e.printStackTrace();
-				System.out.println("No NetworkChannelFactory for r-osgi found");
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("No NetworkChannelFactory for r-osgi found");
-			} finally {
-				// bundleContext.ungetService(serviceRef);
-			}
-		}
-		return null;
 
+				System.out.println("Connection status: " + connected
+						+ " Attempt: " + attempt);
+			} while (!connected && attempt < 3);
+
+			// try {
+			// remote.connect(uri);
+			//
+			// final RemoteServiceReference[] references = remote
+			// .getRemoteServiceReferences(uri,
+			// iGWInterface.class.getName(), null);
+			// if (references == null) {
+			// System.out.println("[WSN to MDW] -> Service not found!");
+			// } else {
+			// igwservice = (iGWInterface) remote
+			// .getRemoteService(references[0]);
+			// // return igw.registerSensor("t1", doc);
+			// return igwservice;
+			// }
+			// } catch (RemoteOSGiException e) {
+			// e.printStackTrace();
+			// System.out.println("No NetworkChannelFactory for r-osgi found");
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// System.out.println("No NetworkChannelFactory for r-osgi found");
+			// } finally {
+			// // bundleContext.ungetService(serviceRef);
+			// }
+		}
+		return igwservice;
+
+	}
+
+	public iGWInterface remoteConnection(RemoteOSGiService remote, URI uri) {
+		try {
+			remote.connect(uri);
+
+			final RemoteServiceReference[] references = remote
+					.getRemoteServiceReferences(uri,
+							iGWInterface.class.getName(), null);
+			if (references == null) {
+				System.out.println("[WSN to MDW] -> Service not found!");
+				return null;
+			} else {
+				igwservice = (iGWInterface) remote
+						.getRemoteService(references[0]);
+				// return igw.registerSensor("t1", doc);
+				return igwservice;
+			}
+		} catch (RemoteOSGiException e) {
+			e.printStackTrace();
+			System.out.println("No NetworkChannelFactory for r-osgi found");
+			igwservice = null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("No NetworkChannelFactory for r-osgi found");
+			igwservice = null;
+		} finally {
+			// bundleContext.ungetService(serviceRef);
+		}
+		return igwservice;
 	}
 
 }
