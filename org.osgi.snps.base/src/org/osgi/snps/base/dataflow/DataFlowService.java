@@ -1,7 +1,6 @@
 package org.osgi.snps.base.dataflow;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 

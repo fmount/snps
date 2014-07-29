@@ -71,6 +71,7 @@ public class WSNService implements iWsnInterface {
 		 * N.B. Eseguire controlli di priorità rstopSPlanispetto ai parametri
 		 * settati nel piano di campionamento (range ed intervalli)..
 		 */
+		// TEST MODE ###########################################################
 		System.out.println("AUTOMAGICAMENTE: " + plan);
 		SamplingPlan splan = JSonUtil.JsonToSamplingPlan(plan);
 
@@ -89,6 +90,9 @@ public class WSNService implements iWsnInterface {
 			}
 			return true;
 		}
+		// #######################################################################
+
+		// return true;
 	}
 
 	@Override
@@ -129,11 +133,9 @@ public class WSNService implements iWsnInterface {
 		 */
 
 		// Creo un dato fittizio..
-		/*
-		 * SimpleData sd = new SimpleData(sensorId,
-		 * String.valueOf((Math.random() * 10)), "",
-		 * System.currentTimeMillis());
-		 */
+
+		SimpleData sd = new SimpleData(sensorId, String.valueOf(0 + Math
+				.random() * 10), "", Util.whatDayIsToday(), Util.whatTimeIsIt());
 
 		/* RETRIEVE DATA FROM ARDUINO... */
 		// SimpleData sd = new SimpleData(sensorId, t.getPhysicData(sensorId),
@@ -141,14 +143,14 @@ public class WSNService implements iWsnInterface {
 		// Util.whatDayIsToday(), Util.whatTimeIsIt());
 		//
 		// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-		// if (options != null) {
-		// sd.setRef(options[0]);
-		// }
+		if (options != null) {
+			sd.setRef(options[0]);
+		}
 		// System.out.println(JSonUtil.SimpleDataToJSON(sd));
 
 		// Lo converto in JSon..
-		return null;
-		// return JSonUtil.SimpleDataToJSON(sd);
+		// return null;
+		return JSonUtil.SimpleDataToJSON(sd);
 	}
 
 	@Override

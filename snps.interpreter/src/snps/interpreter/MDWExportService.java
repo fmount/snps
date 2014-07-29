@@ -66,12 +66,16 @@ public class MDWExportService implements iGWInterface {
 			ServiceReference reference = context
 					.getServiceReference(iCoreInterface.class.getName());
 			icore = (iCoreInterface) context.getService(reference);
-			if (sd.get_id_meas().equals("") || sd.get_id_meas() == null) {
-				String sdata = icore.getData(sd.getSid(), "sync", "");
-				sd = JSonUtil.jsonToSimpleData(sdata);
-				if (sd == null)
-					return false;
-			}
+			
+			// TEST MODE #################################################
+//			if (sd.get_id_meas().equals("") || sd.get_id_meas() == null) {
+//				String sdata = icore.getData(sd.getSid(), "sync", "");
+//				sd = JSonUtil.jsonToSimpleData(sdata);
+//				if (sd == null)
+//					return false;
+//			}
+			// ############################################################
+			
 			// mode=test: write file - mode=persist: write into db
 			icore.processorCall("push", sd, "persist", options);
 			return true;
@@ -183,47 +187,47 @@ public class MDWExportService implements iGWInterface {
 	@Override
 	public String getData(String id_meas_to_set, String sid, String Nature,
 			String mode, String[] options, String action) {
-		// wsnService = setRemoteConnection();
+		wsnService = setRemoteConnection();
 		ServiceReference reference = context
 				.getServiceReference(iEventPublisherInterface.class.getName());
 		if (mode.equals("sync")) {
 
-			/*
-			 * DISABLING WSN INTERACTION.. return
-			 * wsnService.getData(sid,options);
-			 */
+			
+			// DISABLING WSN INTERACTION.. 
+			return wsnService.getData(sid,options);
+			 
 
 			/**************** CLOSING INTERACTION *****************/
-			SimpleData sd = new SimpleData(sid, Util.getSampleValue(Nature),
-					"", Util.whatDayIsToday(), Util.whatTimeIsIt());
-			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-			sd.set_id_meas(id_meas_to_set);
+//			SimpleData sd = new SimpleData(sid, Util.getSampleValue(Nature),
+//					"", Util.whatDayIsToday(), Util.whatTimeIsIt());
+//			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+//			sd.set_id_meas(id_meas_to_set);
 
-			if (options != null) {
-				sd.setRef(options[0]);
-			}
+//			if (options != null) {
+//				sd.setRef(options[0]);
+//			}
 
-			return JSonUtil.SimpleDataToJSON(sd);
+//			return JSonUtil.SimpleDataToJSON(sd);
 			/*******************************/
 
 		} else if (mode.equals("async")) {
-			/*
-			 * DISABLING WSN INTERACTION.. String data =
-			 * wsnService.getData(sid,options);
-			 */
+			
+			// DISABLING WSN INTERACTION.. 
+			String data = wsnService.getData(sid,options);
+			 
 
 			/**************** CLOSING INTERACTION *****************/
-			SimpleData sd = new SimpleData(sid, Util.getSampleValue(Nature),
-					"", Util.whatDayIsToday(), Util.whatTimeIsIt());
-			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
-			sd.set_id_meas(id_meas_to_set);
-
-			if (options != null) {
-				sd.setRef(options[0]);
-			}
-
-			String data = JSonUtil.SimpleDataToJSON(sd);
-			System.out.println(data);
+//			SimpleData sd = new SimpleData(sid, Util.getSampleValue(Nature),
+//					"", Util.whatDayIsToday(), Util.whatTimeIsIt());
+//			// sd.set_id_meas(Util.IdGenerator().replace("-", ""));
+//			sd.set_id_meas(id_meas_to_set);
+//
+//			if (options != null) {
+//				sd.setRef(options[0]);
+//			}
+//
+//			String data = JSonUtil.SimpleDataToJSON(sd);
+//			System.out.println(data);
 			/*******************************/
 
 			ipubservice = (iEventPublisherInterface) context
@@ -255,10 +259,10 @@ public class MDWExportService implements iGWInterface {
 			return false;
 		}
 
-		wsnService.sendCommand(sids, command);
+		return wsnService.sendCommand(sids, command);
 
 		/**************** CLOSING INTERACTION *****************/
-		return true;
+		//return true;
 		/*******************************/
 	}
 
@@ -279,7 +283,14 @@ public class MDWExportService implements iGWInterface {
 		} else {
 			final RemoteOSGiService remote = (RemoteOSGiService) context
 					.getService(serviceRef);
-			URI uri = new URI("r-osgi://127.0.0.1:9279");
+			String url = Util.loadRosgiConfiguration("rosgiconfig.xml");
+			if(url.equalsIgnoreCase("")){
+	        	url = "127.0.0.1:9278";
+	        	System.out.println("default configuration");
+	        }else{
+	        	System.out.println("Configuration loaded from: " + url);
+	        }
+			URI uri = new URI("r-osgi://"+url);
 			int attempt = 1;
 			// URI uri = new URI("r-osgi://127.0.0.1:9279");
 			do {

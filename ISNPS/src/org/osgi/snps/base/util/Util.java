@@ -232,6 +232,22 @@ public class Util {
 		}
 	}
 
+	public static String loadRosgiConfiguration(String path) {
+		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			// description = builder.parse(new File("sensorDescription.xml"));
+			Document description = builder.parse(new File(path));
+			XPath xpath = XPathFactory.newInstance().newXPath();
+			String ip = getIP(xpath, description);
+			int port = Integer.parseInt(getPort(xpath, description));
+			return ip + ":" + port;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "";
+		}
+	}
 	public static String getIP(XPath xpath, Document document) {
 		String ip = "";
 		try {

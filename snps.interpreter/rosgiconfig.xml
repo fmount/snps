@@ -1,0 +1,6 @@
+<client>
+	<config>
+		<ip>localhost</ip>
+		<port>9278</port>
+	</config>
+</client>

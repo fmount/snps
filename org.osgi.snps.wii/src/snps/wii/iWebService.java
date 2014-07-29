@@ -136,8 +136,11 @@ public class iWebService implements iWebIntegrationInterface {
 		reference = context.getServiceReference(iCoreInterface.class.getName());
 		SamplingPlan sp = new SamplingPlan();
 		sp.setSplan_identifier(idPlan);
-		service.interprCall("splanstop", sp, null, "");
-		return sp.getSplan_identifier();
+		if(service.interprCall("splanstop", sp, null, "").equals("true"))
+			return sp.getSplan_identifier();
+		else
+			return "Sampling Plan" + idPlan + "doesn't exist";		
+		
 	}
 
 	/**

@@ -913,9 +913,14 @@ public class CoreServices extends Observable implements iCoreInterface {
 	public String processorCall(String command, SimpleData sd, String mode,
 			String[] options) {
 		try {
+			if(processorService==null){
+				serviceRef = context.getServiceReference(iDataFlow.class.getName());
+				processorService = (iDataFlow) context.getService(serviceRef);
+				
+			}
 			switch (processorcommands.valueOf(command)) {
 			case push:
-
+				
 				System.out
 						.println("[PUSH] -> Core Event generated..waiting for Subs");
 				return String.valueOf(processorService.pushData(sd, mode,
